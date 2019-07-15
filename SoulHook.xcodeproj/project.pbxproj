@@ -1,0 +1,815 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7162718222DC7C6E00EFCA10 /* MDConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7162718122DC7C6E00EFCA10 /* MDConfig.plist */; };
+		7162718C22DC7C6E00EFCA10 /* libSoulHookDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7162718B22DC7C6E00EFCA10 /* libSoulHookDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7162719122DC7C6E00EFCA10 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7162719022DC7C6E00EFCA10 /* JavaScriptCore.framework */; };
+		7162719322DC7C6E00EFCA10 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7162719222DC7C6E00EFCA10 /* Foundation.framework */; };
+		7162719522DC7C6E00EFCA10 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7162719422DC7C6E00EFCA10 /* UIKit.framework */; };
+		7162719A22DC7C6E00EFCA10 /* SoulHookDylib.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7162719922DC7C6E00EFCA10 /* SoulHookDylib.mm */; };
+		7162719D22DC7C6E00EFCA10 /* MDConfigManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7162719C22DC7C6E00EFCA10 /* MDConfigManager.h */; };
+		7162719F22DC7C6E00EFCA10 /* MDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7162719E22DC7C6E00EFCA10 /* MDConfigManager.m */; };
+		716271A122DC7C6E00EFCA10 /* MDCycriptManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271A022DC7C6E00EFCA10 /* MDCycriptManager.h */; };
+		716271A322DC7C6E00EFCA10 /* MDCycriptManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271A222DC7C6E00EFCA10 /* MDCycriptManager.m */; };
+		716271A522DC7C6E00EFCA10 /* MDMethodTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271A422DC7C6E00EFCA10 /* MDMethodTrace.h */; };
+		716271A722DC7C6E00EFCA10 /* MDMethodTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271A622DC7C6E00EFCA10 /* MDMethodTrace.m */; };
+		716271AA22DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271A922DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s */; };
+		716271AC22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271AB22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s */; };
+		716271AE22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271AD22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s */; };
+		716271B022DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271AF22DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s */; };
+		716271B222DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271B122DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s */; };
+		716271B422DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271B322DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s */; };
+		716271B622DC7C6E00EFCA10 /* a2a3-selectortramps-x86_64.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271B522DC7C6E00EFCA10 /* a2a3-selectortramps-x86_64.s */; };
+		716271B822DC7C6E00EFCA10 /* OCMethodTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271B722DC7C6E00EFCA10 /* OCMethodTrace.h */; };
+		716271BA22DC7C6E00EFCA10 /* OCMethodTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271B922DC7C6E00EFCA10 /* OCMethodTrace.m */; };
+		716271BC22DC7C6E00EFCA10 /* OCSelectorTrampolines.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271BB22DC7C6E00EFCA10 /* OCSelectorTrampolines.h */; };
+		716271BE22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm in Sources */ = {isa = PBXBuildFile; fileRef = 716271BD22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm */; };
+		716271C222DC7C6E00EFCA10 /* LLDBTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271C122DC7C6E00EFCA10 /* LLDBTools.h */; };
+		716271C422DC7C6E00EFCA10 /* LLDBTools.mm in Sources */ = {isa = PBXBuildFile; fileRef = 716271C322DC7C6E00EFCA10 /* LLDBTools.mm */; };
+		716271C922DC7C6E00EFCA10 /* AntiAntiDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271C822DC7C6E00EFCA10 /* AntiAntiDebug.m */; };
+		716271CC22DC7C6E00EFCA10 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 716271CB22DC7C6E00EFCA10 /* fishhook.c */; };
+		716271CE22DC7C6E00EFCA10 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271CD22DC7C6E00EFCA10 /* fishhook.h */; };
+		716271D022DC7C6E00EFCA10 /* SoulHookDylib.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271CF22DC7C6E00EFCA10 /* SoulHookDylib.h */; };
+		716271D222DC7C6E00EFCA10 /* SoulHookDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271D122DC7C6E00EFCA10 /* SoulHookDylib.m */; };
+		716271E122DC7CF500EFCA10 /* SoulHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271DC22DC7CF400EFCA10 /* SoulHeader.h */; };
+		716271E222DC7CF500EFCA10 /* SOHookSettingController.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271DD22DC7CF500EFCA10 /* SOHookSettingController.h */; };
+		716271E322DC7CF500EFCA10 /* SOHookURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271DE22DC7CF500EFCA10 /* SOHookURLProtocol.m */; };
+		716271E422DC7CF500EFCA10 /* SOHookURLProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271DF22DC7CF500EFCA10 /* SOHookURLProtocol.h */; };
+		716271E522DC7CF500EFCA10 /* SOHookSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271E022DC7CF500EFCA10 /* SOHookSettingController.m */; };
+		716271E722DC7FD200EFCA10 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716271E622DC7FD200EFCA10 /* Default-568h@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7162718D22DC7C6E00EFCA10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7162716F22DC7C6E00EFCA10 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7162718A22DC7C6E00EFCA10;
+			remoteInfo = SoulHookDylib;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7162717722DC7C6E00EFCA10 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7162718C22DC7C6E00EFCA10 /* libSoulHookDylib.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		7162717A22DC7C6E00EFCA10 /* SoulHook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoulHook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7162717D22DC7C6E00EFCA10 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		7162717F22DC7C6E00EFCA10 /* quick-resign.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "quick-resign.sh"; path = "Scripts/quick-resign.sh"; sourceTree = "<group>"; };
+		7162718122DC7C6E00EFCA10 /* MDConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = MDConfig.plist; path = Config/MDConfig.plist; sourceTree = "<group>"; };
+		7162718422DC7C6E00EFCA10 /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; name = "put ipa or app here"; path = "TargetApp/put ipa or app here"; sourceTree = "<group>"; };
+		7162718522DC7C6E00EFCA10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7162718B22DC7C6E00EFCA10 /* libSoulHookDylib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libSoulHookDylib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		7162719022DC7C6E00EFCA10 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		7162719222DC7C6E00EFCA10 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7162719422DC7C6E00EFCA10 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7162719822DC7C6E00EFCA10 /* SoulHookDylib.xm */ = {isa = PBXFileReference; lastKnownFileType = text; name = SoulHookDylib.xm; path = Logos/SoulHookDylib.xm; sourceTree = "<group>"; };
+		7162719922DC7C6E00EFCA10 /* SoulHookDylib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = SoulHookDylib.mm; path = Logos/SoulHookDylib.mm; sourceTree = "<group>"; };
+		7162719C22DC7C6E00EFCA10 /* MDConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MDConfigManager.h; path = Config/MDConfigManager.h; sourceTree = "<group>"; };
+		7162719E22DC7C6E00EFCA10 /* MDConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MDConfigManager.m; path = Config/MDConfigManager.m; sourceTree = "<group>"; };
+		716271A022DC7C6E00EFCA10 /* MDCycriptManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MDCycriptManager.h; path = Config/MDCycriptManager.h; sourceTree = "<group>"; };
+		716271A222DC7C6E00EFCA10 /* MDCycriptManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MDCycriptManager.m; path = Config/MDCycriptManager.m; sourceTree = "<group>"; };
+		716271A422DC7C6E00EFCA10 /* MDMethodTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MDMethodTrace.h; path = Config/MDMethodTrace.h; sourceTree = "<group>"; };
+		716271A622DC7C6E00EFCA10 /* MDMethodTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MDMethodTrace.m; path = Config/MDMethodTrace.m; sourceTree = "<group>"; };
+		716271A922DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a1a2-selectortramps-arm.s"; path = "Trace/a1a2-selectortramps-arm.s"; sourceTree = "<group>"; };
+		716271AB22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a1a2-selectortramps-arm64.s"; path = "Trace/a1a2-selectortramps-arm64.s"; sourceTree = "<group>"; };
+		716271AD22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a1a2-selectortramps-i386.s"; path = "Trace/a1a2-selectortramps-i386.s"; sourceTree = "<group>"; };
+		716271AF22DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a1a2-selectortramps-x86_64.s"; path = "Trace/a1a2-selectortramps-x86_64.s"; sourceTree = "<group>"; };
+		716271B122DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a2a3-selectortramps-arm.s"; path = "Trace/a2a3-selectortramps-arm.s"; sourceTree = "<group>"; };
+		716271B322DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a2a3-selectortramps-i386.s"; path = "Trace/a2a3-selectortramps-i386.s"; sourceTree = "<group>"; };
+		716271B522DC7C6E00EFCA10 /* a2a3-selectortramps-x86_64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a2a3-selectortramps-x86_64.s"; path = "Trace/a2a3-selectortramps-x86_64.s"; sourceTree = "<group>"; };
+		716271B722DC7C6E00EFCA10 /* OCMethodTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMethodTrace.h; path = Trace/OCMethodTrace.h; sourceTree = "<group>"; };
+		716271B922DC7C6E00EFCA10 /* OCMethodTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = OCMethodTrace.m; path = Trace/OCMethodTrace.m; sourceTree = "<group>"; };
+		716271BB22DC7C6E00EFCA10 /* OCSelectorTrampolines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCSelectorTrampolines.h; path = Trace/OCSelectorTrampolines.h; sourceTree = "<group>"; };
+		716271BD22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = OCSelectorTrampolines.mm; path = Trace/OCSelectorTrampolines.mm; sourceTree = "<group>"; };
+		716271BF22DC7C6E00EFCA10 /* selectortramps.mac */ = {isa = PBXFileReference; lastKnownFileType = text; name = selectortramps.mac; path = Trace/selectortramps.mac; sourceTree = "<group>"; };
+		716271C122DC7C6E00EFCA10 /* LLDBTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LLDBTools.h; path = Tools/LLDBTools.h; sourceTree = "<group>"; };
+		716271C322DC7C6E00EFCA10 /* LLDBTools.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = LLDBTools.mm; path = Tools/LLDBTools.mm; sourceTree = "<group>"; };
+		716271C622DC7C6E00EFCA10 /* SoulHookDylib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoulHookDylib-Prefix.pch"; sourceTree = "<group>"; };
+		716271C822DC7C6E00EFCA10 /* AntiAntiDebug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AntiAntiDebug.m; path = AntiAntiDebug/AntiAntiDebug.m; sourceTree = "<group>"; };
+		716271CB22DC7C6E00EFCA10 /* fishhook.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = fishhook/fishhook.c; sourceTree = "<group>"; };
+		716271CD22DC7C6E00EFCA10 /* fishhook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = fishhook/fishhook.h; sourceTree = "<group>"; };
+		716271CF22DC7C6E00EFCA10 /* SoulHookDylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoulHookDylib.h; sourceTree = "<group>"; };
+		716271D122DC7C6E00EFCA10 /* SoulHookDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoulHookDylib.m; sourceTree = "<group>"; };
+		716271DC22DC7CF400EFCA10 /* SoulHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoulHeader.h; sourceTree = "<group>"; };
+		716271DD22DC7CF500EFCA10 /* SOHookSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookSettingController.h; sourceTree = "<group>"; };
+		716271DE22DC7CF500EFCA10 /* SOHookURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookURLProtocol.m; sourceTree = "<group>"; };
+		716271DF22DC7CF500EFCA10 /* SOHookURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookURLProtocol.h; sourceTree = "<group>"; };
+		716271E022DC7CF500EFCA10 /* SOHookSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookSettingController.m; sourceTree = "<group>"; };
+		716271E622DC7FD200EFCA10 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7162717422DC7C6E00EFCA10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7162718822DC7C6E00EFCA10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7162719122DC7C6E00EFCA10 /* JavaScriptCore.framework in Frameworks */,
+				7162719522DC7C6E00EFCA10 /* UIKit.framework in Frameworks */,
+				7162719322DC7C6E00EFCA10 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7162716E22DC7C6E00EFCA10 = {
+			isa = PBXGroup;
+			children = (
+				716271E622DC7FD200EFCA10 /* Default-568h@2x.png */,
+				7162717C22DC7C6E00EFCA10 /* SoulHook */,
+				7162719622DC7C6E00EFCA10 /* SoulHookDylib */,
+				7162718F22DC7C6E00EFCA10 /* Frameworks */,
+				7162717B22DC7C6E00EFCA10 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7162717B22DC7C6E00EFCA10 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7162717A22DC7C6E00EFCA10 /* SoulHook.app */,
+				7162718B22DC7C6E00EFCA10 /* libSoulHookDylib.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7162717C22DC7C6E00EFCA10 /* SoulHook */ = {
+			isa = PBXGroup;
+			children = (
+				7162717D22DC7C6E00EFCA10 /* icon.png */,
+				7162718522DC7C6E00EFCA10 /* Info.plist */,
+				7162717E22DC7C6E00EFCA10 /* Scripts */,
+				7162718022DC7C6E00EFCA10 /* Config */,
+				7162718322DC7C6E00EFCA10 /* TargetApp */,
+			);
+			path = SoulHook;
+			sourceTree = "<group>";
+		};
+		7162717E22DC7C6E00EFCA10 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				7162717F22DC7C6E00EFCA10 /* quick-resign.sh */,
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
+		7162718022DC7C6E00EFCA10 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				7162718122DC7C6E00EFCA10 /* MDConfig.plist */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		7162718322DC7C6E00EFCA10 /* TargetApp */ = {
+			isa = PBXGroup;
+			children = (
+				7162718422DC7C6E00EFCA10 /* put ipa or app here */,
+			);
+			name = TargetApp;
+			sourceTree = "<group>";
+		};
+		7162718F22DC7C6E00EFCA10 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7162719022DC7C6E00EFCA10 /* JavaScriptCore.framework */,
+				7162719222DC7C6E00EFCA10 /* Foundation.framework */,
+				7162719422DC7C6E00EFCA10 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7162719622DC7C6E00EFCA10 /* SoulHookDylib */ = {
+			isa = PBXGroup;
+			children = (
+				716271CF22DC7C6E00EFCA10 /* SoulHookDylib.h */,
+				716271D122DC7C6E00EFCA10 /* SoulHookDylib.m */,
+				716271DD22DC7CF500EFCA10 /* SOHookSettingController.h */,
+				716271E022DC7CF500EFCA10 /* SOHookSettingController.m */,
+				716271DF22DC7CF500EFCA10 /* SOHookURLProtocol.h */,
+				716271DE22DC7CF500EFCA10 /* SOHookURLProtocol.m */,
+				716271DC22DC7CF400EFCA10 /* SoulHeader.h */,
+				7162719722DC7C6E00EFCA10 /* Logos */,
+				7162719B22DC7C6E00EFCA10 /* Config */,
+				716271A822DC7C6E00EFCA10 /* Trace */,
+				716271C022DC7C6E00EFCA10 /* Tools */,
+				716271C722DC7C6E00EFCA10 /* AntiAntiDebug */,
+				716271CA22DC7C6E00EFCA10 /* fishhook */,
+				716271C522DC7C6E00EFCA10 /* Supporting Files */,
+			);
+			path = SoulHookDylib;
+			sourceTree = "<group>";
+		};
+		7162719722DC7C6E00EFCA10 /* Logos */ = {
+			isa = PBXGroup;
+			children = (
+				7162719822DC7C6E00EFCA10 /* SoulHookDylib.xm */,
+				7162719922DC7C6E00EFCA10 /* SoulHookDylib.mm */,
+			);
+			name = Logos;
+			sourceTree = "<group>";
+		};
+		7162719B22DC7C6E00EFCA10 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				7162719C22DC7C6E00EFCA10 /* MDConfigManager.h */,
+				7162719E22DC7C6E00EFCA10 /* MDConfigManager.m */,
+				716271A022DC7C6E00EFCA10 /* MDCycriptManager.h */,
+				716271A222DC7C6E00EFCA10 /* MDCycriptManager.m */,
+				716271A422DC7C6E00EFCA10 /* MDMethodTrace.h */,
+				716271A622DC7C6E00EFCA10 /* MDMethodTrace.m */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		716271A822DC7C6E00EFCA10 /* Trace */ = {
+			isa = PBXGroup;
+			children = (
+				716271A922DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s */,
+				716271AB22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s */,
+				716271AD22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s */,
+				716271AF22DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s */,
+				716271B122DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s */,
+				716271B322DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s */,
+				716271B522DC7C6E00EFCA10 /* a2a3-selectortramps-x86_64.s */,
+				716271B722DC7C6E00EFCA10 /* OCMethodTrace.h */,
+				716271B922DC7C6E00EFCA10 /* OCMethodTrace.m */,
+				716271BB22DC7C6E00EFCA10 /* OCSelectorTrampolines.h */,
+				716271BD22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm */,
+				716271BF22DC7C6E00EFCA10 /* selectortramps.mac */,
+			);
+			name = Trace;
+			sourceTree = "<group>";
+		};
+		716271C022DC7C6E00EFCA10 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				716271C122DC7C6E00EFCA10 /* LLDBTools.h */,
+				716271C322DC7C6E00EFCA10 /* LLDBTools.mm */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
+		716271C522DC7C6E00EFCA10 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				716271C622DC7C6E00EFCA10 /* SoulHookDylib-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		716271C722DC7C6E00EFCA10 /* AntiAntiDebug */ = {
+			isa = PBXGroup;
+			children = (
+				716271C822DC7C6E00EFCA10 /* AntiAntiDebug.m */,
+			);
+			name = AntiAntiDebug;
+			sourceTree = "<group>";
+		};
+		716271CA22DC7C6E00EFCA10 /* fishhook */ = {
+			isa = PBXGroup;
+			children = (
+				716271CB22DC7C6E00EFCA10 /* fishhook.c */,
+				716271CD22DC7C6E00EFCA10 /* fishhook.h */,
+			);
+			name = fishhook;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7162718922DC7C6E00EFCA10 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				716271A122DC7C6E00EFCA10 /* MDCycriptManager.h in Headers */,
+				716271E422DC7CF500EFCA10 /* SOHookURLProtocol.h in Headers */,
+				716271A522DC7C6E00EFCA10 /* MDMethodTrace.h in Headers */,
+				716271CE22DC7C6E00EFCA10 /* fishhook.h in Headers */,
+				716271C222DC7C6E00EFCA10 /* LLDBTools.h in Headers */,
+				7162719D22DC7C6E00EFCA10 /* MDConfigManager.h in Headers */,
+				716271D022DC7C6E00EFCA10 /* SoulHookDylib.h in Headers */,
+				716271E222DC7CF500EFCA10 /* SOHookSettingController.h in Headers */,
+				716271BC22DC7C6E00EFCA10 /* OCSelectorTrampolines.h in Headers */,
+				716271E122DC7CF500EFCA10 /* SoulHeader.h in Headers */,
+				716271B822DC7C6E00EFCA10 /* OCMethodTrace.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7162717922DC7C6E00EFCA10 /* SoulHook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 716271D822DC7C6E00EFCA10 /* Build configuration list for PBXNativeTarget "SoulHook" */;
+			buildPhases = (
+				7162717322DC7C6E00EFCA10 /* Sources */,
+				7162717422DC7C6E00EFCA10 /* Frameworks */,
+				7162717522DC7C6E00EFCA10 /* ShellScript */,
+				7162717622DC7C6E00EFCA10 /* Resources */,
+				7162717722DC7C6E00EFCA10 /* CopyFiles */,
+				7162717822DC7C6E00EFCA10 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7162718E22DC7C6E00EFCA10 /* PBXTargetDependency */,
+			);
+			name = SoulHook;
+			productName = SoulHook;
+			productReference = 7162717A22DC7C6E00EFCA10 /* SoulHook.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7162718A22DC7C6E00EFCA10 /* SoulHookDylib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 716271D522DC7C6E00EFCA10 /* Build configuration list for PBXNativeTarget "SoulHookDylib" */;
+			buildPhases = (
+				7162718622DC7C6E00EFCA10 /* ShellScript */,
+				7162718722DC7C6E00EFCA10 /* Sources */,
+				7162718822DC7C6E00EFCA10 /* Frameworks */,
+				7162718922DC7C6E00EFCA10 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoulHookDylib;
+			productName = SoulHookDylib;
+			productReference = 7162718B22DC7C6E00EFCA10 /* libSoulHookDylib.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7162716F22DC7C6E00EFCA10 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = fancy;
+				TargetAttributes = {
+					7162717922DC7C6E00EFCA10 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					7162718A22DC7C6E00EFCA10 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 7162717222DC7C6E00EFCA10 /* Build configuration list for PBXProject "SoulHook" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7162716E22DC7C6E00EFCA10;
+			productRefGroup = 7162717B22DC7C6E00EFCA10 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7162717922DC7C6E00EFCA10 /* SoulHook */,
+				7162718A22DC7C6E00EFCA10 /* SoulHookDylib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7162717622DC7C6E00EFCA10 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7162718222DC7C6E00EFCA10 /* MDConfig.plist in Resources */,
+				716271E722DC7FD200EFCA10 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7162717522DC7C6E00EFCA10 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = /opt/MonkeyDev/Tools/pack.sh;
+		};
+		7162717822DC7C6E00EFCA10 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/Tools/pack.sh codesign";
+		};
+		7162718622DC7C6E00EFCA10 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/bin/md --xcbp-logos";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7162717322DC7C6E00EFCA10 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7162718722DC7C6E00EFCA10 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				716271A322DC7C6E00EFCA10 /* MDCycriptManager.m in Sources */,
+				716271D222DC7C6E00EFCA10 /* SoulHookDylib.m in Sources */,
+				716271AC22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s in Sources */,
+				716271AA22DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s in Sources */,
+				716271E322DC7CF500EFCA10 /* SOHookURLProtocol.m in Sources */,
+				716271B022DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s in Sources */,
+				716271BA22DC7C6E00EFCA10 /* OCMethodTrace.m in Sources */,
+				7162719F22DC7C6E00EFCA10 /* MDConfigManager.m in Sources */,
+				716271CC22DC7C6E00EFCA10 /* fishhook.c in Sources */,
+				716271C922DC7C6E00EFCA10 /* AntiAntiDebug.m in Sources */,
+				716271BE22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm in Sources */,
+				716271AE22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s in Sources */,
+				716271B422DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s in Sources */,
+				716271B222DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s in Sources */,
+				716271E522DC7CF500EFCA10 /* SOHookSettingController.m in Sources */,
+				7162719A22DC7C6E00EFCA10 /* SoulHookDylib.mm in Sources */,
+				716271C422DC7C6E00EFCA10 /* LLDBTools.mm in Sources */,
+				716271B622DC7C6E00EFCA10 /* a2a3-selectortramps-x86_64.s in Sources */,
+				716271A722DC7C6E00EFCA10 /* MDMethodTrace.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7162718E22DC7C6E00EFCA10 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7162718A22DC7C6E00EFCA10 /* SoulHookDylib */;
+			targetProxy = 7162718D22DC7C6E00EFCA10 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		716271D322DC7C6E00EFCA10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		716271D422DC7C6E00EFCA10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		716271D622DC7C6E00EFCA10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z78DQXE2Y3;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks/**",
+					"$(MonkeyDevPath)/Librarys/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoulHookDylib/SoulHookDylib-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/include",
+					"$(MonkeyDevTheosPath)/vendor/include/**",
+				);
+				INSTALL_PATH = "@executable_path/Frameworks/libSoulHookDylib.dylib";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks",
+					"$(MonkeyDevTheosPath)/vendor/lib/**",
+				);
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DTHEOS_INSTANCE_NAME=\"\\\"SoulHookDylib\\\"\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_library",
+					"/usr/lib/libc++.dylib",
+					"-weak_library",
+					"/usr/lib/libstdc++.dylib",
+					"-weak_library",
+					"$(MonkeyDevPath)/Frameworks/libsubstrate.dylib",
+					"-lcycript",
+					"-framework",
+					RevealServer,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		716271D722DC7C6E00EFCA10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = Z78DQXE2Y3;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks/**",
+					"$(MonkeyDevPath)/Librarys/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoulHookDylib/SoulHookDylib-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/include",
+					"$(MonkeyDevTheosPath)/vendor/include/**",
+				);
+				INSTALL_PATH = "@executable_path/Frameworks/libSoulHookDylib.dylib";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks",
+					"$(MonkeyDevTheosPath)/vendor/lib/**",
+				);
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DTHEOS_INSTANCE_NAME=\"\\\"SoulHookDylib\\\"\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_library",
+					"/usr/lib/libc++.dylib",
+					"-weak_library",
+					"/usr/lib/libstdc++.dylib",
+					"-weak_library",
+					"$(MonkeyDevPath)/Frameworks/libsubstrate.dylib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		716271D922DC7C6E00EFCA10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z78DQXE2Y3;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = SoulHook/Info.plist;
+				MONKEYDEV_ADD_SUBSTRATE = YES;
+				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_DEFAULT_BUNDLEID = NO;
+				MONKEYDEV_INSERT_DYLIB = YES;
+				MONKEYDEV_RESTORE_SYMBOL = NO;
+				MONKEYDEV_TARGET_APP = Optional;
+				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mihuashi.test;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		716271DA22DC7C6E00EFCA10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z78DQXE2Y3;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = SoulHook/Info.plist;
+				MONKEYDEV_ADD_SUBSTRATE = YES;
+				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_DEFAULT_BUNDLEID = NO;
+				MONKEYDEV_INSERT_DYLIB = YES;
+				MONKEYDEV_RESTORE_SYMBOL = NO;
+				MONKEYDEV_TARGET_APP = Optional;
+				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mihuashi.test;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7162717222DC7C6E00EFCA10 /* Build configuration list for PBXProject "SoulHook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				716271D322DC7C6E00EFCA10 /* Debug */,
+				716271D422DC7C6E00EFCA10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		716271D522DC7C6E00EFCA10 /* Build configuration list for PBXNativeTarget "SoulHookDylib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				716271D622DC7C6E00EFCA10 /* Debug */,
+				716271D722DC7C6E00EFCA10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		716271D822DC7C6E00EFCA10 /* Build configuration list for PBXNativeTarget "SoulHook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				716271D922DC7C6E00EFCA10 /* Debug */,
+				716271DA22DC7C6E00EFCA10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7162716F22DC7C6E00EFCA10 /* Project object */;
+}

@@ -1,0 +1,315 @@
+//
+//  SoulHeader.h
+//  SoulHook
+//
+//  Created by 月成 on 2019/6/24.
+//  Copyright © 2019 fancy. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "SOHookSettingController.h"
+
+
+NS_ASSUME_NONNULL_BEGIN
+
+//统计埋点
+@interface TalkingData: NSObject
+//AppId:A52B96856DC**********1B583A45945 channelId:AppStore
++ (void)sessionStarted:(NSString *)appKey withChannelId:(NSString *)channelId;
+
+@end
+
+//统计埋点
+@interface KochavaTracker: NSObject
+//appGUIDString = "kosoul-ios-********";
+- (void)configureWithParametersDictionary:(NSDictionary *)dic delegate:(id)delegate;
+
+@end
+
+@interface AvatarModifyViewController: UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (copy, nonatomic) NSString *avatarOriginName;
+@property (copy, nonatomic) NSString *avatarName;
+@property (nonatomic, strong) WKWebView *webView;
+@property (nonatomic, strong, nullable) UIImage *customImage;
+
+- (void)updateUserInfWithAvatarName:(NSString *)arg1 originAvatarName:(NSString *)arg2 image:(UIImage *)arg3 originImage:(UIImage *)arg4 svgInfo:(NSString *)arg5;
+
+//上传
+- (void)uploadToQiniu:(UIImage *)arg1 svginfo:(id)arg2 token:(NSDictionary *)arg3 imageName:(NSString *)arg4 completion:(dispatch_block_t)arg5;
+- (void)uploadOriginAvatar:(UIImage *)arg1 avatarSVGInfo:(id)arg2;
+- (void)uploadAvatar:(UIImage *)arg1 avatarSVGInfo:(id)arg2;
+- (void)viewDidLoad;
+
+//add
+- (void)customAction:(UIButton *)sender;
+- (void)cancelAction:(UIButton *)sender;
+- (void)confirmAction:(UIButton *)sender;
+- (UIImage *)resizeImage:(CGSize)size;
+
+@end
+
+@interface IMPMsgCommand : NSObject
+
+@property (nonatomic) int type;
+
+@end
+
+@interface IMPCommandMessage : NSObject
+
+@end
+
+//SoulSocket -> SocketService -> ChatTransCenter (deliverMessageListToIMService:)
+//-> NBIMService(deliverMessageListToIMService:)
+//收到消息 先走 pushMessageToExtor 再走 receiveMessage，hook后者 cmdmsg.type = 8(recall)时 将此cmd置空
+@interface ChatTransCenter : NSObject
+
+- (void)receiveMessage:(NSArray *)arg1;
+- (void)pushMessageToExtor:(NSArray *)arg1;
+- (void)sendCommandsMessage:(id)arg1 completion:(id)arg2;
+
+@end
+
+@interface ImageIMModel : NSObject
+
+@property(nonatomic) long long mark;
+@property(nonatomic, copy) NSString *url;
+
+@end
+
+@interface VoiceIMModel : NSObject
+
+@property(nonatomic, copy) NSString *url;
+
+@end
+
+@interface VideoIMModel : NSObject
+
+@property(nonatomic) long long mark;
+@property(nonatomic, copy) NSString *url;
+
+@end
+
+@interface SOChatMessageModel : NSObject
+
+@property(nonatomic) BOOL snap; //flash
+@property (strong, nonatomic) ImageIMModel *imageIMModel;
+@property (strong, nonatomic) VoiceIMModel *voiceIMModel;
+@property (strong, nonatomic) VideoIMModel *videoIMModel;
+
+@end
+
+@interface SOPrivateChatTableViewCell : UITableViewCell
+
+@property (nonatomic, strong) SOChatMessageModel *model;
+
+@end
+
+@interface SOUserDefinedEmoticonTableViewCell : SOPrivateChatTableViewCell
+
+- (void)tapIamge;
+
+@end
+
+
+@interface SOChatFlashPhotoMessageTableViewCell : SOPrivateChatTableViewCell
+{
+    UIImageView *imageView;
+    UIVisualEffectView *lookBeforeBgView;
+    UIView *lookAferBgView;
+    UIImageView *iconImage;
+    UILabel *titleLabel;
+    UILabel *photoMarklabel;
+}
+
+- (void)tapFlashPhoto;
+
+@end
+
+@interface SOChatPhotoMessageTableViewCell : SOPrivateChatTableViewCell
+
+- (void)tapIamge;
+
+@end
+
+@interface SOChatAudioMessageTableViewCell : SOPrivateChatTableViewCell
+
+- (void)run;
+
+@end
+
+@interface SOChatVideoMessageTableViewCell : SOPrivateChatTableViewCell
+
+- (void)tap;
+- (void)UpdateSubclassingUIWithChatMessageModel:(id)arg1;
+
+@end
+
+@interface SOLookFlashPhotoView : UIView
+
+- (id)initWithFrame:(CGRect)arg1 WithImage:(NSData *)arg2 andIsSelf:(BOOL)arg3;
+- (void)tapImage:(id)arg1;
+- (void)longPressBgView:(UILongPressGestureRecognizer *)arg1;
+- (void)tapbgView:(UITapGestureRecognizer *)arg1;
+
+@end
+
+//表情键盘
+@interface SOCollectEmoticonView : UIView
+
+@property (nonatomic, copy) void (^diceBlock)(void);
+@property (nonatomic, copy) void (^fingerBlock)(void);
+
+- (void)fingerAction:(UIButton *)sender;
+- (void)diceAction:(UIButton *)sender;
+
+- (void)collectionView:(UICollectionView *)arg1 didSelectItemAtIndexPath:(NSIndexPath *)arg2;
+
+@end
+
+//设置页
+@interface MoveViewController : UIViewController
+
+@property (nonatomic, strong) UITableView *tableView;
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+@interface SOBuildMessageManager : NSObject
+
++ (id)buildRollDiceMessageTo:(NSString *)arg1 info:(NSString *)arg2;
++ (id)buildFingerGuessMessageTo:(NSString *)arg1 info:(NSString *)arg2;
+
+@end
+
+
+@interface SOUserInfoViewController : UIViewController
+
+//@property(nonatomic) BOOL isMySoulmate;
+@property (nonatomic) BOOL isCanCreatSoulMate;
+//@property(nonatomic, copy) void (^intiveSoulmateBlock)(void);
+//@property(nonatomic, copy) void (^cancelSoulmateBlock)(void);
+
+- (void)cancelSoulMate;
+- (void)tableView:(UITableView *)arg1 didSelectRowAtIndexPath:(NSIndexPath *)arg2;
+
+@end
+
+
+@interface AppDelegate : NSObject
+
+- (void)showAdvert;
+- (void)displayAdvert;
+
+@end
+
+@interface HeaderTwoViewController : UIViewController
+
+@property (nonatomic, copy) NSString *headImageName;
+
+- (void)confirmClick:(id)arg1;
+
+@end
+
+@interface MatchChatViewController : UIViewController
+
+- (void)playmusic;
+
+@end
+
+@interface SOHTTPSessionManager : NSObject
+
+- (void)handleRequestSuccess:(id)arg1 task:(id)arg2 withSuccessHandler:(dispatch_block_t)arg3 withFailureHandler:(dispatch_block_t)arg4 withFinishHandler:(dispatch_block_t)arg5;
+
+@end
+
+@interface SOReleaseViewController : UIViewController
+
+- (void)tagEditContainerViewDidLocationItemClick:(id)arg1;
+
+@end
+
+@interface SoulIMMessage : NSObject
+
+@property (copy, nonatomic) NSArray *imageArray;
+@property (copy, nonatomic) NSString *media;
+@property (strong, nonatomic) id textIMModel;//TextIMModel
+@property (nonatomic) BOOL fromMine;
+@property (strong, nonatomic) NSError *error;
+@property (copy, nonatomic) NSString *notice;
+@property (copy, nonatomic) NSString *sessionId;
+@property (copy, nonatomic) NSDictionary *extMap;
+@property (strong, nonatomic) id unreadModel;//UnReadIMModel
+@property (strong, nonatomic) id commenModel;//CommonIMModel
+@property (strong, nonatomic) id musicShareModel; //MusicShareIMModel
+@property(strong, nonatomic) id loationshareModel; //LocationShareIMModel
+@property (strong, nonatomic) id shareTagModel; //ShareTagModel
+@property (strong, nonatomic) id extModel; // ExtModel
+@property (strong, nonatomic) id callVoiceIMModel; // CallVoiceIMModel
+@property (strong, nonatomic) id fingerDiceIMModel; // FingerDiceIMModel
+@property (strong, nonatomic) id voiceIMModel; // VoiceIMModel
+@property (strong, nonatomic) id imageModel; // ImageIMModel
+@property (strong, nonatomic) id videoModel; // VideoIMModel
+@property (nonatomic) long long snap;
+@property (nonatomic) long long isTagetRcDone;
+@property (nonatomic) long long localId;
+@property (copy, nonatomic) NSString *targetId;
+@property (copy, nonatomic) NSString *msgId;
+@property (copy, nonatomic) NSString *fromUid;
+@property (copy, nonatomic) NSString *toUid;
+@property (copy, nonatomic) NSDictionary *data;
+@property (nonatomic) int type;
+
+@end
+
+@interface SOChatListViewController : UIViewController
+
+@property (strong, nonatomic) NSMutableArray *dataArr;
+
+@end
+
+@interface SOChatListModel : NSObject
+
+@property (nonatomic) BOOL isChatManuscript;
+@property (nonatomic) BOOL isSelectedShare;
+@property (nonatomic) BOOL isSelected;
+@property (copy, nonatomic) NSString *birthday;
+@property (nonatomic) BOOL isMutualFollow;
+@property (copy, nonatomic) NSString *signatrue;
+@property (copy, nonatomic) NSString *comeFromStr;
+@property (copy, nonatomic) NSString *birthDay;
+@property (nonatomic) long long lastMessageTime;
+@property (nonatomic) int unreadMessagesCount;
+@property (copy, nonatomic) NSString *soulmateStr;
+@property (copy, nonatomic) NSString *contentStr;
+@property (copy, nonatomic) NSString *alicsStr;
+@property (copy, nonatomic) NSString *headIcon;
+@property (copy, nonatomic) NSString *headBGColor;
+@property (copy, nonatomic) NSString *userID;
+
+@end
+
+@interface SOMovieVC : UIViewController
+
+@property (nonatomic) BOOL isFlashVideo;
+
+@end
+
+@interface ScrollerWebController : UIViewController <UIWebViewDelegate>
+
+@property (strong, nonatomic) UIWebView *webView;
+@property (copy, nonatomic) NSString *url;
+
+- (void)actionForStartNetworkRequst:(id)arg1 callBack:(dispatch_block_t)arg2;
+- (void)webViewDidFinishLoad:(UIWebView *)webView;
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
+
+@end
+
+
+NS_ASSUME_NONNULL_END
