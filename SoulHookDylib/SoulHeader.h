@@ -53,11 +53,65 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface IMPMsgCommand : NSObject
 
+@property (strong, nonatomic) id commonMessage;
+@property (strong, nonatomic) id expressionMessage;
+@property (strong, nonatomic) id extChatMessage;
+@property (strong, nonatomic) NSMutableDictionary *extMap;
+@property (readonly, nonatomic) unsigned long long extMap_Count;
+@property (strong, nonatomic) id fingerGuessMessage;
+@property (copy, nonatomic) NSString *from;
+@property (readonly, nonatomic) int msgOneOfCase;
+@property (strong, nonatomic) id musicMessage;
+@property (copy, nonatomic) NSString *notice;
+@property (strong, nonatomic) id picMessage;
+@property (strong, nonatomic) id picMessages;
+@property (strong, nonatomic) id positionMessage;
+@property (strong, nonatomic) id repostMessge;
+@property (strong, nonatomic) id rollDiceMessage;
+@property (strong, nonatomic) id sensitiveWordMessage;
+@property (strong, nonatomic) id shareTagMessage;
+@property (nonatomic) int snapChat;
+@property (strong, nonatomic) id snapChatMessage;
+@property (strong, nonatomic) id soulmateCardMessage;
+@property (strong, nonatomic) id textMsg;
+@property (nonatomic) long long timestamp;
+@property (copy, nonatomic) NSString *to;
 @property (nonatomic) int type;
+@property (strong, nonatomic) id unReadCountMessage;
+@property (strong, nonatomic) id userCardMessage;
+@property (strong, nonatomic) id userExpressionMessage;
+@property (strong, nonatomic) id videoMessage;
+@property (strong, nonatomic) id voiceChatMessage;
+@property (strong, nonatomic) id voiceMessage;
 
 @end
 
+
 @interface IMPCommandMessage : NSObject
+
+@property (copy, nonatomic) NSString *acceptedMsgId;
+@property (strong, nonatomic) id ackCommand;
+@property (strong, nonatomic) id chatRoomCommand;
+@property (nonatomic) int clientType;
+@property (copy, nonatomic) NSString *cmdId;
+@property (readonly, nonatomic) int cmdOneOfCase;
+@property (copy, nonatomic) NSString *crc;
+@property (copy, nonatomic) NSString *encryptedUserId;
+@property (strong, nonatomic) id finCommand;
+@property (strong, nonatomic) IMPMsgCommand *msgCommand;
+@property (strong, nonatomic) id msgFin;
+@property (strong, nonatomic) id notifyCommand;
+@property (strong, nonatomic) id orderCommand;
+@property (strong, nonatomic) id pshCommand;
+@property (strong, nonatomic) id pushMessage;
+@property (strong, nonatomic) id reportCommand;
+@property (strong, nonatomic) id respCommand;
+@property (copy, nonatomic) NSString *soulId;
+@property (strong, nonatomic) id syncCommand;
+@property (strong, nonatomic) id syncFin;
+@property (strong, nonatomic) id transCommand;
+@property (nonatomic) int type;
+
 
 @end
 
@@ -74,27 +128,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ImageIMModel : NSObject
 
-@property(nonatomic) long long mark;
-@property(nonatomic, copy) NSString *url;
+@property (nonatomic) long long mark;
+@property (nonatomic, copy) NSString *url;
 
 @end
 
 @interface VoiceIMModel : NSObject
 
-@property(nonatomic, copy) NSString *url;
+@property (nonatomic, copy) NSString *url;
 
 @end
 
 @interface VideoIMModel : NSObject
 
-@property(nonatomic) long long mark;
-@property(nonatomic, copy) NSString *url;
+@property (nonatomic) long long mark;
+@property (nonatomic, copy) NSString *url;
 
 @end
 
 @interface SOChatMessageModel : NSObject
 
-@property(nonatomic) BOOL snap; //flash
+@property (nonatomic) BOOL snap; //flash
 @property (strong, nonatomic) ImageIMModel *imageIMModel;
 @property (strong, nonatomic) VoiceIMModel *voiceIMModel;
 @property (strong, nonatomic) VideoIMModel *videoIMModel;
@@ -189,10 +243,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SOUserInfoViewController : UIViewController
 
-//@property(nonatomic) BOOL isMySoulmate;
+//@property (nonatomic) BOOL isMySoulmate;
 @property (nonatomic) BOOL isCanCreatSoulMate;
-//@property(nonatomic, copy) void (^intiveSoulmateBlock)(void);
-//@property(nonatomic, copy) void (^cancelSoulmateBlock)(void);
+//@property (nonatomic, copy) void (^intiveSoulmateBlock)(void);
+//@property (nonatomic, copy) void (^cancelSoulmateBlock)(void);
 
 - (void)cancelSoulMate;
 - (void)tableView:(UITableView *)arg1 didSelectRowAtIndexPath:(NSIndexPath *)arg2;
@@ -246,7 +300,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) id unreadModel;//UnReadIMModel
 @property (strong, nonatomic) id commenModel;//CommonIMModel
 @property (strong, nonatomic) id musicShareModel; //MusicShareIMModel
-@property(strong, nonatomic) id loationshareModel; //LocationShareIMModel
+@property (strong, nonatomic) id loationshareModel; //LocationShareIMModel
 @property (strong, nonatomic) id shareTagModel; //ShareTagModel
 @property (strong, nonatomic) id extModel; // ExtModel
 @property (strong, nonatomic) id callVoiceIMModel; // CallVoiceIMModel
@@ -310,6 +364,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
 
 @end
+ 
+@interface TextIMModel : NSObject
 
+@property(nonatomic) long long sensitive;
+@property(copy, nonatomic) NSString *text;
+
+@end
 
 NS_ASSUME_NONNULL_END

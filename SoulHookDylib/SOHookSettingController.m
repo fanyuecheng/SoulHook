@@ -7,11 +7,13 @@
 //
 
 #import "SOHookSettingController.h"
+#import "SOHookAutoReplyController.h"
 
 @interface SOHookSettingController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy)   NSArray     *dataSource;
+@property (nonatomic, strong) UIBarButtonItem *leftBarButtonItem;
 
 @end
 
@@ -19,11 +21,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = @"Hook设置";
+ 
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0 alpha:0.8];
+ 
     [self.view addSubview:self.tableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    self.title = @"Hook设置";
+    [self.navigationController setNavigationBarHidden:NO];
+    self.navigationItem.leftBarButtonItem = self.leftBarButtonItem;
+    
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0 alpha:0.8];
+    
+    NSMutableDictionary *titleTextAttributes = @{}.mutableCopy;
+    titleTextAttributes[NSFontAttributeName] = [UIFont systemFontOfSize:17];
+    titleTextAttributes[NSForegroundColorAttributeName] = [UIColor colorWithWhite:0 alpha:0.8];
+    
+    self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -61,6 +83,7 @@
     cell.textLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
     cell.textLabel.text = [dic valueForKey:@"title"];
     view.on = [[dic valueForKey:@"enable"] boolValue];
+    view.hidden = (indexPath.row == 0);
     
     return cell;
 }
@@ -73,6 +96,15 @@
     return [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 88)];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0) {
+        SOHookAutoReplyController *aotu = [[SOHookAutoReplyController alloc] init];
+        [self.navigationController pushViewController:aotu animated:YES];
+    }
+}
+
 #pragma mark - Action
 - (void)switchAction:(UISwitch *)sender {
     NSIndexPath *indexPath = [self indexPathForRowAtView:sender];
@@ -82,6 +114,14 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:sender.on forKey:[dic valueForKey:@"type"]];
     [userDefaults synchronize];
+}
+
+- (void)leftBarButtonItemAction:(id)sender {
+    if (self.navigationController.viewControllers.firstObject == self) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (NSIndexPath *)indexPathForRowAtView:(UIView *)view {
@@ -100,7 +140,7 @@
 #pragma mark - Get
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 50;
@@ -118,6 +158,11 @@
 - (NSArray *)dataSource {
     if (!_dataSource) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        
+        NSMutableDictionary *item0 = @{@"title" : @"自动回复设置",
+                                       @"enable" : @"0",
+                                       @"type" : @"0"
+                                       }.mutableCopy;
         
         NSMutableDictionary *item1 = @{@"title" : @"防止消息撤回",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_MSG_REVOKE_SWITCH]],
@@ -199,9 +244,17 @@
                                         @"type" : SOUL_HOOK_INPUT_STATE_SWITCH
                                         }.mutableCopy;
         
-        _dataSource = @[item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16];
+        _dataSource = @[item0, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16];
     }
     return _dataSource;
+}
+
+- (UIBarButtonItem *)leftBarButtonItem {
+    if (!_leftBarButtonItem) {
+        BOOL modar = self.navigationController.viewControllers.firstObject == self;
+        _leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:modar ? @"关闭" : @"返回" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction:)];
+    }
+    return _leftBarButtonItem;
 }
 
 @end

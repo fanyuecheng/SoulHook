@@ -15,6 +15,8 @@
 #import <MDCycriptManager.h>
 #import "SoulHeader.h"
 #import "SOHookURLProtocol.h"
+#import "WMDragView.h"
+#import "SOHookChatManager.h"
 
 CHConstructor{
     printf(INSERT_SUCCESS_WELCOME);
@@ -24,17 +26,40 @@ CHConstructor{
 #ifndef __OPTIMIZE__
         CYListenServer(6666);
 
-        MDCycriptManager* manager = [MDCycriptManager sharedInstance];
+        MDCycriptManager *manager = [MDCycriptManager sharedInstance];
         [manager loadCycript:NO];
 
-        NSError* error;
-        NSString* result = [manager evaluateCycript:@"UIApp" error:&error];
+        NSError *error;
+        NSString *result = [manager evaluateCycript:@"UIApp" error:&error];
         NSLog(@"result: %@", result);
         if(error.code != 0){
             NSLog(@"error: %@", error.localizedDescription);
         }
         
-
+        //悬浮按钮
+        UIApplication *application = note.object;
+        WMDragView *dragView = [[WMDragView alloc] initWithFrame:CGRectMake(0, 200, 50, 50)];
+        dragView.backgroundColor = [UIColor whiteColor];
+        dragView.isKeepBounds = YES;
+        dragView.layer.cornerRadius = 25;
+        dragView.layer.masksToBounds = YES;
+        dragView.layer.borderWidth = .5;
+        dragView.layer.borderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2].CGColor;
+        dragView.button.tintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+        [dragView.button setImage:[[UIImage imageNamed:@"icon_setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        
+        dragView.clickDragViewBlock = ^(WMDragView * _Nonnull dragView) {
+            SOHookSettingController *setting = [[SOHookSettingController alloc] init];
+            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:setting];
+            [application.keyWindow.rootViewController presentViewController:navi animated:YES completion:nil];
+        };
+        
+        [application.keyWindow addSubview:dragView];
+    
+        //消息监听
+        [[SOHookChatManager sharedInstance] addMessageObserver];
+        
+        //appid 检测
         [SOHookURLProtocol sharedInstance].requestBlock = ^NSURLRequest *(NSURLRequest *request) {
             if ([request.URL.absoluteString containsString:@"/Api/index/api_v2?sdx="]) {
                 NSLog(@"request == %@", request);
@@ -43,7 +68,7 @@ CHConstructor{
             
             return request;
         };
-        
+ 
 #endif
         
     }];
@@ -341,13 +366,17 @@ CHOptimizedMethod2(self, void, ChatTransCenter, sendCommandsMessage, SoulIMMessa
 }
 
 CHOptimizedMethod1(self, void, ChatTransCenter, receiveMessage, NSArray *, arg1) {
-    NSLog(@"ChatTransCenter_receiveMessage = %@", arg1);
     IMPCommandMessage *msg = arg1[0];
-    
+    //type: 5=RESP 3=ACK
+    NSLog(@"ChatTransCenter_receiveMessage = %@ type = %d", msg, msg.type);
+ 
     IMPMsgCommand *msgCommand = [msg valueForKey:@"msgCommand"];
+    NSLog(@"msgCommand = %@ type = %d", msgCommand, msgCommand.type);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SOUL_HOOK_NOTI_CHAT_MESSAGE_RECEIVED object:msg];
     
     if (msgCommand.type == 8) {
-        //RECALL
+        ////0=text 1=image 3=video 4=voice 8=RECALL 11=finger 12=dice 29=position
         BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_MSG_REVOKE_SWITCH];
         
         if (enable) {
@@ -698,9 +727,6 @@ CHOptimizedMethod0(self, void, MoveViewController, viewDidLoad) {
 CHOptimizedMethod2(self, void, MoveViewController, tableView, UITableView *, tableView, didSelectRowAtIndexPath, NSIndexPath *, indexPath) {
     if (indexPath.section == 3 && indexPath.row == 2) {
         SOHookSettingController *setting = [[SOHookSettingController alloc] init];
-        
-        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
-        self.navigationItem.backBarButtonItem = backItem;
         [self.navigationController pushViewController:setting animated:YES];
     } else {
         CHSuper2(MoveViewController, tableView, tableView, didSelectRowAtIndexPath, indexPath);
