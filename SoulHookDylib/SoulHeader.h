@@ -372,4 +372,32 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+typedef void (^progressBlock)(NSProgress *downloadProgress);
+typedef void (^successBlock)(NSURLSessionDataTask *task, id _Nullable responseObject);
+typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *error);
+
+@interface AFHTTPSessionManager : NSObject
+ 
+- (NSURLSessionDataTask *)dataTaskWithHTTPMethod:(NSString *)method
+                                       URLString:(NSString *)URLString
+                                      parameters:(id)parameters
+                                  uploadProgress:(nullable progressBlock) uploadProgress
+                                downloadProgress:(nullable progressBlock) downloadProgress
+                                         success:(successBlock)success
+                                         failure:(failureBlock)failure;
+
+@end
+
+@interface SOPrivateChatViewController : UIViewController
+{
+    UIMenuItem *_revokeflagMenuItem;
+}
+
+@property (strong, nonatomic) UIMenuController *menuController;
+
+- (void)_showMenuViewIndexPath:(id)arg1;
+
+@end
+
 NS_ASSUME_NONNULL_END

@@ -16,10 +16,19 @@
 #import "SoulHeader.h"
 #import "SOHookURLProtocol.h"
 #import "WMDragView.h"
-#import "SOHookChatManager.h"
 
 CHConstructor{
     printf(INSERT_SUCCESS_WELCOME);
+    
+    //appid 检测
+    [SOHookURLProtocol sharedInstance].requestBlock = ^NSURLRequest *(NSURLRequest *request) {
+        if ([request.URL.absoluteString containsString:@"/Api/index/api_v2?sdx="]) {
+            NSLog(@"request == %@", request);
+            return nil;
+        }
+        
+        return request;
+    };
     
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         
@@ -55,19 +64,6 @@ CHConstructor{
         };
         
         [application.keyWindow addSubview:dragView];
-    
-        //消息监听
-        [[SOHookChatManager sharedInstance] addMessageObserver];
-        
-        //appid 检测
-        [SOHookURLProtocol sharedInstance].requestBlock = ^NSURLRequest *(NSURLRequest *request) {
-            if ([request.URL.absoluteString containsString:@"/Api/index/api_v2?sdx="]) {
-                NSLog(@"request == %@", request);
-                return nil;
-            }
-            
-            return request;
-        };
  
 #endif
         
@@ -372,8 +368,6 @@ CHOptimizedMethod1(self, void, ChatTransCenter, receiveMessage, NSArray *, arg1)
  
     IMPMsgCommand *msgCommand = [msg valueForKey:@"msgCommand"];
     NSLog(@"msgCommand = %@ type = %d", msgCommand, msgCommand.type);
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:SOUL_HOOK_NOTI_CHAT_MESSAGE_RECEIVED object:msg];
     
     if (msgCommand.type == 8) {
         ////0=text 1=image 3=video 4=voice 8=RECALL 11=finger 12=dice 29=position
@@ -808,74 +802,6 @@ CHOptimizedMethod0(self, void, MatchChatViewController, playmusic) {
     CHSuper0(MatchChatViewController, playmusic);
 }
 
-CHDeclareClass(SOHTTPSessionManager)
-
-CHOptimizedMethod5(self, void, SOHTTPSessionManager, handleRequestSuccess, id, arg1, task, NSString *, arg2, withSuccessHandler, dispatch_block_t, arg3, withFailureHandler, dispatch_block_t, arg4, withFinishHandler, dispatch_block_t, arg5) {
-    NSLog(@"handleRequestSuccess ==== %@ %@ ", arg2, arg1);
-    
-    if ([arg2 isEqualToString:@"https://pay.soulapp.cn/face/product/get-paid-list"]) {
-        BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_SWITCH];
-        if (enable) {
-            arg1 = [NSMutableDictionary dictionaryWithDictionary:arg1];
-            [arg1 setObject:@[] forKey:@"data"];
-        }
-    }
-    
-    if ([arg2 containsString:@"account/fastLogin"]) {
-        BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_BIRTHDAY_GENDER_SWITCH];
-        if (enable) {
-            arg1 = [NSMutableDictionary dictionaryWithDictionary:arg1];
-            NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:arg1[@"data"]];
-            NSMutableDictionary *funcSetting = [NSMutableDictionary dictionaryWithDictionary:data[@"funcSetting"]];
-            
-            [funcSetting setObject:@"0" forKey:@"isTeenageModeChatCard"];
-            [funcSetting setObject:@"0" forKey:@"isTeenageMode"];
-            [funcSetting setObject:@"0" forKey:@"isTeenageModeHomepage"];
-            
-            [data setObject:funcSetting forKey:@"funcSetting"];
-            [data setObject:@"0" forKey:@"setBirthday"];
-            [data setObject:@"0" forKey:@"setGender"];
-            [data setObject:@"0" forKey:@"updateBirthdayCount"];
-            [data setObject:@"0" forKey:@"updateGenderCount"];
-            
-            [arg1 setObject:data forKey:@"data"];
-        }
-    }
-    
-    if ([arg2 containsString:@"post/homepage"]) {
-        BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_POST_VISIBILITY_SWITCH];
-        if (enable) {
-            arg1 = [NSMutableDictionary dictionaryWithDictionary:arg1];
-            
-            id originData = arg1[@"data"];
-            
-            if ([originData isKindOfClass:[NSArray class]]) {
-                NSMutableArray *data = [NSMutableArray arrayWithArray:originData];
-                
-                NSMutableArray *newData = [NSMutableArray array];
-                [data enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    NSMutableDictionary *dic = [obj mutableCopy];
-                    [dic setObject:@"PUBLIC" forKey:@"visibility"];
-                    [newData addObject:dic];
-                }];
-                [arg1 setObject:newData forKey:@"data"];
-            }
-        }
-    }
-    
-    //    if ([arg2 containsString:@"user/info"]) {
-    //        arg1 = [NSMutableDictionary dictionaryWithDictionary:arg1];
-    //        NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:arg1[@"data"]];
-    //        [data setObject:@0 forKey:@"blockedByTarget"];
-    //        [data setObject:@0 forKey:@"blocked"];
-    //
-    //        [arg1 setObject:data forKey:@"data"];
-    //    }
-    
-    CHSuper5(SOHTTPSessionManager, handleRequestSuccess, arg1, task, arg2, withSuccessHandler, arg3, withFailureHandler, arg4, withFinishHandler, arg5);
-}
-
-
 CHDeclareClass(SOReleaseViewController)
 
 CHOptimizedMethod1(self, void, SOReleaseViewController, tagEditContainerViewDidLocationItemClick, id, arg1) {
@@ -958,8 +884,99 @@ CHOptimizedMethod3(self, BOOL, ScrollerWebController, webView, UIWebView *, arg1
     return CHSuper3(ScrollerWebController, webView, arg1, shouldStartLoadWithRequest, arg2, navigationType, arg3);
 }
 
+CHDeclareClass(AFHTTPSessionManager)
+
+CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, NSString *, method, URLString, NSString *, URLString, parameters, id, parameters, uploadProgress, progressBlock, uploadProgress, downloadProgress, progressBlock, downloadProgress, success, successBlock, success, failure, failureBlock, failure) {
+    
+    successBlock successB = ^(NSURLSessionDataTask *task, id _Nullable responseObject) {
+        NSLog(@"AFHTTPSessionManager:\nmethod=%@ \nURLString=%@ \nparameters=%@ \nresponseObject=%@", method, URLString, parameters, responseObject);
+        
+        if ([URLString isEqualToString:@"https://pay.soulapp.cn/face/product/get-paid-list"]) {
+            BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_SWITCH];
+            if (enable) {
+                responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+                [responseObject setObject:@[] forKey:@"data"];
+            }
+        }
+        
+        if ([URLString containsString:@"account/fastLogin"]) {
+            BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_BIRTHDAY_GENDER_SWITCH];
+            if (enable) {
+                responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+                NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:responseObject[@"data"]];
+                NSMutableDictionary *funcSetting = [NSMutableDictionary dictionaryWithDictionary:data[@"funcSetting"]];
+                
+                [funcSetting setObject:@"0" forKey:@"isTeenageModeChatCard"];
+                [funcSetting setObject:@"0" forKey:@"isTeenageMode"];
+                [funcSetting setObject:@"0" forKey:@"isTeenageModeHomepage"];
+                
+                [data setObject:funcSetting forKey:@"funcSetting"];
+                [data setObject:@"0" forKey:@"setBirthday"];
+                [data setObject:@"0" forKey:@"setGender"];
+                [data setObject:@"0" forKey:@"updateBirthdayCount"];
+                [data setObject:@"0" forKey:@"updateGenderCount"];
+                
+                [responseObject setObject:data forKey:@"data"];
+            }
+        }
+        
+        if ([URLString containsString:@"post/homepage"]) {
+            BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_POST_VISIBILITY_SWITCH];
+            if (enable) {
+                responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+                
+                id originData = responseObject[@"data"];
+                
+                if ([originData isKindOfClass:[NSArray class]]) {
+                    NSMutableArray *data = [NSMutableArray arrayWithArray:originData];
+                    
+                    NSMutableArray *newData = [NSMutableArray array];
+                    [data enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        NSMutableDictionary *dic = [obj mutableCopy];
+                        [dic setObject:@"PUBLIC" forKey:@"visibility"];//PRIVATE STRANGER HOMEPAGE PUBLIC
+                        [newData addObject:dic];
+                    }];
+                    [responseObject setObject:newData forKey:@"data"];
+                }
+            }
+        }
+  
+        
+        !success ? : success(task, responseObject);
+    };
+
+    
+    NSURLSessionDataTask *task = CHSuper7(AFHTTPSessionManager, dataTaskWithHTTPMethod, method, URLString, URLString, parameters, parameters, uploadProgress, uploadProgress, downloadProgress, downloadProgress, success, successB, failure, failure);
+    
+    return task;
+}
+
+CHDeclareClass(SOPrivateChatViewController)
+
+CHMethod1(void, SOPrivateChatViewController, _showMenuViewIndexPath, NSIndexPath *, arg1) {
+    CHSuper1(SOPrivateChatViewController, _showMenuViewIndexPath, arg1);
+    
+    UIMenuItem *revokeflagMenuItem = [self valueForKey:@"revokeflagMenuItem"];
+    id privateChatIMManager = [self valueForKey:@"privateChatIMManager"];//SOPrivateChatIMManager
+    NSArray *dataArr = [privateChatIMManager valueForKey:@"dataArr"];
+    id messageModel = [dataArr objectAtIndex:arg1.row];
+    BOOL fromMine = [[messageModel valueForKey:@"fromMine"] boolValue];
+    BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:@"SOUL_HOOK_MSG_RECALL_SWITCH"];
+    if (enable && fromMine && ![self.menuController.menuItems containsObject:revokeflagMenuItem]) {
+        NSMutableArray *items = self.menuController.menuItems.mutableCopy;
+        [items addObject:revokeflagMenuItem];
+        self.menuController.menuItems = items;
+        [self.menuController update];
+    }
+}
 
 CHConstructor {
+    CHLoadLateClass(SOPrivateChatViewController);
+    CHHook1(SOPrivateChatViewController, _showMenuViewIndexPath);
+    
+    CHLoadLateClass(AFHTTPSessionManager);
+    CHHook7(AFHTTPSessionManager, dataTaskWithHTTPMethod, URLString, parameters, uploadProgress, downloadProgress, success, failure);
+    
     CHLoadLateClass(ScrollerWebController);
     CHHook0(ScrollerWebController, viewDidLoad);
     CHHook2(ScrollerWebController, actionForStartNetworkRequst, callBack);
@@ -1048,9 +1065,7 @@ CHConstructor {
     CHLoadLateClass(SOMovieVC);
     CHHook0(SOMovieVC, viewDidLoad);
     
-    CHLoadLateClass(SOHTTPSessionManager);
-    CHHook5(SOHTTPSessionManager, handleRequestSuccess, task, withSuccessHandler, withFailureHandler, withFinishHandler);
-    
+ 
     CHLoadLateClass(SOReleaseViewController);
     CHHook1(SOReleaseViewController, tagEditContainerViewDidLocationItemClick);
 }
