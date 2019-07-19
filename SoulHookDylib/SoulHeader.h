@@ -10,6 +10,37 @@
 #import <WebKit/WebKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "SOHookSettingController.h"
+#import <objc/runtime.h>
+
+CG_INLINE BOOL
+ExchangeImplementationsInTwoClasses(Class _fromClass, SEL _originSelector, Class _toClass, SEL _newSelector) {
+    if (!_fromClass || !_toClass) {
+        return NO;
+    }
+    
+    Method oriMethod = class_getInstanceMethod(_fromClass, _originSelector);
+    Method newMethod = class_getInstanceMethod(_toClass, _newSelector);
+    if (!newMethod) {
+        return NO;
+    }
+    
+    BOOL isAddedMethod = class_addMethod(_fromClass, _originSelector, method_getImplementation(newMethod), method_getTypeEncoding(newMethod));
+    if (isAddedMethod) {
+        // 如果 class_addMethod 成功了，说明之前 fromClass 里并不存在 originSelector，所以要用一个空的方法代替它，以避免 class_replaceMethod 后，后续 toClass 的这个方法被调用时可能会 crash
+        IMP oriMethodIMP = method_getImplementation(oriMethod) ?: imp_implementationWithBlock(^(id selfObject) {});
+        const char *oriMethodTypeEncoding = method_getTypeEncoding(oriMethod) ?: "v@:";
+        class_replaceMethod(_toClass, _newSelector, oriMethodIMP, oriMethodTypeEncoding);
+    } else {
+        method_exchangeImplementations(oriMethod, newMethod);
+    }
+    return YES;
+}
+
+/// 交换同一个 class 里的 originSelector 和 newSelector 的实现，如果原本不存在 originSelector，则相当于给 class 新增一个叫做 originSelector 的方法
+CG_INLINE BOOL
+ExchangeImplementations(Class _class, SEL _originSelector, SEL _newSelector) {
+    return ExchangeImplementationsInTwoClasses(_class, _originSelector, _class, _newSelector);
+}
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -51,6 +82,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface IMPTextMsg : NSObject
+
+@property(copy, nonatomic) NSString *text;
+
+@end
+
+
 @interface IMPMsgCommand : NSObject
 
 @property (strong, nonatomic) id commonMessage;
@@ -73,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) int snapChat;
 @property (strong, nonatomic) id snapChatMessage;
 @property (strong, nonatomic) id soulmateCardMessage;
-@property (strong, nonatomic) id textMsg;
+@property (strong, nonatomic) IMPTextMsg *textMsg;
 @property (nonatomic) long long timestamp;
 @property (copy, nonatomic) NSString *to;
 @property (nonatomic) int type;
@@ -237,6 +275,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (id)buildRollDiceMessageTo:(NSString *)arg1 info:(NSString *)arg2;
 + (id)buildFingerGuessMessageTo:(NSString *)arg1 info:(NSString *)arg2;
++ (id)buildTextIMMessage:(NSString *)text to:(NSString *)toId senstive:(int)arg3 messageExt:(id)arg4;
 
 @end
 
@@ -364,7 +403,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
 
 @end
- 
+
+@interface NBIMService : NSObject
+
++ (id)sharedInstance;
+@property (strong, nonatomic) ChatTransCenter *chatCenter;
+
+@end
+
+
 @interface TextIMModel : NSObject
 
 @property(nonatomic) long long sensitive;
@@ -378,7 +425,7 @@ typedef void (^successBlock)(NSURLSessionDataTask *task, id _Nullable responseOb
 typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *error);
 
 @interface AFHTTPSessionManager : NSObject
- 
+
 - (NSURLSessionDataTask *)dataTaskWithHTTPMethod:(NSString *)method
                                        URLString:(NSString *)URLString
                                       parameters:(id)parameters
@@ -397,6 +444,16 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 @property (strong, nonatomic) UIMenuController *menuController;
 
 - (void)_showMenuViewIndexPath:(id)arg1;
+
+@end
+
+@interface NewTabBarController : UITabBarController
+
+@end
+
+@interface SoulUtils : NSObject
+
++ (id)makeWatermarkPhotoImageWithImage:(id)arg1 watermark:(id)arg2;
 
 @end
 

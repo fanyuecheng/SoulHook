@@ -34,10 +34,10 @@ CHConstructor{
         
 #ifndef __OPTIMIZE__
         CYListenServer(6666);
-
+        
         MDCycriptManager *manager = [MDCycriptManager sharedInstance];
         [manager loadCycript:NO];
-
+        
         NSError *error;
         NSString *result = [manager evaluateCycript:@"UIApp" error:&error];
         NSLog(@"result: %@", result);
@@ -52,10 +52,11 @@ CHConstructor{
         dragView.isKeepBounds = YES;
         dragView.layer.cornerRadius = 25;
         dragView.layer.masksToBounds = YES;
-        dragView.layer.borderWidth = .5;
-        dragView.layer.borderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2].CGColor;
-        dragView.button.tintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
-        [dragView.button setImage:[[UIImage imageNamed:@"icon_setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        dragView.layer.borderWidth = 2;
+        dragView.layer.borderColor = [UIColor colorWithRed:37/255.0 green:212/255.0 blue:208/255.0 alpha:1].CGColor;
+ 
+        UIImage *image = [UIImage imageWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:@"https://i.loli.net/2019/07/19/5d3137dbd071139068.png"]]];
+        [dragView.button setImage:image forState:UIControlStateNormal];
         
         dragView.clickDragViewBlock = ^(WMDragView * _Nonnull dragView) {
             SOHookSettingController *setting = [[SOHookSettingController alloc] init];
@@ -64,7 +65,7 @@ CHConstructor{
         };
         
         [application.keyWindow addSubview:dragView];
- 
+        
 #endif
         
     }];
@@ -364,10 +365,81 @@ CHOptimizedMethod2(self, void, ChatTransCenter, sendCommandsMessage, SoulIMMessa
 CHOptimizedMethod1(self, void, ChatTransCenter, receiveMessage, NSArray *, arg1) {
     IMPCommandMessage *msg = arg1[0];
     //type: 5=RESP 3=ACK
-    NSLog(@"ChatTransCenter_receiveMessage = %@ type = %d", msg, msg.type);
- 
+    NSLog(@"ChatTransCenter_receiveMessage = %@ type = %d soulId = %@", msg, msg.type, msg.soulId);
+    
     IMPMsgCommand *msgCommand = [msg valueForKey:@"msgCommand"];
     NSLog(@"msgCommand = %@ type = %d", msgCommand, msgCommand.type);
+    
+    BOOL enable1 = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AUTO_REPLY_ALL_SWITCH];
+    BOOL enable2 = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AUTO_REPLY_KEY_SWITCH];
+    if (enable1 || enable2) {
+        if (msgCommand.type == 1 ||
+            msgCommand.type == 3 ||
+            msgCommand.type == 4 ||
+            msgCommand.type == 11 ||
+            msgCommand.type == 12 ||
+            msgCommand.type == 29 ||
+            (msgCommand.type == 0 && msgCommand.textMsg.text.length)) {
+            
+            if (enable2) {
+                if (msgCommand.type == 0) {
+                    NSArray *keys = [[NSUserDefaults standardUserDefaults] objectForKey:SOUL_HOOK_AUTO_REPLY_KEYS];
+                    
+                    __block BOOL autoReply = NO;
+                    
+                    [keys enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        if ([msgCommand.textMsg.text containsString:obj[@"title"]]) {
+                            autoReply = YES;
+                            *stop = YES;
+                        }
+                    }];
+                    
+                    if (!autoReply) {
+                        CHSuper1(ChatTransCenter, receiveMessage, arg1);
+                        return;
+                    }
+                    
+                } else {
+                    CHSuper1(ChatTransCenter, receiveMessage, arg1);
+                    return;
+                }
+            }
+            
+            NSArray *texts = [[NSUserDefaults standardUserDefaults] objectForKey:SOUL_HOOK_AUTO_REPLY_TEXTS];
+            
+            __block NSString *text = nil;
+            [texts enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj[@"enable"] boolValue]) {
+                    text = obj[@"title"];
+                    *stop = YES;
+                }
+            }];
+            
+            if (!text.length) {
+                text = @"你好，我现在不方便回消息";
+            }
+            
+            Class soBuildMessageManager = NSClassFromString(@"SOBuildMessageManager");
+            SEL build = NSSelectorFromString(@"buildTextIMMessage:to:senstive:messageExt:");
+            IMP buildImp = [soBuildMessageManager methodForSelector:build];
+            id (*func1)(id, SEL, NSString *, NSString *, int, id) = (void *)buildImp;
+            id msg = func1(soBuildMessageManager, build, text, msgCommand.from, 0, nil);
+            
+            Class nbIMService = NSClassFromString(@"NBIMService");
+            SEL instance = NSSelectorFromString(@"sharedInstance");
+            IMP instanceImp = [nbIMService methodForSelector:instance];
+            id (*func2)(id, SEL) = (void *)instanceImp;
+            id manager = func2(nbIMService, instance);
+            
+            ChatTransCenter *chatCenter = [manager valueForKey:@"chatCenter"];
+            
+            dispatch_block_t block = ^(){
+                NSLog(@"自动回复成功");
+            };
+            
+            [chatCenter sendCommandsMessage:msg completion:block];
+        }
+    }
     
     if (msgCommand.type == 8) {
         ////0=text 1=image 3=video 4=voice 8=RECALL 11=finger 12=dice 29=position
@@ -940,11 +1012,11 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
                 }
             }
         }
-  
+        
         
         !success ? : success(task, responseObject);
     };
-
+    
     
     NSURLSessionDataTask *task = CHSuper7(AFHTTPSessionManager, dataTaskWithHTTPMethod, method, URLString, URLString, parameters, parameters, uploadProgress, uploadProgress, downloadProgress, downloadProgress, success, successB, failure, failure);
     
@@ -961,16 +1033,55 @@ CHMethod1(void, SOPrivateChatViewController, _showMenuViewIndexPath, NSIndexPath
     NSArray *dataArr = [privateChatIMManager valueForKey:@"dataArr"];
     id messageModel = [dataArr objectAtIndex:arg1.row];
     BOOL fromMine = [[messageModel valueForKey:@"fromMine"] boolValue];
-    BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:@"SOUL_HOOK_MSG_RECALL_SWITCH"];
+    BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_MSG_RECALL_SWITCH];
     if (enable && fromMine && ![self.menuController.menuItems containsObject:revokeflagMenuItem]) {
         NSMutableArray *items = self.menuController.menuItems.mutableCopy;
         [items addObject:revokeflagMenuItem];
         self.menuController.menuItems = items;
         [self.menuController update];
     }
+    
+}
+
+CHDeclareClass(NewTabBarController)
+
+CHOptimizedMethod0(self, void, NewTabBarController, viewDidLoad) {
+    CHSuper0(NewTabBarController, viewDidLoad);
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSArray <UITabBarItem *>*arr = self.tabBar.items;
+        
+        NSArray *titles = @[@"全随缘", @"光看脸", @"", @"虾扯蛋", @"烹鱼宴"];
+        
+        [arr enumerateObjectsUsingBlock:^(UITabBarItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString *title = titles[idx];
+            
+            if (title.length) {
+                obj.title = title;
+            }
+        }];
+    });
+}
+
+CHDeclareClass(SoulUtils)
+
+CHOptimizedClassMethod2(self, id, SoulUtils, makeWatermarkPhotoImageWithImage, id, arg1, watermark, id, arg2) {
+    
+    BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_WATER_MARK_SWITCH];
+    
+    if (enable) {
+        arg2 = nil;
+    }
+    return CHSuper2(SoulUtils, makeWatermarkPhotoImageWithImage, arg1, watermark, arg2);
 }
 
 CHConstructor {
+    CHLoadLateClass(SoulUtils);
+    CHClassHook2(SoulUtils, makeWatermarkPhotoImageWithImage, watermark);
+    
+    CHLoadLateClass(NewTabBarController);
+    CHHook0(NewTabBarController, viewDidLoad);
+    
     CHLoadLateClass(SOPrivateChatViewController);
     CHHook1(SOPrivateChatViewController, _showMenuViewIndexPath);
     
@@ -1065,7 +1176,7 @@ CHConstructor {
     CHLoadLateClass(SOMovieVC);
     CHHook0(SOMovieVC, viewDidLoad);
     
- 
+    
     CHLoadLateClass(SOReleaseViewController);
     CHHook1(SOReleaseViewController, tagEditContainerViewDidLocationItemClick);
 }

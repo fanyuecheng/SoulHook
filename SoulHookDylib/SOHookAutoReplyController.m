@@ -75,6 +75,12 @@
     view.on = [[dic valueForKey:@"enable"] boolValue];
     view.hidden = !(indexPath.section == 0 || indexPath.section == 1);
     
+    if (indexPath.section == 3) {
+        cell.accessoryType = [[dic valueForKey:@"enable"] boolValue] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
     return cell;
 }
 
@@ -120,6 +126,8 @@
         dic[@"enable"] = @(1);
         
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationNone];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.dataSource[3] forKey:SOUL_HOOK_AUTO_REPLY_TEXTS];
     }
 }
 
@@ -142,7 +150,7 @@
     }
     
     [userDefaults synchronize];
-
+    
 }
 
 - (NSIndexPath *)indexPathForRowAtView:(UIView *)view {
@@ -190,15 +198,30 @@
                                        @"type" : SOUL_HOOK_AUTO_REPLY_KEY_SWITCH
                                        }.mutableCopy;
         
-        NSArray *keys = [userDefaults valueForKey:SOUL_HOOK_AUTO_REPLY_KEYS];
-        NSArray *texts = [userDefaults valueForKey:SOUL_HOOK_AUTO_REPLY_TEXTS];
-        
+        NSMutableArray *keys = [[[NSUserDefaults standardUserDefaults] objectForKey:SOUL_HOOK_AUTO_REPLY_KEYS] mutableCopy];
         if (!keys.count) {
             keys = [self defaultKeys];
+        } else {
+            NSMutableArray *arr = [NSMutableArray array];
+            
+            [keys enumerateObjectsUsingBlock:^(NSDictionary  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [arr addObject:obj.mutableCopy];
+            }];
+            
+            keys = arr;
         }
         
+        NSMutableArray *texts = [[[NSUserDefaults standardUserDefaults] objectForKey:SOUL_HOOK_AUTO_REPLY_TEXTS] mutableCopy];
         if (!texts.count) {
             texts = [self defaultTexts];
+        } else {
+            NSMutableArray *arr = [NSMutableArray array];
+            
+            [texts enumerateObjectsUsingBlock:^(NSDictionary  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [arr addObject:obj.mutableCopy];
+            }];
+            
+            texts = arr;
         }
         
         _dataSource = @[@[item0], @[item1], keys, texts].mutableCopy;
@@ -206,29 +229,44 @@
     return _dataSource;
 }
 
-- (NSArray *)defaultKeys {
+- (NSMutableArray *)defaultKeys {
     NSMutableDictionary *item0 = @{@"title" : @"头像"
                                    }.mutableCopy;
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:@[item0] forKey:SOUL_HOOK_AUTO_REPLY_KEYS];
-
-    return @[item0];
-}
-
-- (NSArray *)defaultTexts {
-    NSMutableDictionary *item0 = @{@"title" : @"不好意思，还在工作中，不方便回复，等我下班吧",
-                                   @"enable" : @(0),
+    NSMutableDictionary *item1 = @{@"title" : @"秃"
+                                   }.mutableCopy;
+    NSMutableDictionary *item2 = @{@"title" : @"头发"
+                                   }.mutableCopy;
+    NSMutableDictionary *item3 = @{@"title" : @"加班"
+                                   }.mutableCopy;
+    NSMutableDictionary *item4 = @{@"title" : @"格子衫"
                                    }.mutableCopy;
     
-    NSMutableDictionary *item1 = @{@"title" : @"不好意思，在吃饭呢，不方便回复，等我一下吧",
+    NSArray *defaultKeys = @[item0, item1, item2, item3, item4];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:defaultKeys forKey:SOUL_HOOK_AUTO_REPLY_KEYS];
+    
+    return defaultKeys.mutableCopy;
+}
+
+- (NSMutableArray *)defaultTexts {
+    NSMutableDictionary *item0 = @{@"title" : @"不好意思，还在工作中，不方便回复，等我下班吧",
                                    @"enable" : @(1),
                                    }.mutableCopy;
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:@[item0, item1] forKey:SOUL_HOOK_AUTO_REPLY_TEXTS];
+    NSMutableDictionary *item1 = @{@"title" : @"不好意思，在吃饭呢，不方便回复，等我一下吧",
+                                   @"enable" : @(0),
+                                   }.mutableCopy;
     
-    return @[item0, item1];
+    NSMutableDictionary *item2 = @{@"title" : @"不好意思，不方便回复，等我一下吧",
+                                   @"enable" : @(0),
+                                   }.mutableCopy;
+    
+    NSArray *defaultTexts = @[item0, item1, item2];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:defaultTexts forKey:SOUL_HOOK_AUTO_REPLY_TEXTS];
+    
+    return defaultTexts.mutableCopy;
 }
 
 @end

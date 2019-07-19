@@ -21,15 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+    
     self.view.backgroundColor = [UIColor whiteColor];
- 
+    
     [self.view addSubview:self.tableView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
     self.title = @"Hook设置";
     [self.navigationController setNavigationBarHidden:NO];
     self.navigationItem.leftBarButtonItem = self.leftBarButtonItem;
@@ -229,26 +229,27 @@
                                         @"type" : SOUL_HOOK_BIRTHDAY_GENDER_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item14 = @{@"title" : @"查看全部瞬间",
-                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_POST_VISIBILITY_SWITCH]],
-                                        @"type" : SOUL_HOOK_POST_VISIBILITY_SWITCH
-                                        }.mutableCopy;
-        
-        NSMutableDictionary *item15 = @{@"title" : @"取消已读回执",
+        NSMutableDictionary *item14 = @{@"title" : @"取消已读回执",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_READ_SWITCH]],
                                         @"type" : SOUL_HOOK_READ_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item16 = @{@"title" : @"禁止发送输入状态",
+        NSMutableDictionary *item15 = @{@"title" : @"禁止发送输入状态",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_INPUT_STATE_SWITCH]],
                                         @"type" : SOUL_HOOK_INPUT_STATE_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item17 = @{@"title" : @"禁止撤回消息三分钟限制解除",
+        NSMutableDictionary *item16 = @{@"title" : @"禁止撤回消息三分钟限制解除",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_MSG_RECALL_SWITCH]],
                                         @"type" : SOUL_HOOK_MSG_RECALL_SWITCH
                                         }.mutableCopy;
         
+        NSMutableDictionary *item17 = @{@"title" : @"存图去除水印",
+                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_WATER_MARK_SWITCH]],
+                                        @"type" : SOUL_HOOK_WATER_MARK_SWITCH
+                                        }.mutableCopy;
+        
+ 
         _dataSource = @[item0, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16, item17];
     }
     return _dataSource;

@@ -21,7 +21,7 @@
 + (void)load {
     [super load];
     
-    [NSURLProtocol registerClass:[SOHookURLProtocol class]];
+//    [NSURLProtocol registerClass:[SOHookURLProtocol class]];
 }
 
 + (instancetype)sharedInstance {
@@ -49,8 +49,8 @@
     if ([NSURLProtocol propertyForKey:kProtocolKey inRequest:request]) {
         return NO;
     }
-    NSString * url = request.URL.absoluteString;
-    return [self isUrl:url];
+
+    return YES;
 }
 
 - (void)startLoading {
@@ -68,9 +68,7 @@
 }
 
 + (BOOL)isUrl:(NSString *)url {
-    NSString *regex = @"[a-zA-z]+://[^\\s]*";
-    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    return [urlTest evaluateWithObject:url];
+    return [url.lowercaseString containsString:@"http"] || [url.lowercaseString containsString:@"https"];
 }
 
 - (NSURLRequest *)requestBlockForRequst:(NSURLRequest *)request {
