@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		711B154022DF02BD003B68B8 /* WMDragView.h in Headers */ = {isa = PBXBuildFile; fileRef = 711B153E22DF02BD003B68B8 /* WMDragView.h */; };
-		711B154122DF02BD003B68B8 /* WMDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 711B153F22DF02BD003B68B8 /* WMDragView.m */; };
 		711B154C22DF26E1003B68B8 /* SOHookAutoReplyController.h in Headers */ = {isa = PBXBuildFile; fileRef = 711B154A22DF26E1003B68B8 /* SOHookAutoReplyController.h */; };
 		711B154D22DF26E1003B68B8 /* SOHookAutoReplyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 711B154B22DF26E1003B68B8 /* SOHookAutoReplyController.m */; };
 		7162718222DC7C6E00EFCA10 /* MDConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7162718122DC7C6E00EFCA10 /* MDConfig.plist */; };
@@ -43,8 +41,6 @@
 		716271D222DC7C6E00EFCA10 /* SoulHookDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271D122DC7C6E00EFCA10 /* SoulHookDylib.m */; };
 		716271E122DC7CF500EFCA10 /* SoulHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271DC22DC7CF400EFCA10 /* SoulHeader.h */; };
 		716271E222DC7CF500EFCA10 /* SOHookSettingController.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271DD22DC7CF500EFCA10 /* SOHookSettingController.h */; };
-		716271E322DC7CF500EFCA10 /* SOHookURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271DE22DC7CF500EFCA10 /* SOHookURLProtocol.m */; };
-		716271E422DC7CF500EFCA10 /* SOHookURLProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271DF22DC7CF500EFCA10 /* SOHookURLProtocol.h */; };
 		716271E522DC7CF500EFCA10 /* SOHookSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271E022DC7CF500EFCA10 /* SOHookSettingController.m */; };
 		716271E722DC7FD200EFCA10 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716271E622DC7FD200EFCA10 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
@@ -73,8 +69,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		711B153E22DF02BD003B68B8 /* WMDragView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMDragView.h; sourceTree = "<group>"; };
-		711B153F22DF02BD003B68B8 /* WMDragView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMDragView.m; sourceTree = "<group>"; };
 		711B154A22DF26E1003B68B8 /* SOHookAutoReplyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOHookAutoReplyController.h; sourceTree = "<group>"; };
 		711B154B22DF26E1003B68B8 /* SOHookAutoReplyController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOHookAutoReplyController.m; sourceTree = "<group>"; };
 		7162717A22DC7C6E00EFCA10 /* SoulHook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoulHook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,8 +111,6 @@
 		716271D122DC7C6E00EFCA10 /* SoulHookDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoulHookDylib.m; sourceTree = "<group>"; };
 		716271DC22DC7CF400EFCA10 /* SoulHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoulHeader.h; sourceTree = "<group>"; };
 		716271DD22DC7CF500EFCA10 /* SOHookSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookSettingController.h; sourceTree = "<group>"; };
-		716271DE22DC7CF500EFCA10 /* SOHookURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookURLProtocol.m; sourceTree = "<group>"; };
-		716271DF22DC7CF500EFCA10 /* SOHookURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookURLProtocol.h; sourceTree = "<group>"; };
 		716271E022DC7CF500EFCA10 /* SOHookSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookSettingController.m; sourceTree = "<group>"; };
 		716271E622DC7FD200EFCA10 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -219,10 +211,6 @@
 				716271E022DC7CF500EFCA10 /* SOHookSettingController.m */,
 				711B154A22DF26E1003B68B8 /* SOHookAutoReplyController.h */,
 				711B154B22DF26E1003B68B8 /* SOHookAutoReplyController.m */,
-				716271DF22DC7CF500EFCA10 /* SOHookURLProtocol.h */,
-				716271DE22DC7CF500EFCA10 /* SOHookURLProtocol.m */,
-				711B153E22DF02BD003B68B8 /* WMDragView.h */,
-				711B153F22DF02BD003B68B8 /* WMDragView.m */,
 				716271DC22DC7CF400EFCA10 /* SoulHeader.h */,
 				7162719722DC7C6E00EFCA10 /* Logos */,
 				7162719B22DC7C6E00EFCA10 /* Config */,
@@ -318,10 +306,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				716271A122DC7C6E00EFCA10 /* MDCycriptManager.h in Headers */,
-				716271E422DC7CF500EFCA10 /* SOHookURLProtocol.h in Headers */,
 				711B154C22DF26E1003B68B8 /* SOHookAutoReplyController.h in Headers */,
 				716271A522DC7C6E00EFCA10 /* MDMethodTrace.h in Headers */,
-				711B154022DF02BD003B68B8 /* WMDragView.h in Headers */,
 				716271CE22DC7C6E00EFCA10 /* fishhook.h in Headers */,
 				716271C222DC7C6E00EFCA10 /* LLDBTools.h in Headers */,
 				7162719D22DC7C6E00EFCA10 /* MDConfigManager.h in Headers */,
@@ -492,7 +478,6 @@
 				716271D222DC7C6E00EFCA10 /* SoulHookDylib.m in Sources */,
 				716271AC22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s in Sources */,
 				716271AA22DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s in Sources */,
-				716271E322DC7CF500EFCA10 /* SOHookURLProtocol.m in Sources */,
 				716271B022DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s in Sources */,
 				716271BA22DC7C6E00EFCA10 /* OCMethodTrace.m in Sources */,
 				7162719F22DC7C6E00EFCA10 /* MDConfigManager.m in Sources */,
@@ -501,7 +486,6 @@
 				711B154D22DF26E1003B68B8 /* SOHookAutoReplyController.m in Sources */,
 				716271BE22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm in Sources */,
 				716271AE22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s in Sources */,
-				711B154122DF02BD003B68B8 /* WMDragView.m in Sources */,
 				716271B422DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s in Sources */,
 				716271B222DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s in Sources */,
 				716271E522DC7CF500EFCA10 /* SOHookSettingController.m in Sources */,

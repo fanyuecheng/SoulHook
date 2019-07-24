@@ -14,8 +14,6 @@
 #import <Cycript/Cycript.h>
 #import <MDCycriptManager.h>
 #import "SoulHeader.h"
-#import "SOHookURLProtocol.h"
-#import "WMDragView.h"
 
 CHConstructor{
     printf(INSERT_SUCCESS_WELCOME);
@@ -44,28 +42,7 @@ CHConstructor{
         if(error.code != 0){
             NSLog(@"error: %@", error.localizedDescription);
         }
-        
-        //悬浮按钮
-        UIApplication *application = note.object;
-        WMDragView *dragView = [[WMDragView alloc] initWithFrame:CGRectMake(0, 200, 50, 50)];
-        dragView.backgroundColor = [UIColor whiteColor];
-        dragView.isKeepBounds = YES;
-        dragView.layer.cornerRadius = 25;
-        dragView.layer.masksToBounds = YES;
-        dragView.layer.borderWidth = 2;
-        dragView.layer.borderColor = [UIColor colorWithRed:37/255.0 green:212/255.0 blue:208/255.0 alpha:1].CGColor;
  
-        UIImage *image = [UIImage imageWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:@"https://i.loli.net/2019/07/19/5d3137dbd071139068.png"]]];
-        [dragView.button setImage:image forState:UIControlStateNormal];
-        
-        dragView.clickDragViewBlock = ^(WMDragView * _Nonnull dragView) {
-            SOHookSettingController *setting = [[SOHookSettingController alloc] init];
-            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:setting];
-            [application.keyWindow.rootViewController presentViewController:navi animated:YES completion:nil];
-        };
-        
-        [application.keyWindow addSubview:dragView];
-        
 #endif
         
     }];
