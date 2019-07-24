@@ -14,6 +14,7 @@
 #import <Cycript/Cycript.h>
 #import <MDCycriptManager.h>
 #import "SoulHeader.h"
+#import "SOHomeHeaderView.h"
 
 CHConstructor{
     printf(INSERT_SUCCESS_WELCOME);
@@ -170,7 +171,7 @@ CHOptimizedMethod0(self, void, AvatarModifyViewController, viewDidLoad) {
     
     if (enable) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 175, [UIApplication sharedApplication].statusBarFrame.size.height + 14, 80, 36)];
-        button.backgroundColor = [UIColor colorWithRed:37/255.0 green:212/255.0 blue:208/255.0 alpha:1];
+        button.backgroundColor = SO_THEME_COLOR;
         button.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:15];
         button.layer.cornerRadius = 18;
         button.layer.masksToBounds = YES;
@@ -247,7 +248,7 @@ CHDeclareMethod2(void, AvatarModifyViewController, imagePickerController, UIImag
         imageView.tag = 1001;
         
         UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(imageView.frame) + 30, 100, 44)];
-        cancelButton.backgroundColor = [UIColor colorWithRed:37/255.0 green:212/255.0 blue:208/255.0 alpha:1];
+        cancelButton.backgroundColor = SO_THEME_COLOR;
         cancelButton.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:15];
         cancelButton.layer.cornerRadius = 22;
         cancelButton.layer.masksToBounds = YES;
@@ -256,7 +257,7 @@ CHDeclareMethod2(void, AvatarModifyViewController, imagePickerController, UIImag
         [cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(width - 110, CGRectGetMaxY(imageView.frame) + 30, 100, 44)];
-        confirmButton.backgroundColor = [UIColor colorWithRed:37/255.0 green:212/255.0 blue:208/255.0 alpha:1];
+        confirmButton.backgroundColor = SO_THEME_COLOR;
         confirmButton.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:15];
         confirmButton.layer.cornerRadius = 22;
         confirmButton.layer.masksToBounds = YES;
@@ -930,6 +931,21 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
     successBlock successB = ^(NSURLSessionDataTask *task, id _Nullable responseObject) {
         NSLog(@"AFHTTPSessionManager:\nmethod=%@ \nURLString=%@ \nparameters=%@ \nresponseObject=%@", method, URLString, parameters, responseObject);
         
+        if ([URLString containsString:@"/v2/user/info"]) {
+            Class soulUserManager = NSClassFromString(@"SoulUserManager");
+            SEL instance = NSSelectorFromString(@"sharedInstance");
+            IMP instanceImp = [soulUserManager methodForSelector:instance];
+            id (*func2)(id, SEL) = (void *)instanceImp;
+            id manager = func2(soulUserManager, instance);
+            
+            id currentUser = [manager valueForKey:@"currentUser"];
+            NSString *useridEcpt = [currentUser valueForKey:@"useridEcpt"];
+            
+            if ([useridEcpt isEqualToString:parameters[@"userIdEcpt"]]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:SOHOOK_NOTIFICATION_USER_DATA object:responseObject[@"data"]];
+            }
+        }
+        
         if ([URLString isEqualToString:@"https://pay.soulapp.cn/face/product/get-paid-list"]) {
             BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_SWITCH];
             if (enable) {
@@ -1042,7 +1058,156 @@ CHOptimizedClassMethod2(self, id, SoulUtils, makeWatermarkPhotoImageWithImage, i
     return CHSuper2(SoulUtils, makeWatermarkPhotoImageWithImage, arg1, watermark, arg2);
 }
 
+CHDeclareClass(FeelingViewController)
+
+CHOptimizedMethod0(self, void, FeelingViewController, viewDidLoad) {
+    CHSuper0(FeelingViewController, viewDidLoad);
+    
+    [self.tableView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:NSClassFromString(@"MXParallaxView")]) {
+            [obj removeFromSuperview];
+            *stop = YES;
+        }
+    }];
+    
+    SOHomeHeaderView *header = [[SOHomeHeaderView alloc] init];
+    header.frame = CGRectMake(0, 0, self.view.bounds.size.width, [header sizeThatFits:CGSizeMake(self.view.bounds.size.width, MAXFLOAT)].height);
+    
+    self.tableView.contentInset = UIEdgeInsetsZero;
+    self.tableView.clipsToBounds = NO;
+    self.tableView.tableHeaderView = header;
+    
+}
+
+CHOptimizedMethod1(self, void, FeelingViewController, scrollViewDidScroll, UITableView *, scrollView) {
+    SOHomeHeaderView *header = (SOHomeHeaderView *)self.tableView.tableHeaderView;
+    [header configViewWithOffset:scrollView.contentOffset.y];
+    
+    //    CHSuper1(FeelingViewController, scrollViewDidScroll, scrollView);
+}
+
+CHDeclareClass(StrangerViewController)
+
+CHOptimizedMethod0(self, void, StrangerViewController, viewDidLoad) {
+    CHSuper0(StrangerViewController, viewDidLoad);
+    
+    UIButton *filter = [[UIButton alloc] init];
+    [filter setTitle:@"筛选" forState:UIControlStateNormal];
+    [filter setTitleColor:SO_THEME_COLOR forState:normal];
+    filter.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+    filter.layer.cornerRadius = 15;
+    filter.layer.masksToBounds = YES;
+    filter.layer.borderColor = SO_THEME_COLOR.CGColor;
+    filter.layer.borderWidth = 1;
+    [filter addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIView *leftView = [self.nav valueForKey:@"leftView"];
+    UIView *navigationBarView = [self.nav valueForKey:@"navigationBarView"];
+    
+    CGRect leftViewFrame = leftView.frame;
+    
+    filter.frame = CGRectMake(leftViewFrame.origin.x + leftViewFrame.size.width + 20, leftViewFrame.origin.y + 2, 50, 30);
+    
+    [navigationBarView addSubview:filter];
+}
+
+CHOptimizedMethod0(self, void, StrangerViewController, endRefresh) {
+    CHSuper0(StrangerViewController, endRefresh);
+    
+    NSMutableDictionary *avatarModel = [NSMutableDictionary dictionaryWithDictionary:self.avatarModel];
+    NSMutableDictionary *dataDic = avatarModel[@"dataDic"];
+    
+    if (!dataDic) {
+        dataDic = [NSMutableDictionary dictionary];
+        avatarModel[@"dataDic"] = dataDic;
+    }
+    
+    [self.dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [dataDic setObject:obj forKey:[[obj valueForKeyPath:@"id"] stringValue]];
+    }];
+    
+   
+    avatarModel[@"dataDic"] = dataDic;
+    
+    self.avatarModel = avatarModel;
+}
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+
+CHDeclareMethod1(void, StrangerViewController, filterAction, UIButton *, arg1) {
+    NSMutableDictionary *avatarModel = [NSMutableDictionary dictionaryWithDictionary:self.avatarModel];
+    NSMutableDictionary *dataDic = avatarModel[@"dataDic"];
+    NSMutableArray *dataArray = [dataDic allValues].mutableCopy;
+    
+    [dataArray sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [[obj2 valueForKey:@"createTime"] compare:[obj1 valueForKey:@"createTime"]];
+    }];
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+//    TEXT  IMAGE  VIDEO  AUDIO
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"全部瞬间" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.dataArray = dataArray;
+        [self.tableView reloadData];
+    }];
+    
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"仅看带图/视频" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSMutableArray *data = [NSMutableArray array];
+        
+        for (id post in dataArray) {
+            NSString *type = [post valueForKey:@"type"];
+            
+            if ([type isEqualToString:@"IMAGE"] || [type isEqualToString:@"VIDEO"]) {
+                [data addObject:post];
+            }
+        }
+        self.dataArray = data;
+        [self.tableView reloadData];
+    }];
+    
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"仅看带音频" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSMutableArray *data = [NSMutableArray array];
+        
+        for (id post in dataArray) {
+            NSString *type = [post valueForKey:@"type"];
+            
+            if ([type isEqualToString:@"AUDIO"]) {
+                [data addObject:post];
+            }
+        }
+        self.dataArray = data;
+        [self.tableView reloadData];
+        
+    }];
+    
+    UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [alert addAction:action3];
+    [alert addAction:action4];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+//@property (nonatomic, weak) UIView *attachView;
+//@property (nonatomic, strong) NSMutableArray *dataArray;
+//@property (nonatomic, strong) UITableView *tableView;
+
+
+
 CHConstructor {
+    CHLoadLateClass(StrangerViewController);
+    CHHook0(StrangerViewController, viewDidLoad);
+    CHHook0(StrangerViewController, endRefresh);
+    
+    CHLoadLateClass(FeelingViewController);
+    CHHook0(FeelingViewController, viewDidLoad);
+    CHHook1(FeelingViewController, scrollViewDidScroll);
+    
     CHLoadLateClass(SoulUtils);
     CHClassHook2(SoulUtils, makeWatermarkPhotoImageWithImage, watermark);
     

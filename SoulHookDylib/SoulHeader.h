@@ -12,6 +12,8 @@
 #import "SOHookSettingController.h"
 #import <objc/runtime.h>
 
+#define SO_THEME_COLOR  [UIColor colorWithRed:37/255.0 green:212/255.0 blue:208/255.0 alpha:1]
+
 CG_INLINE BOOL
 ExchangeImplementationsInTwoClasses(Class _fromClass, SEL _originSelector, Class _toClass, SEL _newSelector) {
     if (!_fromClass || !_toClass) {
@@ -454,6 +456,26 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 @interface SoulUtils : NSObject
 
 + (id)makeWatermarkPhotoImageWithImage:(id)arg1 watermark:(id)arg2;
+
+@end
+
+@interface FeelingViewController : UIViewController
+
+@property (nonatomic, strong) UITableView *tableView;
+
+- (void)scrollViewDidScroll:(UITableView *)scrollView;
+
+@end
+
+@interface StrangerViewController : UIViewController
+
+@property (nonatomic, strong) id nav; //SOCustomNav;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) UITableView *tableView;
+@property (strong, nonatomic) NSDictionary *avatarModel;  //暂存数据用
+
+- (void)filterAction:(UIButton *)sender;
+- (void)endRefresh;
 
 @end
 
