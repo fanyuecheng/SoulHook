@@ -17,17 +17,7 @@
 
 CHConstructor{
     printf(INSERT_SUCCESS_WELCOME);
-    
-    //appid 检测
-    [SOHookURLProtocol sharedInstance].requestBlock = ^NSURLRequest *(NSURLRequest *request) {
-        if ([request.URL.absoluteString containsString:@"/Api/index/api_v2?sdx="]) {
-            NSLog(@"request == %@", request);
-            return nil;
-        }
-        
-        return request;
-    };
-    
+ 
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         
 #ifndef __OPTIMIZE__
