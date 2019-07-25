@@ -106,6 +106,12 @@
         self.bgImageView.frame = CGRectMake(offset * 0.5, offset - 20, self.screenW - offset, 44 + self.statuBarH + 120 - offset);
         self.avatarView.frame = CGRectMake(20, 44 + self.statuBarH + 60, 80, 80);
         self.avatarView.layer.cornerRadius = 40;
+        
+        if (self.changed) {
+            [self exchangeSubviewAtIndex:5 withSubviewAtIndex:6];
+            self.changed = NO;
+        }
+        
     } else if (offset < 100) {
         CGFloat x = 20 + offset * 0.4 * 0.5;
         CGFloat y = 44 + self.statuBarH + 60 + offset * 0.45;

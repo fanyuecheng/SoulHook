@@ -1000,7 +1000,27 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
         !success ? : success(task, responseObject);
     };
     
+    NSMutableDictionary *header = [[self valueForKey:@"requestSerializer"] valueForKey:@"mutableHTTPRequestHeaders"];
     
+    [header setObject:@"3240664" forKey:@"X-Auth-UserId"];
+    
+/*
+      self->_requestSerializer->_mutableHTTPRequestHeaders:
+    {
+        app-id = "10000001",
+        app-version = "3.8.28",
+        device-id = "FBD36813-B04F-4D15-9608-F9FFE4EA77EF",
+        X-Auth-Token = "7303BVibU1KMMgbDZ/ysaNVVf94e7gDX",
+        os = "ios",
+        app-time = "1564050811048",
+        api-sign = "BF63725D27A0E992987180FE2D460A1B1914CAA4",
+        User-Agent = "TlUyYjJJbzdzZldpMU9uVThNL1NQbGxUcENsSVE5c3I1ZXJ0UmIvZ0RVdXFBQ1VJSXhDYUFWNWprNEQ5NjNUZlBLWU1oMmhRWUdITkFCSllPNDhNb1c5Qkx2TkNtdU42RFRKN0UzWWZjOEQzb0tiUklNYjRhUT09",
+        api-sign-version = "v5",
+        request-nonce = "39972665392169031948532831994252",
+        X-Auth-UserId = "3240665",
+        Accept-Language = "zh-Hans-CN;q=1, en-CN;q=0.9, zh-HK;q=0.8"
+    }
+ */
     NSURLSessionDataTask *task = CHSuper7(AFHTTPSessionManager, dataTaskWithHTTPMethod, method, URLString, URLString, parameters, parameters, uploadProgress, uploadProgress, downloadProgress, downloadProgress, success, successB, failure, failure);
     
     return task;
