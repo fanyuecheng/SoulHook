@@ -465,6 +465,13 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 
 - (void)scrollViewDidScroll:(UITableView *)scrollView;
 
+- (void)myMeetingViewDidTap;
+- (void)kuakuaWellDidTap;
+- (void)clickHiddenTag;
+- (void)updateMeSignature:(nullable UIButton *)arg1;
+- (void)updateHeadImageView:(nullable UIImageView *)arg1 bgHeadColor:(nullable UIImageView *)arg2;
+- (void)updateBgImageView:(nullable UIImageView *)arg1;
+
 @end
 
 @interface StrangerViewController : UIViewController

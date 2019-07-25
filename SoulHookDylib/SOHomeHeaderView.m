@@ -83,15 +83,19 @@
     
     self.infoLabel.text = [NSString stringWithFormat:@"%@天,%@条瞬间", data[@"registerDay"], data[@"postCount"]];
     NSMutableString *tag = [NSMutableString string];
-    NSArray *tags = data[@"privacyTagModelList"];
-    [tags enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [tag appendString:obj[@"tagName"]];
-        if (tags.count - 1 != idx ) {
-            [tag appendString:@"、"];
-        }
-    }];
-    self.tagLabel.text = tag;
-
+ 
+    if ([data[@"privacyTagModelList"] isKindOfClass:NSArray.class]) {
+        NSArray *tags = data[@"privacyTagModelList"];
+        [tags enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [tag appendString:obj[@"tagName"]];
+            if (tags.count - 1 != idx ) {
+                [tag appendString:@"、"];
+            }
+        }];
+        
+        self.tagLabel.text = tag;
+    }
+ 
     [self.myMeetingView setTitle:[NSString stringWithFormat:@"来访：%@", data[@"recentViewNum"]] forState:UIControlStateNormal];
     
     [self configViewWithOffset:0];
@@ -101,6 +105,7 @@
     if (offset <= 0) {
         self.bgImageView.frame = CGRectMake(offset * 0.5, offset - 20, self.screenW - offset, 44 + self.statuBarH + 120 - offset);
         self.avatarView.frame = CGRectMake(20, 44 + self.statuBarH + 60, 80, 80);
+        self.avatarView.layer.cornerRadius = 40;
     } else if (offset < 100) {
         CGFloat x = 20 + offset * 0.4 * 0.5;
         CGFloat y = 44 + self.statuBarH + 60 + offset * 0.45;
@@ -126,6 +131,40 @@
     }
 }
 
+#pragma mark - Action
+- (void)gestureAction:(UITapGestureRecognizer *)sender {
+    switch (sender.view.tag) {
+        case 2000:
+            !self.bgBlock ? : self.bgBlock();
+            break;
+            
+        case 2001:
+            !self.avatarBlock ? : self.avatarBlock();
+            break;
+            
+        case 2002:
+            !self.tagBlock ? : self.tagBlock();
+            break;
+    }
+}
+
+- (void)buttonAction:(UIButton *)sender {
+    switch (sender.tag) {
+        case 1000:
+            !self.nameBlock ? : self.nameBlock();
+            break;
+            
+        case 1001:
+            !self.kkBlock ? : self.kkBlock();
+            break;
+            
+        case 1002:
+            !self.visitBlock ? : self.visitBlock();
+            break;
+    }
+}
+
+
 - (CGSize)sizeThatFits:(CGSize)size {
     return CGSizeMake(self.screenW, self.tagLabel.frame.origin.y + self.tagLabel.frame.size.height + 20);
 }
@@ -138,6 +177,8 @@
         _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
         _bgImageView.userInteractionEnabled = YES;
         _bgImageView.clipsToBounds = YES;
+        _bgImageView.tag = 2000;
+        [_bgImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureAction:)]];
     }
     return _bgImageView;
 }
@@ -151,6 +192,9 @@
         _avatarView.layer.masksToBounds = YES;
         _avatarView.layer.borderColor = [UIColor whiteColor].CGColor;
         _avatarView.layer.borderWidth = 2;
+        _avatarView.userInteractionEnabled = YES;
+        _avatarView.tag = 2001;
+        [_avatarView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureAction:)]];
     }
     return _avatarView;
 }
@@ -161,6 +205,8 @@
         _nameButton.frame = CGRectMake(20, 44 + self.statuBarH + 150, 0, 20);
         _nameButton.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:15];
         [_nameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _nameButton.tag = 1000;
+        [_nameButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nameButton;
 }
@@ -171,6 +217,9 @@
         _infoLabel.frame = CGRectMake(20, 44 + self.statuBarH + 180, 200, 20);
         _infoLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
         _infoLabel.textColor = [UIColor blackColor];
+        _infoLabel.userInteractionEnabled = YES;
+        _infoLabel.tag = 2002;
+        [_infoLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureAction:)]];
     }
     return _infoLabel;
 }
@@ -199,6 +248,8 @@
         _kkqView.layer.borderWidth = 1;
         _kkqView.layer.borderColor = SO_THEME_COLOR.CGColor;
         _kkqView.frame = CGRectMake(120, 44 + self.statuBarH + 110, 60, 30);
+        _kkqView.tag = 1001;
+        [_kkqView addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _kkqView;
 }
@@ -217,6 +268,8 @@
         _myMeetingView.layer.borderWidth = 1;
         _myMeetingView.layer.borderColor = SO_THEME_COLOR.CGColor;
         _myMeetingView.frame = CGRectMake(190, 44 + self.statuBarH + 110, 80, 30);
+        _myMeetingView.tag = 1002;
+        [_myMeetingView addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _myMeetingView;
 }

@@ -1071,6 +1071,32 @@ CHOptimizedMethod0(self, void, FeelingViewController, viewDidLoad) {
     }];
     
     SOHomeHeaderView *header = [[SOHomeHeaderView alloc] init];
+    
+    header.bgBlock = ^{
+        [self updateBgImageView:nil];
+    };
+    
+    header.avatarBlock = ^{
+        [self updateHeadImageView:nil bgHeadColor:nil];
+    };
+    
+    header.nameBlock = ^{
+        [self updateMeSignature:nil];
+    };
+    
+    
+    header.kkBlock = ^{
+        [self kuakuaWellDidTap];
+    };
+    
+    header.visitBlock = ^{
+        [self myMeetingViewDidTap];
+    };
+    
+    header.tagBlock = ^{
+        [self clickHiddenTag];
+    };
+    
     header.frame = CGRectMake(0, 0, self.view.bounds.size.width, [header sizeThatFits:CGSizeMake(self.view.bounds.size.width, MAXFLOAT)].height);
     
     self.tableView.contentInset = UIEdgeInsetsZero;
@@ -1192,12 +1218,6 @@ CHDeclareMethod1(void, StrangerViewController, filterAction, UIButton *, arg1) {
     [self presentViewController:alert animated:YES completion:nil];
     
 }
-
-//@property (nonatomic, weak) UIView *attachView;
-//@property (nonatomic, strong) NSMutableArray *dataArray;
-//@property (nonatomic, strong) UITableView *tableView;
-
-
 
 CHConstructor {
     CHLoadLateClass(StrangerViewController);

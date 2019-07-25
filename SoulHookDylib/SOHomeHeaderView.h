@@ -16,6 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)configViewWithOffset:(CGFloat)offset;
 
+@property (nonatomic, copy) void (^bgBlock)(void);
+@property (nonatomic, copy) void (^avatarBlock)(void);
+@property (nonatomic, copy) void (^nameBlock)(void);
+@property (nonatomic, copy) void (^kkBlock)(void);
+@property (nonatomic, copy) void (^visitBlock)(void);
+@property (nonatomic, copy) void (^tagBlock)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END
