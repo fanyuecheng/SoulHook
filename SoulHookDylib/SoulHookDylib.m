@@ -1070,12 +1070,26 @@ CHDeclareClass(SoulUtils)
 
 CHOptimizedClassMethod2(self, id, SoulUtils, makeWatermarkPhotoImageWithImage, id, arg1, watermark, id, arg2) {
     
+    NSLog(@"水印 11 %@ %@", arg1, arg2);
+    
     BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_WATER_MARK_SWITCH];
     
     if (enable) {
         arg2 = nil;
     }
     return CHSuper2(SoulUtils, makeWatermarkPhotoImageWithImage, arg1, watermark, arg2);
+}
+
+CHOptimizedClassMethod1(self, id, SoulUtils, makeWatermarkPhotoImageWithImage, id, arg1) {
+    
+    NSLog(@"水印 22 %@", arg1);
+    
+    BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_WATER_MARK_SWITCH];
+    
+    if (enable) {
+        return arg1;
+    }
+    return CHSuper1(SoulUtils, makeWatermarkPhotoImageWithImage, arg1);
 }
 
 CHDeclareClass(FeelingViewController)
@@ -1250,6 +1264,7 @@ CHConstructor {
     
     CHLoadLateClass(SoulUtils);
     CHClassHook2(SoulUtils, makeWatermarkPhotoImageWithImage, watermark);
+    CHClassHook1(SoulUtils, makeWatermarkPhotoImageWithImage);
     
     CHLoadLateClass(NewTabBarController);
     CHHook0(NewTabBarController, viewDidLoad);

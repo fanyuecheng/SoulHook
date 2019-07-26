@@ -456,6 +456,7 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 @interface SoulUtils : NSObject
 
 + (id)makeWatermarkPhotoImageWithImage:(id)arg1 watermark:(id)arg2;
++ (id)makeWatermarkPhotoImageWithImage:(id)arg1;
 
 @end
 
