@@ -831,17 +831,7 @@ CHOptimizedMethod1(self, void, HeaderTwoViewController, confirmClick, id, arg1) 
     
     CHSuper1(HeaderTwoViewController, confirmClick, arg1);
 }
-
-CHDeclareClass(MatchChatViewController)
-
-CHOptimizedMethod0(self, void, MatchChatViewController, playmusic) {
-    BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_MATCH_BGM_SWITCH];
-    if (enable) {
-        return;
-    }
-    CHSuper0(MatchChatViewController, playmusic);
-}
-
+ 
 CHDeclareClass(SOReleaseViewController)
 
 CHOptimizedMethod1(self, void, SOReleaseViewController, tagEditContainerViewDidLocationItemClick, id, arg1) {
@@ -1092,59 +1082,59 @@ CHOptimizedClassMethod1(self, id, SoulUtils, makeWatermarkPhotoImageWithImage, i
     return CHSuper1(SoulUtils, makeWatermarkPhotoImageWithImage, arg1);
 }
 
-CHDeclareClass(FeelingViewController)
+//CHDeclareClass(FeelingViewController)
 
-CHOptimizedMethod0(self, void, FeelingViewController, viewDidLoad) {
-    CHSuper0(FeelingViewController, viewDidLoad);
-    
-    [self.tableView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:NSClassFromString(@"MXParallaxView")]) {
-            [obj removeFromSuperview];
-            *stop = YES;
-        }
-    }];
-    
-    SOHomeHeaderView *header = [[SOHomeHeaderView alloc] init];
-    
-    header.bgBlock = ^{
-        [self updateBgImageView:nil];
-    };
-    
-    header.avatarBlock = ^{
-        [self updateHeadImageView:nil bgHeadColor:nil];
-    };
-    
-    header.nameBlock = ^{
-        [self updateMeSignature:nil];
-    };
-    
-    
-    header.kkBlock = ^{
-        [self kuakuaWellDidTap];
-    };
-    
-    header.visitBlock = ^{
-        [self myMeetingViewDidTap];
-    };
-    
-    header.tagBlock = ^{
-        [self clickHiddenTag];
-    };
-    
-    header.frame = CGRectMake(0, 0, self.view.bounds.size.width, [header sizeThatFits:CGSizeMake(self.view.bounds.size.width, MAXFLOAT)].height);
-    
-    self.tableView.contentInset = UIEdgeInsetsZero;
-    self.tableView.clipsToBounds = NO;
-    self.tableView.tableHeaderView = header;
-    
-}
+//CHOptimizedMethod0(self, void, FeelingViewController, viewDidLoad) {
+//    CHSuper0(FeelingViewController, viewDidLoad);
+//
+//    [self.tableView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if ([obj isKindOfClass:NSClassFromString(@"MXParallaxView")]) {
+//            [obj removeFromSuperview];
+//            *stop = YES;
+//        }
+//    }];
+//
+//    SOHomeHeaderView *header = [[SOHomeHeaderView alloc] init];
+//
+//    header.bgBlock = ^{
+//        [self updateBgImageView:nil];
+//    };
+//
+//    header.avatarBlock = ^{
+//        [self updateHeadImageView:nil bgHeadColor:nil];
+//    };
+//
+//    header.nameBlock = ^{
+//        [self updateMeSignature:nil];
+//    };
+//
+//
+//    header.kkBlock = ^{
+//        [self kuakuaWellDidTap];
+//    };
+//
+//    header.visitBlock = ^{
+//        [self myMeetingViewDidTap];
+//    };
+//
+//    header.tagBlock = ^{
+//        [self clickHiddenTag];
+//    };
+//
+//    header.frame = CGRectMake(0, 0, self.view.bounds.size.width, [header sizeThatFits:CGSizeMake(self.view.bounds.size.width, MAXFLOAT)].height);
+//
+//    self.tableView.contentInset = UIEdgeInsetsZero;
+//    self.tableView.clipsToBounds = NO;
+//    self.tableView.tableHeaderView = header;
+//
+//}
 
-CHOptimizedMethod1(self, void, FeelingViewController, scrollViewDidScroll, UITableView *, scrollView) {
-    SOHomeHeaderView *header = (SOHomeHeaderView *)self.tableView.tableHeaderView;
-    [header configViewWithOffset:scrollView.contentOffset.y];
-    
-    //    CHSuper1(FeelingViewController, scrollViewDidScroll, scrollView);
-}
+//CHOptimizedMethod1(self, void, FeelingViewController, scrollViewDidScroll, UITableView *, scrollView) {
+//    SOHomeHeaderView *header = (SOHomeHeaderView *)self.tableView.tableHeaderView;
+//    [header configViewWithOffset:scrollView.contentOffset.y];
+//
+//    //    CHSuper1(FeelingViewController, scrollViewDidScroll, scrollView);
+//}
 
 CHDeclareClass(StrangerViewController)
 
@@ -1258,9 +1248,9 @@ CHConstructor {
     CHHook0(StrangerViewController, viewDidLoad);
     CHHook0(StrangerViewController, endRefresh);
     
-    CHLoadLateClass(FeelingViewController);
-    CHHook0(FeelingViewController, viewDidLoad);
-    CHHook1(FeelingViewController, scrollViewDidScroll);
+//    CHLoadLateClass(FeelingViewController);
+//    CHHook0(FeelingViewController, viewDidLoad);
+//    CHHook1(FeelingViewController, scrollViewDidScroll);
     
     CHLoadLateClass(SoulUtils);
     CHClassHook2(SoulUtils, makeWatermarkPhotoImageWithImage, watermark);
@@ -1355,10 +1345,6 @@ CHConstructor {
     //更改头像
     CHLoadLateClass(HeaderTwoViewController);
     CHHook1(HeaderTwoViewController, confirmClick);
-    
-    //匹配时音乐播放
-    CHLoadLateClass(MatchChatViewController);
-    CHHook0(MatchChatViewController, playmusic);
     
     CHLoadLateClass(SOMovieVC);
     CHHook0(SOMovieVC, viewDidLoad);

@@ -213,44 +213,39 @@
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_SOULMATE_SWITCH]],
                                         @"type" : SOUL_HOOK_SOULMATE_SWITCH
                                         }.mutableCopy;
-        
-        NSMutableDictionary *item11 = @{@"title" : @"匹配时关闭音乐播放",
-                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_MATCH_BGM_SWITCH]],
-                                        @"type" : SOUL_HOOK_MATCH_BGM_SWITCH
-                                        }.mutableCopy;
-        
-        NSMutableDictionary *item12 = @{@"title" : @"自定义瞬间发布位置",
+ 
+        NSMutableDictionary *item11 = @{@"title" : @"自定义瞬间发布位置",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_LOCATION_SWITCH]],
                                         @"type" : SOUL_HOOK_LOCATION_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item13 = @{@"title" : @"修改生日&性别",
+        NSMutableDictionary *item12 = @{@"title" : @"修改生日&性别",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_BIRTHDAY_GENDER_SWITCH]],
                                         @"type" : SOUL_HOOK_BIRTHDAY_GENDER_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item14 = @{@"title" : @"取消已读回执",
+        NSMutableDictionary *item13 = @{@"title" : @"取消已读回执",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_READ_SWITCH]],
                                         @"type" : SOUL_HOOK_READ_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item15 = @{@"title" : @"禁止发送输入状态",
+        NSMutableDictionary *item14 = @{@"title" : @"禁止发送输入状态",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_INPUT_STATE_SWITCH]],
                                         @"type" : SOUL_HOOK_INPUT_STATE_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item16 = @{@"title" : @"禁止撤回消息三分钟限制解除",
+        NSMutableDictionary *item15 = @{@"title" : @"禁止撤回消息三分钟限制解除",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_MSG_RECALL_SWITCH]],
                                         @"type" : SOUL_HOOK_MSG_RECALL_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item17 = @{@"title" : @"存图去除水印",
+        NSMutableDictionary *item16 = @{@"title" : @"存图去除水印",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_WATER_MARK_SWITCH]],
                                         @"type" : SOUL_HOOK_WATER_MARK_SWITCH
                                         }.mutableCopy;
         
  
-        _dataSource = @[item0, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16, item17];
+        _dataSource = @[item0, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16];
     }
     return _dataSource;
 }

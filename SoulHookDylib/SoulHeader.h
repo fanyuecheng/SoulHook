@@ -310,12 +310,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface MatchChatViewController : UIViewController
-
-- (void)playmusic;
-
-@end
-
 @interface SOHTTPSessionManager : NSObject
 
 - (void)handleRequestSuccess:(id)arg1 task:(id)arg2 withSuccessHandler:(dispatch_block_t)arg3 withFailureHandler:(dispatch_block_t)arg4 withFinishHandler:(dispatch_block_t)arg5;

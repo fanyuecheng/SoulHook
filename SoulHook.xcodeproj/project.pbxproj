@@ -117,7 +117,7 @@
 		716271DD22DC7CF500EFCA10 /* SOHookSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookSettingController.h; sourceTree = "<group>"; };
 		716271E022DC7CF500EFCA10 /* SOHookSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookSettingController.m; sourceTree = "<group>"; };
 		716271E622DC7FD200EFCA10 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		716F45CD22EAE7D20051AB63 /* SOUL_28.ipa */ = {isa = PBXFileReference; lastKnownFileType = file; path = SOUL_28.ipa; sourceTree = "<group>"; };
+		716CBD4E23407CC90063D3AC /* SOUL.ipa */ = {isa = PBXFileReference; lastKnownFileType = file; path = SOUL.ipa; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +192,7 @@
 		7162718322DC7C6E00EFCA10 /* TargetApp */ = {
 			isa = PBXGroup;
 			children = (
-				716F45CD22EAE7D20051AB63 /* SOUL_28.ipa */,
+				716CBD4E23407CC90063D3AC /* SOUL.ipa */,
 				7162718422DC7C6E00EFCA10 /* put ipa or app here */,
 			);
 			name = TargetApp;
