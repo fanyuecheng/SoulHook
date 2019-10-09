@@ -599,7 +599,7 @@ CHOptimizedMethod0(self, void, SOChatAudioMessageTableViewCell, run) {
     BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_MSG_COPY_SWITCH];
     if (enable) {
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        pasteboard.string = self.model.voiceIMModel.url;
+        pasteboard.string = self.model.voiceIMModel.remoteURL;
         pasteboard.persistent = YES;
     }
 }
@@ -799,7 +799,7 @@ CHOptimizedMethod2(self, void, SOUserInfoViewController, tableView, UITableView 
     
     NSLog(@"%@", indexPath);
     
-    if (indexPath.row == 12) {
+    if (indexPath.row == 16) {
         BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_SOULMATE_SWITCH];
         if (enable) {
             self.isCanCreatSoulMate = YES;

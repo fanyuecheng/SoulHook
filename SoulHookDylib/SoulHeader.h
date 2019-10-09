@@ -175,7 +175,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VoiceIMModel : NSObject
 
-@property (nonatomic, copy) NSString *url;
+@property (nonatomic, copy) NSString *remoteURL;
 
 @end
 
