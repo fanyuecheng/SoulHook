@@ -46,7 +46,7 @@
     self.tableView.frame = CGRectMake(0, top, self.view.bounds.size.width,  self.view.bounds.size.height - top - bottom);
 }
 
-#pragma mark - Tablke
+#pragma mark - Table
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 4;
 }
@@ -86,9 +86,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     switch (section) {
+        case 0:
         case 1:
-        case 2:
-            return 15;
+            return 10;
             break;
         default:
             return 30;
@@ -110,8 +110,8 @@
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 88)];
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 5;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -130,6 +130,38 @@
         [[NSUserDefaults standardUserDefaults] setObject:self.dataSource[3] forKey:SOUL_HOOK_AUTO_REPLY_TEXTS];
     }
 }
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return (indexPath.section == 2 || indexPath.section == 3);
+}
+// <iOS 11
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self deleteItemWithIndexPath:indexPath];
+}
+// <iOS 11
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+// >iOS 11
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) {
+    UIContextualAction *action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"删除" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+      
+        [self deleteItemWithIndexPath:indexPath];
+        completionHandler(YES);
+    }];
+ 
+    action.backgroundColor = [UIColor systemRedColor];
+    
+    UISwipeActionsConfiguration *configuration = [UISwipeActionsConfiguration configurationWithActions:@[action]];
+    configuration.performsFirstActionWithFullSwipe = NO;
+    
+    return configuration;
+}
+
 
 #pragma mark - Action
 - (void)switchAction:(UISwitch *)sender {
@@ -164,6 +196,66 @@
     }
     
     return [self indexPathForRowAtView:view.superview];
+}
+
+- (void)deleteItemWithIndexPath:(NSIndexPath *)indexPath {
+    NSMutableArray *items = (NSMutableArray *)self.dataSource[indexPath.section];
+    [items removeObjectAtIndex:indexPath.row];
+    [self.tableView reloadData];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:items forKey:indexPath.section == 2 ? SOUL_HOOK_AUTO_REPLY_KEYS : SOUL_HOOK_AUTO_REPLY_TEXTS];
+}
+
+- (void)addAction:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"添加关键词或自动回复文本" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+       }];
+    
+    UIAlertAction *key = [UIAlertAction actionWithTitle:@"关键词" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self addText:YES];
+    }];
+    
+    UIAlertAction *text = [UIAlertAction actionWithTitle:@"文本" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self addText:NO];
+    }];
+    
+    [alertController addAction:key];
+    [alertController addAction:text];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)addText:(BOOL)isKey {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:isKey ? @"添加关键词" : @"添加自动回复文本" message:nil preferredStyle:UIAlertControllerStyleAlert];
+      
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    
+    __weak __typeof(self)weakSelf = self;
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+      __strong __typeof(weakSelf)strongSelf = weakSelf;
+      [alertController dismissViewControllerAnimated:YES completion:nil];
+      UITextField *textField = alertController.textFields[0];
+      
+      NSMutableArray *items = (NSMutableArray *)strongSelf.dataSource.lastObject;
+      if (textField.text.length) {
+          [items addObject:isKey ? @{@"title" : textField.text}.mutableCopy : @{@"title" : textField.text, @"enable" : @(0)}.mutableCopy];
+          [strongSelf.tableView reloadData];
+          
+          NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+          [userDefaults setObject:items forKey:isKey ? SOUL_HOOK_AUTO_REPLY_KEYS :  SOUL_HOOK_AUTO_REPLY_TEXTS];
+      }
+    }];
+
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+      textField.placeholder = @"自动回复文本";
+    }];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - Get
@@ -267,6 +359,13 @@
     [userDefaults setObject:defaultTexts forKey:SOUL_HOOK_AUTO_REPLY_TEXTS];
     
     return defaultTexts.mutableCopy;
+}
+
+- (UIBarButtonItem *)rightBarButtonItem {
+    if (!_rightBarButtonItem) {
+        _rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAction:)];
+    }
+    return _rightBarButtonItem;
 }
 
 @end
