@@ -133,7 +133,7 @@ CHOptimizedMethod5(self, void, AvatarModifyViewController, uploadToQiniu, UIImag
         }
         
         dispatch_block_t block = ^() {
-            if (self.avatarName && self.avatarOriginName) {
+            if (self.avatarName && self.avatarOriginName && self.customImage) {
                 [self updateUserInfWithAvatarName:self.avatarName originAvatarName:self.avatarOriginName image:[self resizeImage:CGSizeMake(520, 520)] originImage:[self resizeImage:CGSizeMake(650, 650)] svgInfo:arg2];
             }
         };
@@ -921,20 +921,20 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
     successBlock successB = ^(NSURLSessionDataTask *task, id _Nullable responseObject) {
         NSLog(@"AFHTTPSessionManager:\nmethod=%@ \nURLString=%@ \nparameters=%@ \nresponseObject=%@", method, URLString, parameters, responseObject);
         
-        if ([URLString containsString:@"/v2/user/info"]) {
-            Class soulUserManager = NSClassFromString(@"SoulUserManager");
-            SEL instance = NSSelectorFromString(@"sharedInstance");
-            IMP instanceImp = [soulUserManager methodForSelector:instance];
-            id (*func2)(id, SEL) = (void *)instanceImp;
-            id manager = func2(soulUserManager, instance);
+//         if ([URLString containsString:@"/v2/user/info"]) {
+//             Class soulUserManager = NSClassFromString(@"SoulUserManager");
+//             SEL instance = NSSelectorFromString(@"sharedInstance");
+//             IMP instanceImp = [soulUserManager methodForSelector:instance];
+//             id (*func2)(id, SEL) = (void *)instanceImp;
+//             id manager = func2(soulUserManager, instance);
             
-            id currentUser = [manager valueForKey:@"currentUser"];
-            NSString *useridEcpt = [currentUser valueForKey:@"useridEcpt"];
+//             id currentUser = [manager valueForKey:@"currentUser"];
+//             NSString *useridEcpt = [currentUser valueForKey:@"useridEcpt"];
             
-            if ([useridEcpt isEqualToString:parameters[@"userIdEcpt"]]) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:SOHOOK_NOTIFICATION_USER_DATA object:responseObject[@"data"]];
-            }
-        }
+//             if ([useridEcpt isEqualToString:parameters[@"userIdEcpt"]]) {
+//                 [[NSNotificationCenter defaultCenter] postNotificationName:SOHOOK_NOTIFICATION_USER_DATA object:responseObject[@"data"]];
+//             }
+//         }
         
         if ([URLString isEqualToString:@"https://pay.soulapp.cn/face/product/get-paid-list"]) {
             BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_SWITCH];
@@ -946,7 +946,7 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
         
         if ([URLString containsString:@"account/fastLogin"]) {
             BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_BIRTHDAY_GENDER_SWITCH];
-            if (enable) {
+            if (enable && ![responseObject[@"data"] isKindOfClass:[NSNull class]]) {
                 responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
                 NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:responseObject[@"data"]];
                 NSMutableDictionary *funcSetting = [NSMutableDictionary dictionaryWithDictionary:data[@"funcSetting"]];
