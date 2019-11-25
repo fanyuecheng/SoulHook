@@ -15,6 +15,7 @@
 #import <MDCycriptManager.h>
 #import "SoulHeader.h"
 #import "SOHomeHeaderView.h"
+#import "SORobot.h"
 
 CHConstructor{
     printf(INSERT_SUCCESS_WELCOME);
@@ -133,7 +134,7 @@ CHOptimizedMethod5(self, void, AvatarModifyViewController, uploadToQiniu, UIImag
         }
         
         dispatch_block_t block = ^() {
-            if (self.avatarName && self.avatarOriginName) {
+            if (self.avatarName && self.avatarOriginName && self.customImage) {
                 [self updateUserInfWithAvatarName:self.avatarName originAvatarName:self.avatarOriginName image:[self resizeImage:CGSizeMake(520, 520)] originImage:[self resizeImage:CGSizeMake(650, 650)] svgInfo:arg2];
             }
         };
@@ -340,6 +341,7 @@ CHOptimizedMethod1(self, void, ChatTransCenter, receiveMessage, NSArray *, arg1)
     
     BOOL enable1 = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AUTO_REPLY_ALL_SWITCH];
     BOOL enable2 = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AUTO_REPLY_KEY_SWITCH];
+    BOOL enable3 = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_ROBOT_SWITCH];
     if (enable1 || enable2) {
         if (msgCommand.type == 1 ||
             msgCommand.type == 3 ||
@@ -407,10 +409,65 @@ CHOptimizedMethod1(self, void, ChatTransCenter, receiveMessage, NSArray *, arg1)
             
             [chatCenter sendCommandsMessage:msg completion:block];
         }
+    } else if (enable3) {
+        if ((msgCommand.type == 0 && msgCommand.textMsg.text.length) || msgCommand.type == 1 || msgCommand.type == 3 || msgCommand.type == 4 || msgCommand.type == 7) {
+            
+            Class soBuildMessageManager = NSClassFromString(@"SOBuildMessageManager");
+            SEL build = NSSelectorFromString(@"buildTextIMMessage:to:senstive:messageExt:");
+            IMP buildImp = [soBuildMessageManager methodForSelector:build];
+            id (*func1)(id, SEL, NSString *, NSString *, int, id) = (void *)buildImp;
+            Class nbIMService = NSClassFromString(@"NBIMService");
+            SEL instance = NSSelectorFromString(@"sharedInstance");
+            IMP instanceImp = [nbIMService methodForSelector:instance];
+            id (*func2)(id, SEL) = (void *)instanceImp;
+            id manager = func2(nbIMService, instance);
+
+            ChatTransCenter *chatCenter = [manager valueForKey:@"chatCenter"];
+            
+            if (msgCommand.type == 0 && msgCommand.textMsg.text.length) {
+                 [SORobot answerWithKey:msgCommand.textMsg.text finished:^(NSString * _Nonnull answer, NSError * _Nonnull error) {
+                     NSString *text = answer ? answer : @"本机器人好像出了一点问题";
+                
+                     id msg = func1(soBuildMessageManager, build, text, msgCommand.from, 0, nil);
+
+                     dispatch_block_t block = ^(){
+                         NSLog(@"机器人回复成功");
+                     };
+
+                     [chatCenter sendCommandsMessage:msg completion:block];
+                 }];
+            } else {
+                NSString *text = @"";
+                if (msgCommand.type == 1) {
+                    text = @"图片我可看不了呀，除非是你漂酿的自拍~";
+                } else if (msgCommand.type == 3) {
+                    text = @"视频我可看不了哦，咱还是老老实实的打字吧~";
+                } else if (msgCommand.type == 4) {
+                    text = @"语音我可听不了哦，咱还是老老实实的打字吧~";
+                } else if (msgCommand.type == 7) {
+                    NSArray *arr = @[@"欺负我表情包没你多是不是？",
+                                     @"斗图我可比不上你呀，认输认输~",
+                                     @"我没有表情回你岂不是很尬嘛~",
+                                     @"不要发表情啦，跟我打字聊天很麻烦吗~"];
+                    
+                    NSUInteger i = arc4random_uniform(3);
+                    
+                    text = arr[i];
+                }
+                
+                id msg = func1(soBuildMessageManager, build, text, msgCommand.from, 0, nil);
+
+                dispatch_block_t block = ^(){
+                    NSLog(@"机器人回复成功");
+                };
+
+                [chatCenter sendCommandsMessage:msg completion:block];
+            }
+        }
     }
     
     if (msgCommand.type == 8) {
-        ////0=text 1=image 3=video 4=voice 8=RECALL 11=finger 12=dice 29=position
+        ////0=text 1=image 3=video 4=voice 7=emotion 8=RECALL 11=finger 12=dice 29=position
         BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_MSG_REVOKE_SWITCH];
         
         if (enable) {

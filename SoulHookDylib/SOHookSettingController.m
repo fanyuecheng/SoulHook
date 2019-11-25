@@ -112,6 +112,12 @@
     [dic setValue:[NSNumber numberWithBool:sender.on] forKey:@"enable"];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([dic[@"title"] isEqualToString:@"机器人"] && sender.on) {
+        [userDefaults setBool:NO forKey:SOUL_HOOK_AUTO_REPLY_ALL_SWITCH];
+        [userDefaults setBool:NO forKey:SOUL_HOOK_AUTO_REPLY_KEY_SWITCH];
+    }
+    
     [userDefaults setBool:sender.on forKey:[dic valueForKey:@"type"]];
     [userDefaults synchronize];
 }
@@ -244,8 +250,12 @@
                                         @"type" : SOUL_HOOK_WATER_MARK_SWITCH
                                         }.mutableCopy;
         
- 
-        _dataSource = @[item0, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16];
+        NSMutableDictionary *item17 = @{@"title" : @"机器人",
+                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_ROBOT_SWITCH]],
+                                        @"type" : SOUL_HOOK_ROBOT_SWITCH
+                                        }.mutableCopy;
+        
+        _dataSource = @[item0, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16, item17];
     }
     return _dataSource;
 }

@@ -11,6 +11,8 @@
 		711B154D22DF26E1003B68B8 /* SOHookAutoReplyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 711B154B22DF26E1003B68B8 /* SOHookAutoReplyController.m */; };
 		71462E6822E7F77B003A00E2 /* SOHomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71462E6622E7F77A003A00E2 /* SOHomeHeaderView.m */; };
 		71462E6922E7F77B003A00E2 /* SOHomeHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 71462E6722E7F77A003A00E2 /* SOHomeHeaderView.h */; };
+		71469BBD238B74B50032A070 /* SORobot.h in Headers */ = {isa = PBXBuildFile; fileRef = 71469BBB238B74B50032A070 /* SORobot.h */; };
+		71469BBE238B74B50032A070 /* SORobot.m in Sources */ = {isa = PBXBuildFile; fileRef = 71469BBC238B74B50032A070 /* SORobot.m */; };
 		7162718222DC7C6E00EFCA10 /* MDConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7162718122DC7C6E00EFCA10 /* MDConfig.plist */; };
 		7162718C22DC7C6E00EFCA10 /* libSoulHookDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7162718B22DC7C6E00EFCA10 /* libSoulHookDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7162719122DC7C6E00EFCA10 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7162719022DC7C6E00EFCA10 /* JavaScriptCore.framework */; };
@@ -75,6 +77,9 @@
 		711B154B22DF26E1003B68B8 /* SOHookAutoReplyController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOHookAutoReplyController.m; sourceTree = "<group>"; };
 		71462E6622E7F77A003A00E2 /* SOHomeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHomeHeaderView.m; sourceTree = "<group>"; };
 		71462E6722E7F77A003A00E2 /* SOHomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHomeHeaderView.h; sourceTree = "<group>"; };
+		71469BBB238B74B50032A070 /* SORobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SORobot.h; sourceTree = "<group>"; };
+		71469BBC238B74B50032A070 /* SORobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SORobot.m; sourceTree = "<group>"; };
+		71469BBF238B764A0032A070 /* SOUL-3-13-0.ipa */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOUL-3-13-0.ipa"; sourceTree = "<group>"; };
 		7162717A22DC7C6E00EFCA10 /* SoulHook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoulHook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7162717D22DC7C6E00EFCA10 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		7162717F22DC7C6E00EFCA10 /* quick-resign.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "quick-resign.sh"; path = "Scripts/quick-resign.sh"; sourceTree = "<group>"; };
@@ -117,7 +122,6 @@
 		716271DD22DC7CF500EFCA10 /* SOHookSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookSettingController.h; sourceTree = "<group>"; };
 		716271E022DC7CF500EFCA10 /* SOHookSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookSettingController.m; sourceTree = "<group>"; };
 		716271E622DC7FD200EFCA10 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		716CBD4E23407CC90063D3AC /* SOUL.ipa */ = {isa = PBXFileReference; lastKnownFileType = file; path = SOUL.ipa; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,8 +196,8 @@
 		7162718322DC7C6E00EFCA10 /* TargetApp */ = {
 			isa = PBXGroup;
 			children = (
-				716CBD4E23407CC90063D3AC /* SOUL.ipa */,
 				7162718422DC7C6E00EFCA10 /* put ipa or app here */,
+				71469BBF238B764A0032A070 /* SOUL-3-13-0.ipa */,
 			);
 			name = TargetApp;
 			sourceTree = "<group>";
@@ -219,6 +223,8 @@
 				711B154B22DF26E1003B68B8 /* SOHookAutoReplyController.m */,
 				71462E6722E7F77A003A00E2 /* SOHomeHeaderView.h */,
 				71462E6622E7F77A003A00E2 /* SOHomeHeaderView.m */,
+				71469BBB238B74B50032A070 /* SORobot.h */,
+				71469BBC238B74B50032A070 /* SORobot.m */,
 				716271DC22DC7CF400EFCA10 /* SoulHeader.h */,
 				7162719722DC7C6E00EFCA10 /* Logos */,
 				7162719B22DC7C6E00EFCA10 /* Config */,
@@ -322,6 +328,7 @@
 				716271D022DC7C6E00EFCA10 /* SoulHookDylib.h in Headers */,
 				716271E222DC7CF500EFCA10 /* SOHookSettingController.h in Headers */,
 				716271BC22DC7C6E00EFCA10 /* OCSelectorTrampolines.h in Headers */,
+				71469BBD238B74B50032A070 /* SORobot.h in Headers */,
 				716271E122DC7CF500EFCA10 /* SoulHeader.h in Headers */,
 				716271B822DC7C6E00EFCA10 /* OCMethodTrace.h in Headers */,
 				71462E6922E7F77B003A00E2 /* SOHomeHeaderView.h in Headers */,
@@ -493,6 +500,7 @@
 				716271BA22DC7C6E00EFCA10 /* OCMethodTrace.m in Sources */,
 				7162719F22DC7C6E00EFCA10 /* MDConfigManager.m in Sources */,
 				716271CC22DC7C6E00EFCA10 /* fishhook.c in Sources */,
+				71469BBE238B74B50032A070 /* SORobot.m in Sources */,
 				716271C922DC7C6E00EFCA10 /* AntiAntiDebug.m in Sources */,
 				711B154D22DF26E1003B68B8 /* SOHookAutoReplyController.m in Sources */,
 				716271BE22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm in Sources */,
@@ -755,6 +763,7 @@
 				DEVELOPMENT_TEAM = Z78DQXE2Y3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SoulHook/Info.plist;
+				MARKETING_VERSION = 3.13.0;
 				MONKEYDEV_ADD_SUBSTRATE = YES;
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_DEFAULT_BUNDLEID = NO;
@@ -776,6 +785,7 @@
 				DEVELOPMENT_TEAM = Z78DQXE2Y3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SoulHook/Info.plist;
+				MARKETING_VERSION = 3.13.0;
 				MONKEYDEV_ADD_SUBSTRATE = YES;
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_DEFAULT_BUNDLEID = NO;
