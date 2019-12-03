@@ -501,7 +501,7 @@ CHOptimizedMethod1(self, void, ChatTransCenter, receiveMessage, NSArray *, arg1)
                     break;
                 case 304:
                     type = @"语音";
-                    msgContent = [soulIMmessage.voiceIMModel valueForKey:@"url"];
+                    msgContent = [soulIMmessage.voiceIMModel valueForKey:@"remoteURL"];
                     break;
                 case 307:
                     type = @"表情";
