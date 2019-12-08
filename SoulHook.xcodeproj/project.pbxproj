@@ -80,7 +80,7 @@
 		71469BBB238B74B50032A070 /* SORobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SORobot.h; sourceTree = "<group>"; };
 		71469BBC238B74B50032A070 /* SORobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SORobot.m; sourceTree = "<group>"; };
 		71469BBF238B764A0032A070 /* SOUL-3-13-0.ipa */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOUL-3-13-0.ipa"; sourceTree = "<group>"; };
-		7162717A22DC7C6E00EFCA10 /* SoulHook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoulHook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7162717A22DC7C6E00EFCA10 /* MySOUL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySOUL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7162717D22DC7C6E00EFCA10 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		7162717F22DC7C6E00EFCA10 /* quick-resign.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "quick-resign.sh"; path = "Scripts/quick-resign.sh"; sourceTree = "<group>"; };
 		7162718122DC7C6E00EFCA10 /* MDConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = MDConfig.plist; path = Config/MDConfig.plist; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		7162717B22DC7C6E00EFCA10 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7162717A22DC7C6E00EFCA10 /* SoulHook.app */,
+				7162717A22DC7C6E00EFCA10 /* MySOUL.app */,
 				7162718B22DC7C6E00EFCA10 /* libSoulHookDylib.dylib */,
 			);
 			name = Products;
@@ -356,7 +356,7 @@
 			);
 			name = SoulHook;
 			productName = SoulHook;
-			productReference = 7162717A22DC7C6E00EFCA10 /* SoulHook.app */;
+			productReference = 7162717A22DC7C6E00EFCA10 /* MySOUL.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7162718A22DC7C6E00EFCA10 /* SoulHookDylib */ = {
@@ -760,10 +760,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z78DQXE2Y3;
+				DEVELOPMENT_TEAM = 64DK8BZY68;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SoulHook/Info.plist;
-				MARKETING_VERSION = 3.13.0;
+				MARKETING_VERSION = 3.14.0;
 				MONKEYDEV_ADD_SUBSTRATE = YES;
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_DEFAULT_BUNDLEID = NO;
@@ -772,8 +772,8 @@
 				MONKEYDEV_TARGET_APP = Optional;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mihuashi.test;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = fantest;
+				PRODUCT_NAME = MySOUL;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -782,10 +782,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z78DQXE2Y3;
+				DEVELOPMENT_TEAM = 64DK8BZY68;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SoulHook/Info.plist;
-				MARKETING_VERSION = 3.13.0;
+				MARKETING_VERSION = 3.14.0;
 				MONKEYDEV_ADD_SUBSTRATE = YES;
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_DEFAULT_BUNDLEID = NO;
@@ -794,8 +794,8 @@
 				MONKEYDEV_TARGET_APP = Optional;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mihuashi.test;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = fantest;
+				PRODUCT_NAME = MySOUL;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

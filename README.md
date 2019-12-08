@@ -1,6 +1,7 @@
 # SoulHook
 Soul iOS App逆向实战
 功能：  
+旧版本头像修改
 自定义头像  
 自动回复  
 去除消息撤回3min限制  
@@ -11,6 +12,6 @@ Soul iOS App逆向实战
 多媒体消息链接复制  
 添加机器人回复（[莉莉机器人](http://www.itpk.cn/)）
 ### 破壳ipa下载：
-v3.13.0  
-[百度云链接](https://pan.baidu.com/s/1bGgkuztE8MGh5C6fUcP6JA)  
-提取码: yqgx
+v3.14.0  
+[百度云链接](https://pan.baidu.com/s/15lN5x8Kbs6n40M2Lkwd-iA)  
+提取码: zyd2
