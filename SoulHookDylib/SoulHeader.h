@@ -481,4 +481,37 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 
 @end
 
+@interface SOWebItemModel : NSObject
+
+@property(nonatomic, copy) NSString *url;
+@property(nonatomic, strong) NSMutableDictionary *params;
+@property(nonatomic, assign) long long urlType;
+@property(nonatomic, copy) NSString *title;
+@property(nonatomic, copy) NSString *userId;
+
+//@property(nonatomic, copy) void (^avatarChangeBlock)(void);
+//@property(nonatomic, copy) void (^avatarRegisterChangeBlock)(void);
+//@property(nonatomic, copy) void (^makeFaceFinishNotPayBlock)(void);
+
+@end
+
+@interface SOUserBridgeManager : NSObject
+
+@property(nonatomic, strong, nullable) UIImage *customImage;
+- (UIImage *)resizeImage:(UIImage *)img size:(CGSize)size;
+
+@end
+
+@interface SOWebItemViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+
+@property(strong, nonatomic) SOWebItemModel *model;
+@property(strong, nonatomic) UIView *webView;
+@property(strong, nonatomic) SOUserBridgeManager *userBridge;
+
+- (void)customAction:(UIButton *)sender;
+- (UIImage *)resizeImage:(UIImage *)img size:(CGSize)size;
+
+@end
+
+
 NS_ASSUME_NONNULL_END

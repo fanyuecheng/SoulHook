@@ -144,12 +144,26 @@
             }
         }];
         
+        UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"旧版捏脸" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            Class clzz = NSClassFromString(@"AvatarModifyViewController");
+            
+            if (clzz) {
+                UIViewController *clzIns = (UIViewController *)[clzz new];
+                
+                //设置性别
+                [clzIns setValue:@1 forKey:@"_isBoy"];
+                [self.navigationController pushViewController:clzIns animated:YES];
+            }
+        }];
+        
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         
         [alert addAction:action0];
         [alert addAction:action1];
         [alert addAction:action2];
         [alert addAction:action3];
+        [alert addAction:action4];
         [alert addAction:cancel];
         
         [self presentViewController:alert animated:YES completion:nil];

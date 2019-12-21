@@ -993,11 +993,13 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
 //             }
 //         }
         
-        if ([URLString isEqualToString:@"https://pay.soulapp.cn/face/product/get-paid-list"]) {
+        if ([URLString containsString:@"cuteface/getAllItems"]) {
             BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_SWITCH];
             if (enable) {
-                responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
-                [responseObject setObject:@[] forKey:@"data"];
+               responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+               NSMutableDictionary *data = [NSMutableDictionary dictionary];
+               data[@"cuteFaceItems"] = @[];
+               responseObject[@"data"] = data;
             }
         }
         
@@ -1300,7 +1302,145 @@ CHDeclareMethod1(void, StrangerViewController, filterAction, UIButton *, arg1) {
     
 }
 
+CHDeclareClass(SOWebItemViewController)
+
+CHOptimizedMethod0(self, void, SOWebItemViewController, viewDidLoad) {
+    CHSuper0(SOWebItemViewController, viewDidLoad);
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_CUSTOM_SWITCH];
+        
+        if (enable && [self.model.url isEqualToString:@"avatar/#/own/create"]) {
+            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 175, [UIApplication sharedApplication].statusBarFrame.size.height + 14, 80, 36)];
+            button.backgroundColor = SO_THEME_COLOR;
+            button.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:15];
+            button.layer.cornerRadius = 18;
+            button.layer.masksToBounds = YES;
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [button setTitle:@"自定义" forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(customAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self.webView addSubview:button];
+        }
+    });
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+
+CHDeclareMethod1(void, SOWebItemViewController, customAction, UIButton *, arg1) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *mediaType = AVMediaTypeVideo;
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+        if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
+            // 请在'设置'中打开相机权限
+            return;
+        }
+        
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            // 照相机不可用
+            return;
+        }
+        UIImagePickerController *vc = [[UIImagePickerController alloc] init];
+        vc.delegate = self;
+        vc.allowsEditing = YES;
+        vc.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:vc animated:YES completion:nil];
+    }];
+    
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        UIImagePickerController *vc = [[UIImagePickerController alloc] init];
+        vc.delegate = self;
+        vc.allowsEditing = YES;
+        vc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:vc animated:YES completion:nil];
+        
+    }];
+    
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [alert addAction:action3];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+CHDeclareMethod1(void, SOWebItemViewController, imagePickerControllerDidCancel, UIImagePickerController *, arg1) {
+    self.userBridge.customImage = nil;
+    [arg1 dismissViewControllerAnimated:YES completion:nil];
+}
+
+CHDeclareMethod2(void, SOWebItemViewController, imagePickerController, UIImagePickerController *, arg1, didFinishPickingMediaWithInfo, NSDictionary *, arg2) {
+    UIImage *image = [arg2 objectForKey:UIImagePickerControllerEditedImage];
+    [arg1 dismissViewControllerAnimated:YES completion:nil];
+    
+    self.userBridge.customImage = image;
+    
+    NSLog(@"customImage === %@", self.userBridge.customImage);
+}
+
+CHDeclareClass(SOUserBridgeManager)
+CHPropertyRetainNonatomic(SOUserBridgeManager, UIImage *, customImage, setCustomImage);
+
+CHOptimizedMethod2(self, void, SOUserBridgeManager, uploadOriginAvatar, UIImage *, arg1, avatarSVGInfo, id, arg2) {
+    BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_CUSTOM_SWITCH];
+    if (enable && self.customImage) {
+        arg1 = [self resizeImage:self.customImage size:arg1.size];
+    }
+    
+    CHSuper2(SOUserBridgeManager, uploadOriginAvatar, arg1, avatarSVGInfo, arg2);
+}
+
+CHOptimizedMethod2(self, void, SOUserBridgeManager, uploadAvatar, UIImage *, arg1, avatarSVGInfo, id, arg2) {
+    //520
+    BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_CUSTOM_SWITCH];
+    if (enable && self.customImage) {
+        arg1 = [self resizeImage:self.customImage size:arg1.size];
+    }
+    
+    CHSuper2(SOUserBridgeManager, uploadAvatar, arg1, avatarSVGInfo, arg2);
+}
+
+
+CHDeclareMethod2(UIImage *, SOUserBridgeManager, resizeImage, UIImage *, img, size, CGSize, size) {
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, img.scale);
+    UIGraphicsGetCurrentContext();
+    [self.customImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *imageOut = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return imageOut;
+}
+
+CHOptimizedMethod5(self, void, SOUserBridgeManager, updateUserInfWithAvatarName, NSString *, arg1, originAvatarName, NSString *, arg2, image, UIImage *, arg3, originImage, UIImage *, arg4, svgInfo, NSString *, arg5) {
+    
+    BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_CUSTOM_SWITCH];
+    if (enable && self.customImage) {
+        arg3 = [self resizeImage:self.customImage size:arg3.size];
+        arg4 = [self resizeImage:self.customImage size:arg4.size];
+        
+        CHSuper5(SOUserBridgeManager, updateUserInfWithAvatarName, arg1, originAvatarName, arg2, image, arg3, originImage, arg4, svgInfo, arg5);
+    } else {
+        CHSuper5(SOUserBridgeManager, updateUserInfWithAvatarName, arg1, originAvatarName, arg2, image, arg3, originImage, arg4, svgInfo, arg5);
+    }
+}
+
 CHConstructor {
+    //新版本设置头像
+    CHLoadLateClass(SOUserBridgeManager);
+    CHHook0(SOUserBridgeManager, customImage);
+    CHHook1(SOUserBridgeManager, setCustomImage);
+    CHHook2(SOUserBridgeManager, uploadOriginAvatar, avatarSVGInfo);
+    CHHook2(SOUserBridgeManager, uploadAvatar, avatarSVGInfo);
+    CHHook5(SOUserBridgeManager, updateUserInfWithAvatarName, originAvatarName, image, originImage, svgInfo);
+
+    CHLoadLateClass(SOWebItemViewController);
+    CHHook0(SOWebItemViewController, viewDidLoad);
+    
     CHLoadLateClass(StrangerViewController);
     CHHook0(StrangerViewController, viewDidLoad);
     CHHook0(StrangerViewController, endRefresh);
