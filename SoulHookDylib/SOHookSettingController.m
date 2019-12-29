@@ -83,7 +83,7 @@
     cell.textLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
     cell.textLabel.text = [dic valueForKey:@"title"];
     view.on = [[dic valueForKey:@"enable"] boolValue];
-    view.hidden = (indexPath.row == 0 || indexPath.row == 1);
+    view.hidden = (indexPath.row == 0);
     
     return cell;
 }
