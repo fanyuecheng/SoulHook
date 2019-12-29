@@ -1429,7 +1429,40 @@ CHOptimizedMethod5(self, void, SOUserBridgeManager, updateUserInfWithAvatarName,
     }
 }
 
+CHDeclareClass(SOPersonalInfoVC)
+
+CHOptimizedMethod2(self, NSInteger, SOPersonalInfoVC, tableView, UITableView *, arg1, numberOfRowsInSection, NSInteger, arg2) {
+ 
+    NSInteger num = CHSuper2(SOPersonalInfoVC, tableView, arg1, numberOfRowsInSection, arg2);
+
+    if (arg2 == 0) {
+        return 3;
+    } else {
+        return num;
+    }
+}
+
+CHOptimizedMethod2(self, CGFloat, SOPersonalInfoVC, tableView, UITableView *, arg1, heightForRowAtIndexPath, NSIndexPath *, arg2) {
+    return 50.0;
+}
+
+CHOptimizedMethod2(self, UITableViewCell *, SOPersonalInfoVC, tableView, UITableView *, arg1, cellForRowAtIndexPath, NSIndexPath *, arg2) {
+
+    UITableViewCell *cell = CHSuper2(SOPersonalInfoVC, tableView, arg1, cellForRowAtIndexPath, arg2);
+    if (arg2.section == 0) {
+        cell.hidden = NO;
+    }
+    
+    return cell;
+}
+
 CHConstructor {
+    //设置个人信息 - 旧版头像
+    CHLoadLateClass(SOPersonalInfoVC);
+    CHHook2(SOPersonalInfoVC, tableView, numberOfRowsInSection);
+    CHHook2(SOPersonalInfoVC, tableView, heightForRowAtIndexPath);
+    CHHook2(SOPersonalInfoVC, tableView, cellForRowAtIndexPath);
+    
     //新版本设置头像
     CHLoadLateClass(SOUserBridgeManager);
     CHHook0(SOUserBridgeManager, customImage);

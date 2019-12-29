@@ -102,72 +102,7 @@
     if (indexPath.row == 0) {
         SOHookAutoReplyController *aotu = [[SOHookAutoReplyController alloc] init];
         [self.navigationController pushViewController:aotu animated:YES];
-    } else if (indexPath.row == 1) {
-        Class clz = NSClassFromString(@"HeaderViewController");
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改旧版头像" message:@"选择头像版本" preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        UIAlertAction *action0 = [UIAlertAction actionWithTitle:@"版本一" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (clz) {
-                UIViewController *clzIns = (UIViewController *)[clz new];
-                [self.navigationController pushViewController:clzIns animated:YES];
-            }
-        }];
-        
-        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"版本二" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (clz) {
-                UIViewController *clzIns = (UIViewController *)[clz new];
-                [clzIns setValue:@1 forKey:@"_isnew"];
-                [clzIns setValue:@0 forKey:@"_isnew2"];
-                [clzIns setValue:@0 forKey:@"_isnew3"];
-                [self.navigationController pushViewController:clzIns animated:YES];
-            }
-        }];
-        
-        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"版本三" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (clz) {
-                UIViewController *clzIns = (UIViewController *)[clz new];
-                [clzIns setValue:@0 forKey:@"_isnew"];
-                [clzIns setValue:@1 forKey:@"_isnew2"];
-                [clzIns setValue:@0 forKey:@"_isnew3"];
-                [self.navigationController pushViewController:clzIns animated:YES];
-            }
-        }];
-        
-        UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"版本四" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (clz) {
-                UIViewController *clzIns = (UIViewController *)[clz new];
-                [clzIns setValue:@0 forKey:@"_isnew"];
-                [clzIns setValue:@0 forKey:@"_isnew2"];
-                [clzIns setValue:@1 forKey:@"_isnew3"];
-                [self.navigationController pushViewController:clzIns animated:YES];
-            }
-        }];
-        
-        UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"旧版捏脸" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            Class clzz = NSClassFromString(@"AvatarModifyViewController");
-            
-            if (clzz) {
-                UIViewController *clzIns = (UIViewController *)[clzz new];
-                
-                //设置性别
-                [clzIns setValue:@1 forKey:@"_isBoy"];
-                [self.navigationController pushViewController:clzIns animated:YES];
-            }
-        }];
-        
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        
-        [alert addAction:action0];
-        [alert addAction:action1];
-        [alert addAction:action2];
-        [alert addAction:action3];
-        [alert addAction:action4];
-        [alert addAction:cancel];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    }
+    } 
 }
 
 #pragma mark - Action
@@ -234,100 +169,95 @@
                                        @"enable" : @"0",
                                        @"type" : @"0"
                                        }.mutableCopy;
-        
-        NSMutableDictionary *item1 = @{@"title" : @"旧版修改头像",
-                                       @"enable" : @"0",
-                                       @"type" : @"0"
-                                       }.mutableCopy;
                     
-        NSMutableDictionary *item2 = @{@"title" : @"防止消息撤回",
+        NSMutableDictionary *item1 = @{@"title" : @"防止消息撤回",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_MSG_REVOKE_SWITCH]],
                                        @"type" : SOUL_HOOK_MSG_REVOKE_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item3 = @{@"title" : @"防止阅后即焚",
+        NSMutableDictionary *item2 = @{@"title" : @"防止阅后即焚",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_MSG_FLASH_SWITCH]],
                                        @"type" : SOUL_HOOK_MSG_FLASH_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item4 = @{@"title" : @"点击自动复制消息媒体URL",
+        NSMutableDictionary *item3 = @{@"title" : @"点击自动复制消息媒体URL",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_MSG_COPY_SWITCH]],
                                        @"type" : SOUL_HOOK_MSG_COPY_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item5 = @{@"title" : @"捏脸道具免费",
+        NSMutableDictionary *item4 = @{@"title" : @"捏脸道具免费",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_AVATAR_SWITCH]],
                                        @"type" : SOUL_HOOK_AVATAR_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item6 = @{@"title" : @"设置头像仅设置背景色",
+        NSMutableDictionary *item5 = @{@"title" : @"设置头像仅设置背景色",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_AVATAR_BG_SWITCH]],
                                        @"type" : SOUL_HOOK_AVATAR_BG_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item7 = @{@"title" : @"设置自定义头像",
+        NSMutableDictionary *item6 = @{@"title" : @"设置自定义头像",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_AVATAR_CUSTOM_SWITCH]],
                                        @"type" : SOUL_HOOK_AVATAR_CUSTOM_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item8 = @{@"title" : @"掷骰子作弊",
+        NSMutableDictionary *item7 = @{@"title" : @"掷骰子作弊",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_DICE_SWITCH]],
                                        @"type" : SOUL_HOOK_DICE_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item9 = @{@"title" : @"石头剪子布作弊",
+        NSMutableDictionary *item8 = @{@"title" : @"石头剪子布作弊",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_FINGER_SWITCH]],
                                        @"type" : SOUL_HOOK_FINGER_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item10 = @{@"title" : @"启动图屏蔽",
+        NSMutableDictionary *item9 = @{@"title" : @"启动图屏蔽",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_ADVERT_SWITCH]],
                                        @"type" : SOUL_HOOK_ADVERT_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item11 = @{@"title" : @"soulmate邀请无限制",
+        NSMutableDictionary *item10 = @{@"title" : @"soulmate邀请无限制",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_SOULMATE_SWITCH]],
                                         @"type" : SOUL_HOOK_SOULMATE_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item12 = @{@"title" : @"自定义瞬间发布位置",
+        NSMutableDictionary *item11 = @{@"title" : @"自定义瞬间发布位置",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_LOCATION_SWITCH]],
                                         @"type" : SOUL_HOOK_LOCATION_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item13 = @{@"title" : @"修改生日&性别",
+        NSMutableDictionary *item12 = @{@"title" : @"修改生日&性别",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_BIRTHDAY_GENDER_SWITCH]],
                                         @"type" : SOUL_HOOK_BIRTHDAY_GENDER_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item14 = @{@"title" : @"取消已读回执",
+        NSMutableDictionary *item13 = @{@"title" : @"取消已读回执",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_READ_SWITCH]],
                                         @"type" : SOUL_HOOK_READ_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item15 = @{@"title" : @"禁止发送输入状态",
+        NSMutableDictionary *item14 = @{@"title" : @"禁止发送输入状态",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_INPUT_STATE_SWITCH]],
                                         @"type" : SOUL_HOOK_INPUT_STATE_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item16 = @{@"title" : @"禁止撤回消息两分钟限制解除",
+        NSMutableDictionary *item15 = @{@"title" : @"禁止撤回消息两分钟限制解除",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_MSG_RECALL_SWITCH]],
                                         @"type" : SOUL_HOOK_MSG_RECALL_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item17 = @{@"title" : @"存图去除水印",
+        NSMutableDictionary *item16 = @{@"title" : @"存图去除水印",
                                         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_WATER_MARK_SWITCH]],
                                         @"type" : SOUL_HOOK_WATER_MARK_SWITCH
                                         }.mutableCopy;
         
-        NSMutableDictionary *item18 = @{@"title" : @"机器人",
+        NSMutableDictionary *item17 = @{@"title" : @"机器人",
         @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_ROBOT_SWITCH]],
         @"type" : SOUL_HOOK_ROBOT_SWITCH
         }.mutableCopy;
  
         
         
-        _dataSource = @[item0, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16, item17, item18];
+        _dataSource = @[item0, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16, item17];
     }
     return _dataSource;
 }

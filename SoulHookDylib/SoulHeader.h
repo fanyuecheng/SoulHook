@@ -513,5 +513,12 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 
 @end
 
+@interface SOPersonalInfoVC : UIViewController
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
 
 NS_ASSUME_NONNULL_END
