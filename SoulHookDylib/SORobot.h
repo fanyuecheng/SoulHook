@@ -33,4 +33,12 @@ typedef NS_ENUM(NSUInteger, SONetworkingMethod) {
 
 @end
 
+@interface SOIMManager : NSObject
+
++ (void)sendText:(NSString *)text
+          toUser:(NSString *)userId
+        finished:(nullable void (^)(void))finished;
+
+@end
+
 NS_ASSUME_NONNULL_END

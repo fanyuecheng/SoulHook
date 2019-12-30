@@ -7,366 +7,359 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		711B154C22DF26E1003B68B8 /* SOHookAutoReplyController.h in Headers */ = {isa = PBXBuildFile; fileRef = 711B154A22DF26E1003B68B8 /* SOHookAutoReplyController.h */; };
-		711B154D22DF26E1003B68B8 /* SOHookAutoReplyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 711B154B22DF26E1003B68B8 /* SOHookAutoReplyController.m */; };
-		71462E6822E7F77B003A00E2 /* SOHomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71462E6622E7F77A003A00E2 /* SOHomeHeaderView.m */; };
-		71462E6922E7F77B003A00E2 /* SOHomeHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 71462E6722E7F77A003A00E2 /* SOHomeHeaderView.h */; };
-		71469BBD238B74B50032A070 /* SORobot.h in Headers */ = {isa = PBXBuildFile; fileRef = 71469BBB238B74B50032A070 /* SORobot.h */; };
-		71469BBE238B74B50032A070 /* SORobot.m in Sources */ = {isa = PBXBuildFile; fileRef = 71469BBC238B74B50032A070 /* SORobot.m */; };
-		7162718222DC7C6E00EFCA10 /* MDConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7162718122DC7C6E00EFCA10 /* MDConfig.plist */; };
-		7162718C22DC7C6E00EFCA10 /* libSoulHookDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7162718B22DC7C6E00EFCA10 /* libSoulHookDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		7162719122DC7C6E00EFCA10 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7162719022DC7C6E00EFCA10 /* JavaScriptCore.framework */; };
-		7162719322DC7C6E00EFCA10 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7162719222DC7C6E00EFCA10 /* Foundation.framework */; };
-		7162719522DC7C6E00EFCA10 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7162719422DC7C6E00EFCA10 /* UIKit.framework */; };
-		7162719A22DC7C6E00EFCA10 /* SoulHookDylib.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7162719922DC7C6E00EFCA10 /* SoulHookDylib.mm */; };
-		7162719D22DC7C6E00EFCA10 /* MDConfigManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7162719C22DC7C6E00EFCA10 /* MDConfigManager.h */; };
-		7162719F22DC7C6E00EFCA10 /* MDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7162719E22DC7C6E00EFCA10 /* MDConfigManager.m */; };
-		716271A122DC7C6E00EFCA10 /* MDCycriptManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271A022DC7C6E00EFCA10 /* MDCycriptManager.h */; };
-		716271A322DC7C6E00EFCA10 /* MDCycriptManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271A222DC7C6E00EFCA10 /* MDCycriptManager.m */; };
-		716271A522DC7C6E00EFCA10 /* MDMethodTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271A422DC7C6E00EFCA10 /* MDMethodTrace.h */; };
-		716271A722DC7C6E00EFCA10 /* MDMethodTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271A622DC7C6E00EFCA10 /* MDMethodTrace.m */; };
-		716271AA22DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271A922DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s */; };
-		716271AC22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271AB22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s */; };
-		716271AE22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271AD22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s */; };
-		716271B022DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271AF22DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s */; };
-		716271B222DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271B122DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s */; };
-		716271B422DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271B322DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s */; };
-		716271B622DC7C6E00EFCA10 /* a2a3-selectortramps-x86_64.s in Sources */ = {isa = PBXBuildFile; fileRef = 716271B522DC7C6E00EFCA10 /* a2a3-selectortramps-x86_64.s */; };
-		716271B822DC7C6E00EFCA10 /* OCMethodTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271B722DC7C6E00EFCA10 /* OCMethodTrace.h */; };
-		716271BA22DC7C6E00EFCA10 /* OCMethodTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271B922DC7C6E00EFCA10 /* OCMethodTrace.m */; };
-		716271BC22DC7C6E00EFCA10 /* OCSelectorTrampolines.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271BB22DC7C6E00EFCA10 /* OCSelectorTrampolines.h */; };
-		716271BE22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm in Sources */ = {isa = PBXBuildFile; fileRef = 716271BD22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm */; };
-		716271C222DC7C6E00EFCA10 /* LLDBTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271C122DC7C6E00EFCA10 /* LLDBTools.h */; };
-		716271C422DC7C6E00EFCA10 /* LLDBTools.mm in Sources */ = {isa = PBXBuildFile; fileRef = 716271C322DC7C6E00EFCA10 /* LLDBTools.mm */; };
-		716271C922DC7C6E00EFCA10 /* AntiAntiDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271C822DC7C6E00EFCA10 /* AntiAntiDebug.m */; };
-		716271CC22DC7C6E00EFCA10 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 716271CB22DC7C6E00EFCA10 /* fishhook.c */; };
-		716271CE22DC7C6E00EFCA10 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271CD22DC7C6E00EFCA10 /* fishhook.h */; };
-		716271D022DC7C6E00EFCA10 /* SoulHookDylib.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271CF22DC7C6E00EFCA10 /* SoulHookDylib.h */; };
-		716271D222DC7C6E00EFCA10 /* SoulHookDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271D122DC7C6E00EFCA10 /* SoulHookDylib.m */; };
-		716271E122DC7CF500EFCA10 /* SoulHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271DC22DC7CF400EFCA10 /* SoulHeader.h */; };
-		716271E222DC7CF500EFCA10 /* SOHookSettingController.h in Headers */ = {isa = PBXBuildFile; fileRef = 716271DD22DC7CF500EFCA10 /* SOHookSettingController.h */; };
-		716271E522DC7CF500EFCA10 /* SOHookSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 716271E022DC7CF500EFCA10 /* SOHookSettingController.m */; };
-		716271E722DC7FD200EFCA10 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716271E622DC7FD200EFCA10 /* Default-568h@2x.png */; };
+		71A99C4823B9DCBE0043D2BF /* MDConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71A99C4723B9DCBE0043D2BF /* MDConfig.plist */; };
+		71A99C5223B9DCBE0043D2BF /* libSoulHookDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 71A99C5123B9DCBE0043D2BF /* libSoulHookDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		71A99C5723B9DCBE0043D2BF /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A99C5623B9DCBE0043D2BF /* JavaScriptCore.framework */; };
+		71A99C5923B9DCBE0043D2BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A99C5823B9DCBE0043D2BF /* Foundation.framework */; };
+		71A99C5B23B9DCBE0043D2BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A99C5A23B9DCBE0043D2BF /* UIKit.framework */; };
+		71A99C6023B9DCBE0043D2BF /* SoulHookDylib.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C5F23B9DCBE0043D2BF /* SoulHookDylib.mm */; };
+		71A99C6323B9DCBE0043D2BF /* MDConfigManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99C6223B9DCBE0043D2BF /* MDConfigManager.h */; };
+		71A99C6523B9DCBE0043D2BF /* MDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C6423B9DCBE0043D2BF /* MDConfigManager.m */; };
+		71A99C6723B9DCBE0043D2BF /* MDCycriptManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99C6623B9DCBE0043D2BF /* MDCycriptManager.h */; };
+		71A99C6923B9DCBE0043D2BF /* MDCycriptManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C6823B9DCBE0043D2BF /* MDCycriptManager.m */; };
+		71A99C6B23B9DCBE0043D2BF /* MDMethodTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99C6A23B9DCBE0043D2BF /* MDMethodTrace.h */; };
+		71A99C6D23B9DCBE0043D2BF /* MDMethodTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C6C23B9DCBE0043D2BF /* MDMethodTrace.m */; };
+		71A99C7023B9DCBE0043D2BF /* a1a2-selectortramps-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C6F23B9DCBE0043D2BF /* a1a2-selectortramps-arm.s */; };
+		71A99C7223B9DCBE0043D2BF /* a1a2-selectortramps-arm64.s in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C7123B9DCBE0043D2BF /* a1a2-selectortramps-arm64.s */; };
+		71A99C7423B9DCBE0043D2BF /* a1a2-selectortramps-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C7323B9DCBE0043D2BF /* a1a2-selectortramps-i386.s */; };
+		71A99C7623B9DCBE0043D2BF /* a1a2-selectortramps-x86_64.s in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C7523B9DCBE0043D2BF /* a1a2-selectortramps-x86_64.s */; };
+		71A99C7823B9DCBE0043D2BF /* a2a3-selectortramps-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C7723B9DCBE0043D2BF /* a2a3-selectortramps-arm.s */; };
+		71A99C7A23B9DCBE0043D2BF /* a2a3-selectortramps-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C7923B9DCBE0043D2BF /* a2a3-selectortramps-i386.s */; };
+		71A99C7C23B9DCBE0043D2BF /* a2a3-selectortramps-x86_64.s in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C7B23B9DCBE0043D2BF /* a2a3-selectortramps-x86_64.s */; };
+		71A99C7E23B9DCBE0043D2BF /* OCMethodTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99C7D23B9DCBE0043D2BF /* OCMethodTrace.h */; };
+		71A99C8023B9DCBE0043D2BF /* OCMethodTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C7F23B9DCBE0043D2BF /* OCMethodTrace.m */; };
+		71A99C8223B9DCBE0043D2BF /* OCSelectorTrampolines.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99C8123B9DCBE0043D2BF /* OCSelectorTrampolines.h */; };
+		71A99C8423B9DCBE0043D2BF /* OCSelectorTrampolines.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C8323B9DCBE0043D2BF /* OCSelectorTrampolines.mm */; };
+		71A99C8823B9DCBE0043D2BF /* LLDBTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99C8723B9DCBE0043D2BF /* LLDBTools.h */; };
+		71A99C8A23B9DCBE0043D2BF /* LLDBTools.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C8923B9DCBE0043D2BF /* LLDBTools.mm */; };
+		71A99C8F23B9DCBE0043D2BF /* AntiAntiDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C8E23B9DCBE0043D2BF /* AntiAntiDebug.m */; };
+		71A99C9223B9DCBE0043D2BF /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C9123B9DCBE0043D2BF /* fishhook.c */; };
+		71A99C9423B9DCBE0043D2BF /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99C9323B9DCBE0043D2BF /* fishhook.h */; };
+		71A99C9623B9DCBE0043D2BF /* SoulHookDylib.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99C9523B9DCBE0043D2BF /* SoulHookDylib.h */; };
+		71A99C9823B9DCBE0043D2BF /* SoulHookDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A99C9723B9DCBE0043D2BF /* SoulHookDylib.m */; };
+		71A99CA223B9DCE00043D2BF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71A99CA123B9DCE00043D2BF /* Default-568h@2x.png */; };
+		71A99CAD23B9DE4E0043D2BF /* SOHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99CA423B9DE4E0043D2BF /* SOHeader.h */; };
+		71A99CAE23B9DE4E0043D2BF /* SORobot.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A99CA523B9DE4E0043D2BF /* SORobot.m */; };
+		71A99CAF23B9DE4E0043D2BF /* SOHookSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A99CA623B9DE4E0043D2BF /* SOHookSettingController.m */; };
+		71A99CB123B9DE4E0043D2BF /* SOHookAutoReplyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A99CA823B9DE4E0043D2BF /* SOHookAutoReplyController.m */; };
+		71A99CB223B9DE4E0043D2BF /* SOHookSettingController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99CA923B9DE4E0043D2BF /* SOHookSettingController.h */; };
+		71A99CB323B9DE4E0043D2BF /* SOHookAutoReplyController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99CAA23B9DE4E0043D2BF /* SOHookAutoReplyController.h */; };
+		71A99CB523B9DE4E0043D2BF /* SORobot.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99CAC23B9DE4E0043D2BF /* SORobot.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7162718D22DC7C6E00EFCA10 /* PBXContainerItemProxy */ = {
+		71A99C5323B9DCBE0043D2BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7162716F22DC7C6E00EFCA10 /* Project object */;
+			containerPortal = 71A99C3523B9DCBE0043D2BF /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7162718A22DC7C6E00EFCA10;
+			remoteGlobalIDString = 71A99C5023B9DCBE0043D2BF;
 			remoteInfo = SoulHookDylib;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7162717722DC7C6E00EFCA10 /* CopyFiles */ = {
+		71A99C3D23B9DCBE0043D2BF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7162718C22DC7C6E00EFCA10 /* libSoulHookDylib.dylib in CopyFiles */,
+				71A99C5223B9DCBE0043D2BF /* libSoulHookDylib.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		711B154A22DF26E1003B68B8 /* SOHookAutoReplyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOHookAutoReplyController.h; sourceTree = "<group>"; };
-		711B154B22DF26E1003B68B8 /* SOHookAutoReplyController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOHookAutoReplyController.m; sourceTree = "<group>"; };
-		71462E6622E7F77A003A00E2 /* SOHomeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHomeHeaderView.m; sourceTree = "<group>"; };
-		71462E6722E7F77A003A00E2 /* SOHomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHomeHeaderView.h; sourceTree = "<group>"; };
-		71469BBB238B74B50032A070 /* SORobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SORobot.h; sourceTree = "<group>"; };
-		71469BBC238B74B50032A070 /* SORobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SORobot.m; sourceTree = "<group>"; };
-		71469BBF238B764A0032A070 /* SOUL-3-13-0.ipa */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOUL-3-13-0.ipa"; sourceTree = "<group>"; };
-		7162717A22DC7C6E00EFCA10 /* MySOUL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySOUL.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7162717D22DC7C6E00EFCA10 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		7162717F22DC7C6E00EFCA10 /* quick-resign.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "quick-resign.sh"; path = "Scripts/quick-resign.sh"; sourceTree = "<group>"; };
-		7162718122DC7C6E00EFCA10 /* MDConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = MDConfig.plist; path = Config/MDConfig.plist; sourceTree = "<group>"; };
-		7162718422DC7C6E00EFCA10 /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; name = "put ipa or app here"; path = "TargetApp/put ipa or app here"; sourceTree = "<group>"; };
-		7162718522DC7C6E00EFCA10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7162718B22DC7C6E00EFCA10 /* libSoulHookDylib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libSoulHookDylib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		7162719022DC7C6E00EFCA10 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		7162719222DC7C6E00EFCA10 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		7162719422DC7C6E00EFCA10 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		7162719822DC7C6E00EFCA10 /* SoulHookDylib.xm */ = {isa = PBXFileReference; lastKnownFileType = text; name = SoulHookDylib.xm; path = Logos/SoulHookDylib.xm; sourceTree = "<group>"; };
-		7162719922DC7C6E00EFCA10 /* SoulHookDylib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = SoulHookDylib.mm; path = Logos/SoulHookDylib.mm; sourceTree = "<group>"; };
-		7162719C22DC7C6E00EFCA10 /* MDConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MDConfigManager.h; path = Config/MDConfigManager.h; sourceTree = "<group>"; };
-		7162719E22DC7C6E00EFCA10 /* MDConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MDConfigManager.m; path = Config/MDConfigManager.m; sourceTree = "<group>"; };
-		716271A022DC7C6E00EFCA10 /* MDCycriptManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MDCycriptManager.h; path = Config/MDCycriptManager.h; sourceTree = "<group>"; };
-		716271A222DC7C6E00EFCA10 /* MDCycriptManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MDCycriptManager.m; path = Config/MDCycriptManager.m; sourceTree = "<group>"; };
-		716271A422DC7C6E00EFCA10 /* MDMethodTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MDMethodTrace.h; path = Config/MDMethodTrace.h; sourceTree = "<group>"; };
-		716271A622DC7C6E00EFCA10 /* MDMethodTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MDMethodTrace.m; path = Config/MDMethodTrace.m; sourceTree = "<group>"; };
-		716271A922DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a1a2-selectortramps-arm.s"; path = "Trace/a1a2-selectortramps-arm.s"; sourceTree = "<group>"; };
-		716271AB22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a1a2-selectortramps-arm64.s"; path = "Trace/a1a2-selectortramps-arm64.s"; sourceTree = "<group>"; };
-		716271AD22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a1a2-selectortramps-i386.s"; path = "Trace/a1a2-selectortramps-i386.s"; sourceTree = "<group>"; };
-		716271AF22DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a1a2-selectortramps-x86_64.s"; path = "Trace/a1a2-selectortramps-x86_64.s"; sourceTree = "<group>"; };
-		716271B122DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a2a3-selectortramps-arm.s"; path = "Trace/a2a3-selectortramps-arm.s"; sourceTree = "<group>"; };
-		716271B322DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a2a3-selectortramps-i386.s"; path = "Trace/a2a3-selectortramps-i386.s"; sourceTree = "<group>"; };
-		716271B522DC7C6E00EFCA10 /* a2a3-selectortramps-x86_64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "a2a3-selectortramps-x86_64.s"; path = "Trace/a2a3-selectortramps-x86_64.s"; sourceTree = "<group>"; };
-		716271B722DC7C6E00EFCA10 /* OCMethodTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMethodTrace.h; path = Trace/OCMethodTrace.h; sourceTree = "<group>"; };
-		716271B922DC7C6E00EFCA10 /* OCMethodTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = OCMethodTrace.m; path = Trace/OCMethodTrace.m; sourceTree = "<group>"; };
-		716271BB22DC7C6E00EFCA10 /* OCSelectorTrampolines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCSelectorTrampolines.h; path = Trace/OCSelectorTrampolines.h; sourceTree = "<group>"; };
-		716271BD22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = OCSelectorTrampolines.mm; path = Trace/OCSelectorTrampolines.mm; sourceTree = "<group>"; };
-		716271BF22DC7C6E00EFCA10 /* selectortramps.mac */ = {isa = PBXFileReference; lastKnownFileType = text; name = selectortramps.mac; path = Trace/selectortramps.mac; sourceTree = "<group>"; };
-		716271C122DC7C6E00EFCA10 /* LLDBTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LLDBTools.h; path = Tools/LLDBTools.h; sourceTree = "<group>"; };
-		716271C322DC7C6E00EFCA10 /* LLDBTools.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = LLDBTools.mm; path = Tools/LLDBTools.mm; sourceTree = "<group>"; };
-		716271C622DC7C6E00EFCA10 /* SoulHookDylib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoulHookDylib-Prefix.pch"; sourceTree = "<group>"; };
-		716271C822DC7C6E00EFCA10 /* AntiAntiDebug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AntiAntiDebug.m; path = AntiAntiDebug/AntiAntiDebug.m; sourceTree = "<group>"; };
-		716271CB22DC7C6E00EFCA10 /* fishhook.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = fishhook/fishhook.c; sourceTree = "<group>"; };
-		716271CD22DC7C6E00EFCA10 /* fishhook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = fishhook/fishhook.h; sourceTree = "<group>"; };
-		716271CF22DC7C6E00EFCA10 /* SoulHookDylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoulHookDylib.h; sourceTree = "<group>"; };
-		716271D122DC7C6E00EFCA10 /* SoulHookDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoulHookDylib.m; sourceTree = "<group>"; };
-		716271DC22DC7CF400EFCA10 /* SoulHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoulHeader.h; sourceTree = "<group>"; };
-		716271DD22DC7CF500EFCA10 /* SOHookSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookSettingController.h; sourceTree = "<group>"; };
-		716271E022DC7CF500EFCA10 /* SOHookSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookSettingController.m; sourceTree = "<group>"; };
-		716271E622DC7FD200EFCA10 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		71A99C4023B9DCBE0043D2BF /* SoulHook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoulHook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71A99C4323B9DCBE0043D2BF /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		71A99C4523B9DCBE0043D2BF /* quick-resign.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "quick-resign.sh"; sourceTree = "<group>"; };
+		71A99C4723B9DCBE0043D2BF /* MDConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MDConfig.plist; sourceTree = "<group>"; };
+		71A99C4A23B9DCBE0043D2BF /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; path = "put ipa or app here"; sourceTree = "<group>"; };
+		71A99C4B23B9DCBE0043D2BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71A99C5123B9DCBE0043D2BF /* libSoulHookDylib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libSoulHookDylib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		71A99C5623B9DCBE0043D2BF /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		71A99C5823B9DCBE0043D2BF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		71A99C5A23B9DCBE0043D2BF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		71A99C5E23B9DCBE0043D2BF /* SoulHookDylib.xm */ = {isa = PBXFileReference; lastKnownFileType = text; path = SoulHookDylib.xm; sourceTree = "<group>"; };
+		71A99C5F23B9DCBE0043D2BF /* SoulHookDylib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SoulHookDylib.mm; sourceTree = "<group>"; };
+		71A99C6223B9DCBE0043D2BF /* MDConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDConfigManager.h; sourceTree = "<group>"; };
+		71A99C6423B9DCBE0043D2BF /* MDConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDConfigManager.m; sourceTree = "<group>"; };
+		71A99C6623B9DCBE0043D2BF /* MDCycriptManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDCycriptManager.h; sourceTree = "<group>"; };
+		71A99C6823B9DCBE0043D2BF /* MDCycriptManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDCycriptManager.m; sourceTree = "<group>"; };
+		71A99C6A23B9DCBE0043D2BF /* MDMethodTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMethodTrace.h; sourceTree = "<group>"; };
+		71A99C6C23B9DCBE0043D2BF /* MDMethodTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMethodTrace.m; sourceTree = "<group>"; };
+		71A99C6F23B9DCBE0043D2BF /* a1a2-selectortramps-arm.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a1a2-selectortramps-arm.s"; sourceTree = "<group>"; };
+		71A99C7123B9DCBE0043D2BF /* a1a2-selectortramps-arm64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a1a2-selectortramps-arm64.s"; sourceTree = "<group>"; };
+		71A99C7323B9DCBE0043D2BF /* a1a2-selectortramps-i386.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a1a2-selectortramps-i386.s"; sourceTree = "<group>"; };
+		71A99C7523B9DCBE0043D2BF /* a1a2-selectortramps-x86_64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a1a2-selectortramps-x86_64.s"; sourceTree = "<group>"; };
+		71A99C7723B9DCBE0043D2BF /* a2a3-selectortramps-arm.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a2a3-selectortramps-arm.s"; sourceTree = "<group>"; };
+		71A99C7923B9DCBE0043D2BF /* a2a3-selectortramps-i386.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a2a3-selectortramps-i386.s"; sourceTree = "<group>"; };
+		71A99C7B23B9DCBE0043D2BF /* a2a3-selectortramps-x86_64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a2a3-selectortramps-x86_64.s"; sourceTree = "<group>"; };
+		71A99C7D23B9DCBE0043D2BF /* OCMethodTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCMethodTrace.h; sourceTree = "<group>"; };
+		71A99C7F23B9DCBE0043D2BF /* OCMethodTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCMethodTrace.m; sourceTree = "<group>"; };
+		71A99C8123B9DCBE0043D2BF /* OCSelectorTrampolines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCSelectorTrampolines.h; sourceTree = "<group>"; };
+		71A99C8323B9DCBE0043D2BF /* OCSelectorTrampolines.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OCSelectorTrampolines.mm; sourceTree = "<group>"; };
+		71A99C8523B9DCBE0043D2BF /* selectortramps.mac */ = {isa = PBXFileReference; lastKnownFileType = text; path = selectortramps.mac; sourceTree = "<group>"; };
+		71A99C8723B9DCBE0043D2BF /* LLDBTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLDBTools.h; sourceTree = "<group>"; };
+		71A99C8923B9DCBE0043D2BF /* LLDBTools.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LLDBTools.mm; sourceTree = "<group>"; };
+		71A99C8C23B9DCBE0043D2BF /* SoulHookDylib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SoulHookDylib-Prefix.pch"; path = "../SoulHookDylib-Prefix.pch"; sourceTree = "<group>"; };
+		71A99C8E23B9DCBE0043D2BF /* AntiAntiDebug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AntiAntiDebug.m; sourceTree = "<group>"; };
+		71A99C9123B9DCBE0043D2BF /* fishhook.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
+		71A99C9323B9DCBE0043D2BF /* fishhook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
+		71A99C9523B9DCBE0043D2BF /* SoulHookDylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoulHookDylib.h; sourceTree = "<group>"; };
+		71A99C9723B9DCBE0043D2BF /* SoulHookDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoulHookDylib.m; sourceTree = "<group>"; };
+		71A99CA123B9DCE00043D2BF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		71A99CA323B9DD0C0043D2BF /* SOUL-3-13-0.ipa */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOUL-3-13-0.ipa"; sourceTree = "<group>"; };
+		71A99CA423B9DE4E0043D2BF /* SOHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHeader.h; sourceTree = "<group>"; };
+		71A99CA523B9DE4E0043D2BF /* SORobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SORobot.m; sourceTree = "<group>"; };
+		71A99CA623B9DE4E0043D2BF /* SOHookSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookSettingController.m; sourceTree = "<group>"; };
+		71A99CA823B9DE4E0043D2BF /* SOHookAutoReplyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookAutoReplyController.m; sourceTree = "<group>"; };
+		71A99CA923B9DE4E0043D2BF /* SOHookSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookSettingController.h; sourceTree = "<group>"; };
+		71A99CAA23B9DE4E0043D2BF /* SOHookAutoReplyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookAutoReplyController.h; sourceTree = "<group>"; };
+		71A99CAC23B9DE4E0043D2BF /* SORobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SORobot.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7162717422DC7C6E00EFCA10 /* Frameworks */ = {
+		71A99C3A23B9DCBE0043D2BF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7162718822DC7C6E00EFCA10 /* Frameworks */ = {
+		71A99C4E23B9DCBE0043D2BF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7162719122DC7C6E00EFCA10 /* JavaScriptCore.framework in Frameworks */,
-				7162719522DC7C6E00EFCA10 /* UIKit.framework in Frameworks */,
-				7162719322DC7C6E00EFCA10 /* Foundation.framework in Frameworks */,
+				71A99C5723B9DCBE0043D2BF /* JavaScriptCore.framework in Frameworks */,
+				71A99C5B23B9DCBE0043D2BF /* UIKit.framework in Frameworks */,
+				71A99C5923B9DCBE0043D2BF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7162716E22DC7C6E00EFCA10 = {
+		71A99C3423B9DCBE0043D2BF = {
 			isa = PBXGroup;
 			children = (
-				716271E622DC7FD200EFCA10 /* Default-568h@2x.png */,
-				7162717C22DC7C6E00EFCA10 /* SoulHook */,
-				7162719622DC7C6E00EFCA10 /* SoulHookDylib */,
-				7162718F22DC7C6E00EFCA10 /* Frameworks */,
-				7162717B22DC7C6E00EFCA10 /* Products */,
+				71A99CA123B9DCE00043D2BF /* Default-568h@2x.png */,
+				71A99C4223B9DCBE0043D2BF /* SoulHook */,
+				71A99C5C23B9DCBE0043D2BF /* SoulHookDylib */,
+				71A99C5523B9DCBE0043D2BF /* Frameworks */,
+				71A99C4123B9DCBE0043D2BF /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		7162717B22DC7C6E00EFCA10 /* Products */ = {
+		71A99C4123B9DCBE0043D2BF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7162717A22DC7C6E00EFCA10 /* MySOUL.app */,
-				7162718B22DC7C6E00EFCA10 /* libSoulHookDylib.dylib */,
+				71A99C4023B9DCBE0043D2BF /* SoulHook.app */,
+				71A99C5123B9DCBE0043D2BF /* libSoulHookDylib.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7162717C22DC7C6E00EFCA10 /* SoulHook */ = {
+		71A99C4223B9DCBE0043D2BF /* SoulHook */ = {
 			isa = PBXGroup;
 			children = (
-				7162717D22DC7C6E00EFCA10 /* icon.png */,
-				7162718522DC7C6E00EFCA10 /* Info.plist */,
-				7162717E22DC7C6E00EFCA10 /* Scripts */,
-				7162718022DC7C6E00EFCA10 /* Config */,
-				7162718322DC7C6E00EFCA10 /* TargetApp */,
+				71A99C4323B9DCBE0043D2BF /* icon.png */,
+				71A99C4B23B9DCBE0043D2BF /* Info.plist */,
+				71A99C4423B9DCBE0043D2BF /* Scripts */,
+				71A99C4623B9DCBE0043D2BF /* Config */,
+				71A99C4923B9DCBE0043D2BF /* TargetApp */,
 			);
 			path = SoulHook;
 			sourceTree = "<group>";
 		};
-		7162717E22DC7C6E00EFCA10 /* Scripts */ = {
+		71A99C4423B9DCBE0043D2BF /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				7162717F22DC7C6E00EFCA10 /* quick-resign.sh */,
+				71A99C4523B9DCBE0043D2BF /* quick-resign.sh */,
 			);
-			name = Scripts;
+			path = Scripts;
 			sourceTree = "<group>";
 		};
-		7162718022DC7C6E00EFCA10 /* Config */ = {
+		71A99C4623B9DCBE0043D2BF /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				7162718122DC7C6E00EFCA10 /* MDConfig.plist */,
+				71A99C4723B9DCBE0043D2BF /* MDConfig.plist */,
 			);
-			name = Config;
+			path = Config;
 			sourceTree = "<group>";
 		};
-		7162718322DC7C6E00EFCA10 /* TargetApp */ = {
+		71A99C4923B9DCBE0043D2BF /* TargetApp */ = {
 			isa = PBXGroup;
 			children = (
-				7162718422DC7C6E00EFCA10 /* put ipa or app here */,
-				71469BBF238B764A0032A070 /* SOUL-3-13-0.ipa */,
+				71A99CA323B9DD0C0043D2BF /* SOUL-3-13-0.ipa */,
+				71A99C4A23B9DCBE0043D2BF /* put ipa or app here */,
 			);
-			name = TargetApp;
+			path = TargetApp;
 			sourceTree = "<group>";
 		};
-		7162718F22DC7C6E00EFCA10 /* Frameworks */ = {
+		71A99C5523B9DCBE0043D2BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7162719022DC7C6E00EFCA10 /* JavaScriptCore.framework */,
-				7162719222DC7C6E00EFCA10 /* Foundation.framework */,
-				7162719422DC7C6E00EFCA10 /* UIKit.framework */,
+				71A99C5623B9DCBE0043D2BF /* JavaScriptCore.framework */,
+				71A99C5823B9DCBE0043D2BF /* Foundation.framework */,
+				71A99C5A23B9DCBE0043D2BF /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7162719622DC7C6E00EFCA10 /* SoulHookDylib */ = {
+		71A99C5C23B9DCBE0043D2BF /* SoulHookDylib */ = {
 			isa = PBXGroup;
 			children = (
-				716271CF22DC7C6E00EFCA10 /* SoulHookDylib.h */,
-				716271D122DC7C6E00EFCA10 /* SoulHookDylib.m */,
-				716271DD22DC7CF500EFCA10 /* SOHookSettingController.h */,
-				716271E022DC7CF500EFCA10 /* SOHookSettingController.m */,
-				711B154A22DF26E1003B68B8 /* SOHookAutoReplyController.h */,
-				711B154B22DF26E1003B68B8 /* SOHookAutoReplyController.m */,
-				71462E6722E7F77A003A00E2 /* SOHomeHeaderView.h */,
-				71462E6622E7F77A003A00E2 /* SOHomeHeaderView.m */,
-				71469BBB238B74B50032A070 /* SORobot.h */,
-				71469BBC238B74B50032A070 /* SORobot.m */,
-				716271DC22DC7CF400EFCA10 /* SoulHeader.h */,
-				7162719722DC7C6E00EFCA10 /* Logos */,
-				7162719B22DC7C6E00EFCA10 /* Config */,
-				716271A822DC7C6E00EFCA10 /* Trace */,
-				716271C022DC7C6E00EFCA10 /* Tools */,
-				716271C722DC7C6E00EFCA10 /* AntiAntiDebug */,
-				716271CA22DC7C6E00EFCA10 /* fishhook */,
-				716271C522DC7C6E00EFCA10 /* Supporting Files */,
+				71A99C9523B9DCBE0043D2BF /* SoulHookDylib.h */,
+				71A99C9723B9DCBE0043D2BF /* SoulHookDylib.m */,
+				71A99CAA23B9DE4E0043D2BF /* SOHookAutoReplyController.h */,
+				71A99CA823B9DE4E0043D2BF /* SOHookAutoReplyController.m */,
+				71A99CA923B9DE4E0043D2BF /* SOHookSettingController.h */,
+				71A99CA623B9DE4E0043D2BF /* SOHookSettingController.m */,
+				71A99CAC23B9DE4E0043D2BF /* SORobot.h */,
+				71A99CA523B9DE4E0043D2BF /* SORobot.m */,
+				71A99CA423B9DE4E0043D2BF /* SOHeader.h */,
+				71A99C5D23B9DCBE0043D2BF /* Logos */,
+				71A99C6123B9DCBE0043D2BF /* Config */,
+				71A99C6E23B9DCBE0043D2BF /* Trace */,
+				71A99C8623B9DCBE0043D2BF /* Tools */,
+				71A99C8D23B9DCBE0043D2BF /* AntiAntiDebug */,
+				71A99C9023B9DCBE0043D2BF /* fishhook */,
+				71A99C8B23B9DCBE0043D2BF /* Supporting Files */,
 			);
 			path = SoulHookDylib;
 			sourceTree = "<group>";
 		};
-		7162719722DC7C6E00EFCA10 /* Logos */ = {
+		71A99C5D23B9DCBE0043D2BF /* Logos */ = {
 			isa = PBXGroup;
 			children = (
-				7162719822DC7C6E00EFCA10 /* SoulHookDylib.xm */,
-				7162719922DC7C6E00EFCA10 /* SoulHookDylib.mm */,
+				71A99C5E23B9DCBE0043D2BF /* SoulHookDylib.xm */,
+				71A99C5F23B9DCBE0043D2BF /* SoulHookDylib.mm */,
 			);
-			name = Logos;
+			path = Logos;
 			sourceTree = "<group>";
 		};
-		7162719B22DC7C6E00EFCA10 /* Config */ = {
+		71A99C6123B9DCBE0043D2BF /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				7162719C22DC7C6E00EFCA10 /* MDConfigManager.h */,
-				7162719E22DC7C6E00EFCA10 /* MDConfigManager.m */,
-				716271A022DC7C6E00EFCA10 /* MDCycriptManager.h */,
-				716271A222DC7C6E00EFCA10 /* MDCycriptManager.m */,
-				716271A422DC7C6E00EFCA10 /* MDMethodTrace.h */,
-				716271A622DC7C6E00EFCA10 /* MDMethodTrace.m */,
+				71A99C6223B9DCBE0043D2BF /* MDConfigManager.h */,
+				71A99C6423B9DCBE0043D2BF /* MDConfigManager.m */,
+				71A99C6623B9DCBE0043D2BF /* MDCycriptManager.h */,
+				71A99C6823B9DCBE0043D2BF /* MDCycriptManager.m */,
+				71A99C6A23B9DCBE0043D2BF /* MDMethodTrace.h */,
+				71A99C6C23B9DCBE0043D2BF /* MDMethodTrace.m */,
 			);
-			name = Config;
+			path = Config;
 			sourceTree = "<group>";
 		};
-		716271A822DC7C6E00EFCA10 /* Trace */ = {
+		71A99C6E23B9DCBE0043D2BF /* Trace */ = {
 			isa = PBXGroup;
 			children = (
-				716271A922DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s */,
-				716271AB22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s */,
-				716271AD22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s */,
-				716271AF22DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s */,
-				716271B122DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s */,
-				716271B322DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s */,
-				716271B522DC7C6E00EFCA10 /* a2a3-selectortramps-x86_64.s */,
-				716271B722DC7C6E00EFCA10 /* OCMethodTrace.h */,
-				716271B922DC7C6E00EFCA10 /* OCMethodTrace.m */,
-				716271BB22DC7C6E00EFCA10 /* OCSelectorTrampolines.h */,
-				716271BD22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm */,
-				716271BF22DC7C6E00EFCA10 /* selectortramps.mac */,
+				71A99C6F23B9DCBE0043D2BF /* a1a2-selectortramps-arm.s */,
+				71A99C7123B9DCBE0043D2BF /* a1a2-selectortramps-arm64.s */,
+				71A99C7323B9DCBE0043D2BF /* a1a2-selectortramps-i386.s */,
+				71A99C7523B9DCBE0043D2BF /* a1a2-selectortramps-x86_64.s */,
+				71A99C7723B9DCBE0043D2BF /* a2a3-selectortramps-arm.s */,
+				71A99C7923B9DCBE0043D2BF /* a2a3-selectortramps-i386.s */,
+				71A99C7B23B9DCBE0043D2BF /* a2a3-selectortramps-x86_64.s */,
+				71A99C7D23B9DCBE0043D2BF /* OCMethodTrace.h */,
+				71A99C7F23B9DCBE0043D2BF /* OCMethodTrace.m */,
+				71A99C8123B9DCBE0043D2BF /* OCSelectorTrampolines.h */,
+				71A99C8323B9DCBE0043D2BF /* OCSelectorTrampolines.mm */,
+				71A99C8523B9DCBE0043D2BF /* selectortramps.mac */,
 			);
-			name = Trace;
+			path = Trace;
 			sourceTree = "<group>";
 		};
-		716271C022DC7C6E00EFCA10 /* Tools */ = {
+		71A99C8623B9DCBE0043D2BF /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				716271C122DC7C6E00EFCA10 /* LLDBTools.h */,
-				716271C322DC7C6E00EFCA10 /* LLDBTools.mm */,
+				71A99C8723B9DCBE0043D2BF /* LLDBTools.h */,
+				71A99C8923B9DCBE0043D2BF /* LLDBTools.mm */,
 			);
-			name = Tools;
+			path = Tools;
 			sourceTree = "<group>";
 		};
-		716271C522DC7C6E00EFCA10 /* Supporting Files */ = {
+		71A99C8B23B9DCBE0043D2BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				716271C622DC7C6E00EFCA10 /* SoulHookDylib-Prefix.pch */,
+				71A99C8C23B9DCBE0043D2BF /* SoulHookDylib-Prefix.pch */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		716271C722DC7C6E00EFCA10 /* AntiAntiDebug */ = {
+		71A99C8D23B9DCBE0043D2BF /* AntiAntiDebug */ = {
 			isa = PBXGroup;
 			children = (
-				716271C822DC7C6E00EFCA10 /* AntiAntiDebug.m */,
+				71A99C8E23B9DCBE0043D2BF /* AntiAntiDebug.m */,
 			);
-			name = AntiAntiDebug;
+			path = AntiAntiDebug;
 			sourceTree = "<group>";
 		};
-		716271CA22DC7C6E00EFCA10 /* fishhook */ = {
+		71A99C9023B9DCBE0043D2BF /* fishhook */ = {
 			isa = PBXGroup;
 			children = (
-				716271CB22DC7C6E00EFCA10 /* fishhook.c */,
-				716271CD22DC7C6E00EFCA10 /* fishhook.h */,
+				71A99C9123B9DCBE0043D2BF /* fishhook.c */,
+				71A99C9323B9DCBE0043D2BF /* fishhook.h */,
 			);
-			name = fishhook;
+			path = fishhook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7162718922DC7C6E00EFCA10 /* Headers */ = {
+		71A99C4F23B9DCBE0043D2BF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				716271A122DC7C6E00EFCA10 /* MDCycriptManager.h in Headers */,
-				711B154C22DF26E1003B68B8 /* SOHookAutoReplyController.h in Headers */,
-				716271A522DC7C6E00EFCA10 /* MDMethodTrace.h in Headers */,
-				716271CE22DC7C6E00EFCA10 /* fishhook.h in Headers */,
-				716271C222DC7C6E00EFCA10 /* LLDBTools.h in Headers */,
-				7162719D22DC7C6E00EFCA10 /* MDConfigManager.h in Headers */,
-				716271D022DC7C6E00EFCA10 /* SoulHookDylib.h in Headers */,
-				716271E222DC7CF500EFCA10 /* SOHookSettingController.h in Headers */,
-				716271BC22DC7C6E00EFCA10 /* OCSelectorTrampolines.h in Headers */,
-				71469BBD238B74B50032A070 /* SORobot.h in Headers */,
-				716271E122DC7CF500EFCA10 /* SoulHeader.h in Headers */,
-				716271B822DC7C6E00EFCA10 /* OCMethodTrace.h in Headers */,
-				71462E6922E7F77B003A00E2 /* SOHomeHeaderView.h in Headers */,
+				71A99C6723B9DCBE0043D2BF /* MDCycriptManager.h in Headers */,
+				71A99C6B23B9DCBE0043D2BF /* MDMethodTrace.h in Headers */,
+				71A99C9423B9DCBE0043D2BF /* fishhook.h in Headers */,
+				71A99CB323B9DE4E0043D2BF /* SOHookAutoReplyController.h in Headers */,
+				71A99C8823B9DCBE0043D2BF /* LLDBTools.h in Headers */,
+				71A99C6323B9DCBE0043D2BF /* MDConfigManager.h in Headers */,
+				71A99C9623B9DCBE0043D2BF /* SoulHookDylib.h in Headers */,
+				71A99CB223B9DE4E0043D2BF /* SOHookSettingController.h in Headers */,
+				71A99C8223B9DCBE0043D2BF /* OCSelectorTrampolines.h in Headers */,
+				71A99CB523B9DE4E0043D2BF /* SORobot.h in Headers */,
+				71A99CAD23B9DE4E0043D2BF /* SOHeader.h in Headers */,
+				71A99C7E23B9DCBE0043D2BF /* OCMethodTrace.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7162717922DC7C6E00EFCA10 /* SoulHook */ = {
+		71A99C3F23B9DCBE0043D2BF /* SoulHook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 716271D822DC7C6E00EFCA10 /* Build configuration list for PBXNativeTarget "SoulHook" */;
+			buildConfigurationList = 71A99C9E23B9DCBE0043D2BF /* Build configuration list for PBXNativeTarget "SoulHook" */;
 			buildPhases = (
-				7162717322DC7C6E00EFCA10 /* Sources */,
-				7162717422DC7C6E00EFCA10 /* Frameworks */,
-				7162717522DC7C6E00EFCA10 /* ShellScript */,
-				7162717622DC7C6E00EFCA10 /* Resources */,
-				7162717722DC7C6E00EFCA10 /* CopyFiles */,
-				7162717822DC7C6E00EFCA10 /* ShellScript */,
+				71A99C3923B9DCBE0043D2BF /* Sources */,
+				71A99C3A23B9DCBE0043D2BF /* Frameworks */,
+				71A99C3B23B9DCBE0043D2BF /* ShellScript */,
+				71A99C3C23B9DCBE0043D2BF /* Resources */,
+				71A99C3D23B9DCBE0043D2BF /* CopyFiles */,
+				71A99C3E23B9DCBE0043D2BF /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7162718E22DC7C6E00EFCA10 /* PBXTargetDependency */,
+				71A99C5423B9DCBE0043D2BF /* PBXTargetDependency */,
 			);
 			name = SoulHook;
 			productName = SoulHook;
-			productReference = 7162717A22DC7C6E00EFCA10 /* MySOUL.app */;
+			productReference = 71A99C4023B9DCBE0043D2BF /* SoulHook.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7162718A22DC7C6E00EFCA10 /* SoulHookDylib */ = {
+		71A99C5023B9DCBE0043D2BF /* SoulHookDylib */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 716271D522DC7C6E00EFCA10 /* Build configuration list for PBXNativeTarget "SoulHookDylib" */;
+			buildConfigurationList = 71A99C9B23B9DCBE0043D2BF /* Build configuration list for PBXNativeTarget "SoulHookDylib" */;
 			buildPhases = (
-				7162718622DC7C6E00EFCA10 /* ShellScript */,
-				7162718722DC7C6E00EFCA10 /* Sources */,
-				7162718822DC7C6E00EFCA10 /* Frameworks */,
-				7162718922DC7C6E00EFCA10 /* Headers */,
+				71A99C4C23B9DCBE0043D2BF /* ShellScript */,
+				71A99C4D23B9DCBE0043D2BF /* Sources */,
+				71A99C4E23B9DCBE0043D2BF /* Frameworks */,
+				71A99C4F23B9DCBE0043D2BF /* Headers */,
 			);
 			buildRules = (
 			);
@@ -374,27 +367,27 @@
 			);
 			name = SoulHookDylib;
 			productName = SoulHookDylib;
-			productReference = 7162718B22DC7C6E00EFCA10 /* libSoulHookDylib.dylib */;
+			productReference = 71A99C5123B9DCBE0043D2BF /* libSoulHookDylib.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7162716F22DC7C6E00EFCA10 /* Project object */ = {
+		71A99C3523B9DCBE0043D2BF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = fancy;
 				TargetAttributes = {
-					7162717922DC7C6E00EFCA10 = {
-						CreatedOnToolsVersion = 10.2.1;
+					71A99C3F23B9DCBE0043D2BF = {
+						CreatedOnToolsVersion = 11.3;
 					};
-					7162718A22DC7C6E00EFCA10 = {
-						CreatedOnToolsVersion = 10.2.1;
+					71A99C5023B9DCBE0043D2BF = {
+						CreatedOnToolsVersion = 11.3;
 					};
 				};
 			};
-			buildConfigurationList = 7162717222DC7C6E00EFCA10 /* Build configuration list for PBXProject "SoulHook" */;
+			buildConfigurationList = 71A99C3823B9DCBE0043D2BF /* Build configuration list for PBXProject "SoulHook" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -402,31 +395,31 @@
 				en,
 				Base,
 			);
-			mainGroup = 7162716E22DC7C6E00EFCA10;
-			productRefGroup = 7162717B22DC7C6E00EFCA10 /* Products */;
+			mainGroup = 71A99C3423B9DCBE0043D2BF;
+			productRefGroup = 71A99C4123B9DCBE0043D2BF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7162717922DC7C6E00EFCA10 /* SoulHook */,
-				7162718A22DC7C6E00EFCA10 /* SoulHookDylib */,
+				71A99C3F23B9DCBE0043D2BF /* SoulHook */,
+				71A99C5023B9DCBE0043D2BF /* SoulHookDylib */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7162717622DC7C6E00EFCA10 /* Resources */ = {
+		71A99C3C23B9DCBE0043D2BF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7162718222DC7C6E00EFCA10 /* MDConfig.plist in Resources */,
-				716271E722DC7FD200EFCA10 /* Default-568h@2x.png in Resources */,
+				71A99C4823B9DCBE0043D2BF /* MDConfig.plist in Resources */,
+				71A99CA223B9DCE00043D2BF /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7162717522DC7C6E00EFCA10 /* ShellScript */ = {
+		71A99C3B23B9DCBE0043D2BF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -443,7 +436,7 @@
 			shellPath = /bin/sh;
 			shellScript = /opt/MonkeyDev/Tools/pack.sh;
 		};
-		7162717822DC7C6E00EFCA10 /* ShellScript */ = {
+		71A99C3E23B9DCBE0043D2BF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -460,7 +453,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/opt/MonkeyDev/Tools/pack.sh codesign";
 		};
-		7162718622DC7C6E00EFCA10 /* ShellScript */ = {
+		71A99C4C23B9DCBE0043D2BF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -480,53 +473,52 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7162717322DC7C6E00EFCA10 /* Sources */ = {
+		71A99C3923B9DCBE0043D2BF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7162718722DC7C6E00EFCA10 /* Sources */ = {
+		71A99C4D23B9DCBE0043D2BF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				716271A322DC7C6E00EFCA10 /* MDCycriptManager.m in Sources */,
-				716271D222DC7C6E00EFCA10 /* SoulHookDylib.m in Sources */,
-				716271AC22DC7C6E00EFCA10 /* a1a2-selectortramps-arm64.s in Sources */,
-				716271AA22DC7C6E00EFCA10 /* a1a2-selectortramps-arm.s in Sources */,
-				71462E6822E7F77B003A00E2 /* SOHomeHeaderView.m in Sources */,
-				716271B022DC7C6E00EFCA10 /* a1a2-selectortramps-x86_64.s in Sources */,
-				716271BA22DC7C6E00EFCA10 /* OCMethodTrace.m in Sources */,
-				7162719F22DC7C6E00EFCA10 /* MDConfigManager.m in Sources */,
-				716271CC22DC7C6E00EFCA10 /* fishhook.c in Sources */,
-				71469BBE238B74B50032A070 /* SORobot.m in Sources */,
-				716271C922DC7C6E00EFCA10 /* AntiAntiDebug.m in Sources */,
-				711B154D22DF26E1003B68B8 /* SOHookAutoReplyController.m in Sources */,
-				716271BE22DC7C6E00EFCA10 /* OCSelectorTrampolines.mm in Sources */,
-				716271AE22DC7C6E00EFCA10 /* a1a2-selectortramps-i386.s in Sources */,
-				716271B422DC7C6E00EFCA10 /* a2a3-selectortramps-i386.s in Sources */,
-				716271B222DC7C6E00EFCA10 /* a2a3-selectortramps-arm.s in Sources */,
-				716271E522DC7CF500EFCA10 /* SOHookSettingController.m in Sources */,
-				7162719A22DC7C6E00EFCA10 /* SoulHookDylib.mm in Sources */,
-				716271C422DC7C6E00EFCA10 /* LLDBTools.mm in Sources */,
-				716271B622DC7C6E00EFCA10 /* a2a3-selectortramps-x86_64.s in Sources */,
-				716271A722DC7C6E00EFCA10 /* MDMethodTrace.m in Sources */,
+				71A99C6923B9DCBE0043D2BF /* MDCycriptManager.m in Sources */,
+				71A99C9823B9DCBE0043D2BF /* SoulHookDylib.m in Sources */,
+				71A99C7223B9DCBE0043D2BF /* a1a2-selectortramps-arm64.s in Sources */,
+				71A99C7023B9DCBE0043D2BF /* a1a2-selectortramps-arm.s in Sources */,
+				71A99C7623B9DCBE0043D2BF /* a1a2-selectortramps-x86_64.s in Sources */,
+				71A99C8023B9DCBE0043D2BF /* OCMethodTrace.m in Sources */,
+				71A99CAE23B9DE4E0043D2BF /* SORobot.m in Sources */,
+				71A99C6523B9DCBE0043D2BF /* MDConfigManager.m in Sources */,
+				71A99C9223B9DCBE0043D2BF /* fishhook.c in Sources */,
+				71A99C8F23B9DCBE0043D2BF /* AntiAntiDebug.m in Sources */,
+				71A99C8423B9DCBE0043D2BF /* OCSelectorTrampolines.mm in Sources */,
+				71A99C7423B9DCBE0043D2BF /* a1a2-selectortramps-i386.s in Sources */,
+				71A99CB123B9DE4E0043D2BF /* SOHookAutoReplyController.m in Sources */,
+				71A99C7A23B9DCBE0043D2BF /* a2a3-selectortramps-i386.s in Sources */,
+				71A99C7823B9DCBE0043D2BF /* a2a3-selectortramps-arm.s in Sources */,
+				71A99CAF23B9DE4E0043D2BF /* SOHookSettingController.m in Sources */,
+				71A99C6023B9DCBE0043D2BF /* SoulHookDylib.mm in Sources */,
+				71A99C8A23B9DCBE0043D2BF /* LLDBTools.mm in Sources */,
+				71A99C7C23B9DCBE0043D2BF /* a2a3-selectortramps-x86_64.s in Sources */,
+				71A99C6D23B9DCBE0043D2BF /* MDMethodTrace.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7162718E22DC7C6E00EFCA10 /* PBXTargetDependency */ = {
+		71A99C5423B9DCBE0043D2BF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7162718A22DC7C6E00EFCA10 /* SoulHookDylib */;
-			targetProxy = 7162718D22DC7C6E00EFCA10 /* PBXContainerItemProxy */;
+			target = 71A99C5023B9DCBE0043D2BF /* SoulHookDylib */;
+			targetProxy = 71A99C5323B9DCBE0043D2BF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		716271D322DC7C6E00EFCA10 /* Debug */ = {
+		71A99C9923B9DCBE0043D2BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -558,7 +550,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -585,7 +576,7 @@
 			};
 			name = Debug;
 		};
-		716271D422DC7C6E00EFCA10 /* Release */ = {
+		71A99C9A23B9DCBE0043D2BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -617,7 +608,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -638,7 +628,7 @@
 			};
 			name = Release;
 		};
-		716271D622DC7C6E00EFCA10 /* Debug */ = {
+		71A99C9C23B9DCBE0043D2BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -699,7 +689,7 @@
 			};
 			name = Debug;
 		};
-		716271D722DC7C6E00EFCA10 /* Release */ = {
+		71A99C9D23B9DCBE0043D2BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -756,46 +746,44 @@
 			};
 			name = Release;
 		};
-		716271D922DC7C6E00EFCA10 /* Debug */ = {
+		71A99C9F23B9DCBE0043D2BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64DK8BZY68;
+				DEVELOPMENT_TEAM = Z78DQXE2Y3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SoulHook/Info.plist;
-				MARKETING_VERSION = 3.14.0;
 				MONKEYDEV_ADD_SUBSTRATE = YES;
-				MONKEYDEV_CLASS_DUMP = YES;
+				MONKEYDEV_CLASS_DUMP = NO;
 				MONKEYDEV_DEFAULT_BUNDLEID = NO;
 				MONKEYDEV_INSERT_DYLIB = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				MONKEYDEV_TARGET_APP = Optional;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = fantest;
-				PRODUCT_NAME = MySOUL;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mihuashi.test;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		716271DA22DC7C6E00EFCA10 /* Release */ = {
+		71A99CA023B9DCBE0043D2BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64DK8BZY68;
+				DEVELOPMENT_TEAM = Z78DQXE2Y3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SoulHook/Info.plist;
-				MARKETING_VERSION = 3.14.0;
 				MONKEYDEV_ADD_SUBSTRATE = YES;
-				MONKEYDEV_CLASS_DUMP = YES;
+				MONKEYDEV_CLASS_DUMP = NO;
 				MONKEYDEV_DEFAULT_BUNDLEID = NO;
 				MONKEYDEV_INSERT_DYLIB = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				MONKEYDEV_TARGET_APP = Optional;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = fantest;
-				PRODUCT_NAME = MySOUL;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mihuashi.test;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -803,34 +791,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7162717222DC7C6E00EFCA10 /* Build configuration list for PBXProject "SoulHook" */ = {
+		71A99C3823B9DCBE0043D2BF /* Build configuration list for PBXProject "SoulHook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				716271D322DC7C6E00EFCA10 /* Debug */,
-				716271D422DC7C6E00EFCA10 /* Release */,
+				71A99C9923B9DCBE0043D2BF /* Debug */,
+				71A99C9A23B9DCBE0043D2BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		716271D522DC7C6E00EFCA10 /* Build configuration list for PBXNativeTarget "SoulHookDylib" */ = {
+		71A99C9B23B9DCBE0043D2BF /* Build configuration list for PBXNativeTarget "SoulHookDylib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				716271D622DC7C6E00EFCA10 /* Debug */,
-				716271D722DC7C6E00EFCA10 /* Release */,
+				71A99C9C23B9DCBE0043D2BF /* Debug */,
+				71A99C9D23B9DCBE0043D2BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		716271D822DC7C6E00EFCA10 /* Build configuration list for PBXNativeTarget "SoulHook" */ = {
+		71A99C9E23B9DCBE0043D2BF /* Build configuration list for PBXNativeTarget "SoulHook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				716271D922DC7C6E00EFCA10 /* Debug */,
-				716271DA22DC7C6E00EFCA10 /* Release */,
+				71A99C9F23B9DCBE0043D2BF /* Debug */,
+				71A99CA023B9DCBE0043D2BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7162716F22DC7C6E00EFCA10 /* Project object */;
+	rootObject = 71A99C3523B9DCBE0043D2BF /* Project object */;
 }

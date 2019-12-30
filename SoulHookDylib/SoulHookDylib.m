@@ -4,7 +4,7 @@
 //  SoulHookDylib.m
 //  SoulHookDylib
 //
-//  Created by 月成 on 2019/7/15.
+//  Created by 月成 on 2019/12/30.
 //  Copyright (c) 2019 fancy. All rights reserved.
 //
 
@@ -13,8 +13,7 @@
 #import <UIKit/UIKit.h>
 #import <Cycript/Cycript.h>
 #import <MDCycriptManager.h>
-#import "SoulHeader.h"
-#import "SOHomeHeaderView.h"
+#import "SOHeader.h"
 #import "SORobot.h"
 
 CHConstructor{
@@ -389,52 +388,16 @@ CHOptimizedMethod1(self, void, ChatTransCenter, receiveMessage, NSArray *, arg1)
                 text = @"你好，我现在不方便回消息";
             }
             
-            Class soBuildMessageManager = NSClassFromString(@"SOBuildMessageManager");
-            SEL build = NSSelectorFromString(@"buildTextIMMessage:to:senstive:messageExt:");
-            IMP buildImp = [soBuildMessageManager methodForSelector:build];
-            id (*func1)(id, SEL, NSString *, NSString *, int, id) = (void *)buildImp;
-            id msg = func1(soBuildMessageManager, build, text, msgCommand.from, 0, nil);
-            
-            Class nbIMService = NSClassFromString(@"NBIMService");
-            SEL instance = NSSelectorFromString(@"sharedInstance");
-            IMP instanceImp = [nbIMService methodForSelector:instance];
-            id (*func2)(id, SEL) = (void *)instanceImp;
-            id manager = func2(nbIMService, instance);
-            
-            ChatTransCenter *chatCenter = [manager valueForKey:@"chatCenter"];
-            
-            dispatch_block_t block = ^(){
-                NSLog(@"自动回复成功");
-            };
-            
-            [chatCenter sendCommandsMessage:msg completion:block];
+            [SOIMManager sendText:text toUser:msgCommand.from finished:nil];
         }
     } else if (enable3) {
         if ((msgCommand.type == 0 && msgCommand.textMsg.text.length) || msgCommand.type == 1 || msgCommand.type == 3 || msgCommand.type == 4 || msgCommand.type == 7) {
-            
-            Class soBuildMessageManager = NSClassFromString(@"SOBuildMessageManager");
-            SEL build = NSSelectorFromString(@"buildTextIMMessage:to:senstive:messageExt:");
-            IMP buildImp = [soBuildMessageManager methodForSelector:build];
-            id (*func1)(id, SEL, NSString *, NSString *, int, id) = (void *)buildImp;
-            Class nbIMService = NSClassFromString(@"NBIMService");
-            SEL instance = NSSelectorFromString(@"sharedInstance");
-            IMP instanceImp = [nbIMService methodForSelector:instance];
-            id (*func2)(id, SEL) = (void *)instanceImp;
-            id manager = func2(nbIMService, instance);
-
-            ChatTransCenter *chatCenter = [manager valueForKey:@"chatCenter"];
-            
+ 
             if (msgCommand.type == 0 && msgCommand.textMsg.text.length) {
                  [SORobot answerWithKey:msgCommand.textMsg.text finished:^(NSString * _Nonnull answer, NSError * _Nonnull error) {
                      NSString *text = answer ? answer : @"本机器人好像出了一点问题";
                 
-                     id msg = func1(soBuildMessageManager, build, text, msgCommand.from, 0, nil);
-
-                     dispatch_block_t block = ^(){
-                         NSLog(@"机器人回复成功");
-                     };
-
-                     [chatCenter sendCommandsMessage:msg completion:block];
+                     [SOIMManager sendText:text toUser:msgCommand.from finished:nil];
                  }];
             } else {
                 NSString *text = @"";
@@ -454,14 +417,8 @@ CHOptimizedMethod1(self, void, ChatTransCenter, receiveMessage, NSArray *, arg1)
                     
                     text = arr[i];
                 }
-                
-                id msg = func1(soBuildMessageManager, build, text, msgCommand.from, 0, nil);
-
-                dispatch_block_t block = ^(){
-                    NSLog(@"机器人回复成功");
-                };
-
-                [chatCenter sendCommandsMessage:msg completion:block];
+            
+                [SOIMManager sendText:text toUser:msgCommand.from finished:nil];
             }
         }
     }
@@ -1077,6 +1034,66 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
 
 CHDeclareClass(SOPrivateChatViewController)
 
+CHOptimizedMethod0(self, void, SOPrivateChatViewController, viewDidLoad) {
+    CHSuper0(SOPrivateChatViewController, viewDidLoad);
+    
+    UIButton *button = [self.customNavBar viewWithTag:999];
+    if (!button) {
+        button = [[UIButton alloc] initWithFrame:CGRectMake(60, [UIApplication sharedApplication].statusBarFrame.size.height + 11, 50, 22)];
+        button.tag = 999;
+        button.layer.cornerRadius = 11;
+        button.layer.masksToBounds = YES;
+        button.backgroundColor = [UIColor redColor];
+        button.titleLabel.font = [UIFont boldSystemFontOfSize:13];
+        [button setTitle:@"轰炸" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(boomAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.customNavBar addSubview:button];
+    }
+}
+
+CHDeclareMethod1(void, SOPrivateChatViewController, boomAction, UIButton *, arg1) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入文本及消息次数" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+       }];
+       
+    __weak __typeof(self)weakSelf = self;
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [alert dismissViewControllerAnimated:YES completion:nil];
+        UITextField *textField1 = alert.textFields[0];
+        UITextField *textField2 = alert.textFields[1];
+        
+        NSInteger count = [textField2.text intValue];
+        
+        if (count && textField1.text.length) {
+            for (NSInteger i = 0; i < count; i++) {
+                [SOIMManager sendText:textField1.text toUser:strongSelf.chatId finished:nil];
+            }
+            
+            UIAlertController *tip = [UIAlertController alertControllerWithTitle:@"轰炸结束" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [strongSelf presentViewController:tip animated:YES completion:nil];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [tip dismissViewControllerAnimated:YES completion:nil];
+            });
+        }
+    }];
+
+    [alert addAction:cancelAction];
+    [alert addAction:okAction];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+         textField.placeholder = @"自动回复文本";
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+         textField.placeholder = @"轰炸次数";
+    }];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 CHMethod1(void, SOPrivateChatViewController, _showMenuViewIndexPath, NSIndexPath *, arg1) {
     CHSuper1(SOPrivateChatViewController, _showMenuViewIndexPath, arg1);
     
@@ -1140,60 +1157,6 @@ CHOptimizedClassMethod1(self, id, SoulUtils, makeWatermarkPhotoImageWithImage, i
     }
     return CHSuper1(SoulUtils, makeWatermarkPhotoImageWithImage, arg1);
 }
-
-//CHDeclareClass(FeelingViewController)
-
-//CHOptimizedMethod0(self, void, FeelingViewController, viewDidLoad) {
-//    CHSuper0(FeelingViewController, viewDidLoad);
-//
-//    [self.tableView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if ([obj isKindOfClass:NSClassFromString(@"MXParallaxView")]) {
-//            [obj removeFromSuperview];
-//            *stop = YES;
-//        }
-//    }];
-//
-//    SOHomeHeaderView *header = [[SOHomeHeaderView alloc] init];
-//
-//    header.bgBlock = ^{
-//        [self updateBgImageView:nil];
-//    };
-//
-//    header.avatarBlock = ^{
-//        [self updateHeadImageView:nil bgHeadColor:nil];
-//    };
-//
-//    header.nameBlock = ^{
-//        [self updateMeSignature:nil];
-//    };
-//
-//
-//    header.kkBlock = ^{
-//        [self kuakuaWellDidTap];
-//    };
-//
-//    header.visitBlock = ^{
-//        [self myMeetingViewDidTap];
-//    };
-//
-//    header.tagBlock = ^{
-//        [self clickHiddenTag];
-//    };
-//
-//    header.frame = CGRectMake(0, 0, self.view.bounds.size.width, [header sizeThatFits:CGSizeMake(self.view.bounds.size.width, MAXFLOAT)].height);
-//
-//    self.tableView.contentInset = UIEdgeInsetsZero;
-//    self.tableView.clipsToBounds = NO;
-//    self.tableView.tableHeaderView = header;
-//
-//}
-
-//CHOptimizedMethod1(self, void, FeelingViewController, scrollViewDidScroll, UITableView *, scrollView) {
-//    SOHomeHeaderView *header = (SOHomeHeaderView *)self.tableView.tableHeaderView;
-//    [header configViewWithOffset:scrollView.contentOffset.y];
-//
-//    //    CHSuper1(FeelingViewController, scrollViewDidScroll, scrollView);
-//}
 
 CHDeclareClass(StrangerViewController)
 
@@ -1477,11 +1440,7 @@ CHConstructor {
     CHLoadLateClass(StrangerViewController);
     CHHook0(StrangerViewController, viewDidLoad);
     CHHook0(StrangerViewController, endRefresh);
-    
-//    CHLoadLateClass(FeelingViewController);
-//    CHHook0(FeelingViewController, viewDidLoad);
-//    CHHook1(FeelingViewController, scrollViewDidScroll);
-    
+ 
     CHLoadLateClass(SoulUtils);
     CHClassHook2(SoulUtils, makeWatermarkPhotoImageWithImage, watermark);
     CHClassHook1(SoulUtils, makeWatermarkPhotoImageWithImage);
@@ -1490,6 +1449,7 @@ CHConstructor {
     CHHook0(NewTabBarController, viewDidLoad);
     
     CHLoadLateClass(SOPrivateChatViewController);
+    CHHook0(SOPrivateChatViewController, viewDidLoad);
     CHHook1(SOPrivateChatViewController, _showMenuViewIndexPath);
     
     CHLoadLateClass(AFHTTPSessionManager);
@@ -1578,8 +1538,7 @@ CHConstructor {
     
     CHLoadLateClass(SOMovieVC);
     CHHook0(SOMovieVC, viewDidLoad);
-    
-    
+
     CHLoadLateClass(SOReleaseViewController);
     CHHook1(SOReleaseViewController, tagEditContainerViewDidLocationItemClick);
 }

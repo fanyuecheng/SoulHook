@@ -1,5 +1,5 @@
 //
-//  SoulHeader.h
+//  SOHeader.h
 //  SoulHook
 //
 //  Created by 月成 on 2019/6/24.
@@ -436,10 +436,12 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 {
     UIMenuItem *_revokeflagMenuItem;
 }
-
-@property (strong, nonatomic) UIMenuController *menuController;
+@property (nonatomic, copy)   NSString *chatId; //对方id
+@property (nonatomic, strong) UIView *customNavBar; //SAPrivateChatNavBar
+@property (nonatomic, strong) UIMenuController *menuController;
 
 - (void)_showMenuViewIndexPath:(id)arg1;
+- (void)boomAction:(UIButton *)sender;
 
 @end
 
@@ -474,7 +476,8 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 @property (nonatomic, strong) id nav; //SOCustomNav;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UITableView *tableView;
-@property (strong, nonatomic) NSDictionary *avatarModel;  //暂存数据用
+@property (nonatomic, strong) NSDictionary *avatarModel;  //暂存数据用
+@property (nonatomic, copy)   NSString *userID;
 
 - (void)filterAction:(UIButton *)sender;
 - (void)endRefresh;

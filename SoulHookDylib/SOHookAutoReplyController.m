@@ -258,6 +258,35 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+- (void)goIdAcion:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"输入对方ID" message:nil preferredStyle:UIAlertControllerStyleAlert];
+      
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+ 
+    __weak __typeof(self)weakSelf = self;
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [alertController dismissViewControllerAnimated:YES completion:nil];
+        UITextField *textField = alertController.textFields[0];
+
+        if (textField.text.length) {
+            Class clz = NSClassFromString(@"StrangerViewController");
+            UIViewController *vc = (UIViewController *)[clz new];
+            [vc setValue:textField.text forKey:@"userID"];
+            [strongSelf.navigationController pushViewController:vc animated:YES];
+        }
+    }];
+
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+      textField.placeholder = @"对方ID";
+    }];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
+
 #pragma mark - Get
 - (UITableView *)tableView {
     if (!_tableView) {
@@ -265,6 +294,12 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 50;
+        
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
+        [button setTitle:@"去指定用户主页" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(goIdAcion:) forControlEvents:UIControlEventTouchUpInside];
+        _tableView.tableHeaderView = button;
         _tableView.tableFooterView = [UIView new];
         
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];

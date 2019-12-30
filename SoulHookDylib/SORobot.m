@@ -7,6 +7,7 @@
 //
 
 #import "SORobot.h"
+#import "SOHeader.h"
 
 #define SO_TOBOT_HOST        @"http://i.itpk.cn/api.php"
 #define SO_TOBOT_API_KEY     @"7ab9524762524779626e9a04ef83bff7"
@@ -77,6 +78,40 @@
                            finished:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
         !finished ? : finished(responseObject, error);
     }];
+}
+
+@end
+
+@implementation SOIMManager
+
++ (void)sendText:(NSString *)text
+          toUser:(NSString *)userId
+        finished:(void (^)(void))finished {
+    
+    if (!text.length || !userId.length) {
+        return;
+    }
+    
+    Class soBuildMessageManager = NSClassFromString(@"SOBuildMessageManager");
+    SEL build = NSSelectorFromString(@"buildTextIMMessage:to:senstive:messageExt:");
+    IMP buildImp = [soBuildMessageManager methodForSelector:build];
+    id (*func1)(id, SEL, NSString *, NSString *, int, id) = (void *)buildImp;
+    id msg = func1(soBuildMessageManager, build, text, userId, 0, nil);
+               
+    Class nbIMService = NSClassFromString(@"NBIMService");
+    SEL instance = NSSelectorFromString(@"sharedInstance");
+    IMP instanceImp = [nbIMService methodForSelector:instance];
+    id (*func2)(id, SEL) = (void *)instanceImp;
+    id manager = func2(nbIMService, instance);
+               
+    ChatTransCenter *chatCenter = [manager valueForKey:@"chatCenter"];
+               
+    dispatch_block_t block = ^(){
+        NSLog(@"发送成功");
+        !finished ? : finished();
+    };
+               
+    [chatCenter sendCommandsMessage:msg completion:block];
 }
 
 @end
