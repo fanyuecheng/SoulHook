@@ -1273,7 +1273,7 @@ CHOptimizedMethod0(self, void, SOWebItemViewController, viewDidLoad) {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_CUSTOM_SWITCH];
         
-        if (enable && [self.model.url isEqualToString:@"avatar/#/own/create"]) {
+        if (enable && ([self.model.url isEqualToString:@"avatar/#/own/create"] || [self.model.url isEqualToString:@"avatar/#/ta/create"])) {
             UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 175, [UIApplication sharedApplication].statusBarFrame.size.height + 14, 80, 36)];
             button.backgroundColor = SO_THEME_COLOR;
             button.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:15];
