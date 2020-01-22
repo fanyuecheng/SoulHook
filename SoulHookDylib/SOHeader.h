@@ -524,4 +524,10 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 
 @end
 
+@interface SoulChatLimitGiftViewController : UIViewController
+
+- (void)clickCancelButtonAction:(id)arg1;
+
+@end
+
 NS_ASSUME_NONNULL_END

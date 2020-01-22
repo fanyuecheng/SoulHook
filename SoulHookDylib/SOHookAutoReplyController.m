@@ -295,11 +295,23 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 50;
         
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
-        [button setTitle:@"去指定用户主页" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(goIdAcion:) forControlEvents:UIControlEventTouchUpInside];
-        _tableView.tableHeaderView = button;
+        CGFloat w = [UIScreen mainScreen].bounds.size.width;
+        
+        UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, w * 0.5, 50)];
+        [button1 setTitle:@"去指定用户主页" forState:UIControlStateNormal];
+        [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button1 addTarget:self action:@selector(goIdAcion:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(w * 0.5, 0, w * 0.5, 50)];
+        [button2 setTitle:@"自定义匹配度" forState:UIControlStateNormal];
+        [button2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button2 addTarget:self action:@selector(valueAcion:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, w, 50)];
+        [header addSubview:button1];
+        [header addSubview:button2];
+        
+        _tableView.tableHeaderView = header;
         _tableView.tableFooterView = [UIView new];
         
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];

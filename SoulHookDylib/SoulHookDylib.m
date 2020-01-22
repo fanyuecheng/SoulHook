@@ -1002,6 +1002,27 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
             }
         }
         
+        if ([URLString containsString:@"getMatchValue"]) {
+            responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+            
+            CGFloat value =  [[NSUserDefaults standardUserDefaults] floatForKey:SOUL_HOOK_MATCH_VALUE];
+            
+            if (value) {
+                responseObject[@"data"] = @{@"value" : [NSString stringWithFormat:@"%.2f", (value / 100)]};
+            }
+        }
+        
+        if ([URLString containsString:@"user/chatCard/info"]) {
+            responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+            
+            CGFloat value =  [[NSUserDefaults standardUserDefaults] floatForKey:SOUL_HOOK_MATCH_VALUE];
+            
+            if (value) {
+                NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:responseObject[@"data"]];
+                data[@"matchDegree"] = @(value);
+                responseObject[@"data"] = data;
+            }
+        }
         
         !success ? : success(task, responseObject);
     };
@@ -1427,7 +1448,16 @@ CHOptimizedMethod2(self, UITableViewCell *, SOPersonalInfoVC, tableView, UITable
     return cell;
 }
 
+CHDeclareClass(SoulChatLimitGiftViewController)
+
+CHOptimizedMethod1(self, void, SoulChatLimitGiftViewController, clickCancelButtonAction, id, arg1) {
+    [self.view removeFromSuperview];
+}
+
 CHConstructor {
+    CHLoadLateClass(SoulChatLimitGiftViewController);
+    CHHook1(SoulChatLimitGiftViewController, clickCancelButtonAction);
+    
     //设置个人信息 - 旧版头像
     CHLoadLateClass(SOPersonalInfoVC);
     CHHook2(SOPersonalInfoVC, tableView, numberOfRowsInSection);
