@@ -287,6 +287,31 @@
     
 }
 
+- (void)valueAcion:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"匹配值" message:nil preferredStyle:UIAlertControllerStyleAlert];
+         
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+       
+        [alertController dismissViewControllerAnimated:YES completion:nil];
+        UITextField *textField = alertController.textFields[0];
+
+        if (textField.text.length) {
+            [[NSUserDefaults standardUserDefaults] setDouble:[textField.text doubleValue] forKey:SOUL_HOOK_MATCH_VALUE];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }];
+
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"0 ~ 100";
+    }];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 #pragma mark - Get
 - (UITableView *)tableView {
     if (!_tableView) {
