@@ -1068,16 +1068,24 @@ CHDeclareMethod1(void, SOPrivateChatViewController, boomAction, UIButton *, arg1
         NSInteger count = [textField2.text intValue];
         
         if (count && textField1.text.length) {
+            __block NSInteger time = 0;
             for (NSInteger i = 0; i < count; i++) {
-                [SOIMManager sendText:textField1.text toUser:strongSelf.chatId finished:nil];
+                CGFloat delay = 0.03 * i;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [SOIMManager sendText:textField1.text toUser:strongSelf.chatId finished:^{
+                        time ++;
+                        
+                        if (time == count) {
+                            UIAlertController *tip = [UIAlertController alertControllerWithTitle:@"轰炸结束" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                            [strongSelf presentViewController:tip animated:YES completion:nil];
+                            
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                [tip dismissViewControllerAnimated:YES completion:nil];
+                            });
+                        }
+                    }];
+                });
             }
-            
-            UIAlertController *tip = [UIAlertController alertControllerWithTitle:@"轰炸结束" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            [strongSelf presentViewController:tip animated:YES completion:nil];
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [tip dismissViewControllerAnimated:YES completion:nil];
-            });
         }
     }];
 
