@@ -1017,7 +1017,7 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
             
             CGFloat value =  [[NSUserDefaults standardUserDefaults] floatForKey:SOUL_HOOK_MATCH_VALUE];
             
-            if (value) {
+            if (value && responseObject[@"data"]) {
                 NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:responseObject[@"data"]];
                 data[@"matchDegree"] = @(value);
                 responseObject[@"data"] = data;
