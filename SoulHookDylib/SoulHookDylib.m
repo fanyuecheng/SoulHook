@@ -341,6 +341,22 @@ CHOptimizedMethod1(self, void, ChatTransCenter, receiveMessage, NSArray *, arg1)
     BOOL enable1 = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AUTO_REPLY_ALL_SWITCH];
     BOOL enable2 = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AUTO_REPLY_KEY_SWITCH];
     BOOL enable3 = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_ROBOT_SWITCH];
+    BOOL enable4 = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AUTO_READ_KEY_SWITCH];
+    
+    if (enable4) {
+        if (msgCommand.type == 1 ||
+        msgCommand.type == 3 ||
+        msgCommand.type == 4 ||
+        msgCommand.type == 11 ||
+        msgCommand.type == 12 ||
+        msgCommand.type == 29 ||
+            (msgCommand.type == 0 && msgCommand.textMsg.text.length)) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SOIMManager sendRead:msg.cmdId toUser:msg.soulId finished:nil];
+            });
+        }
+    }
+    
     if (enable1 || enable2) {
         if (msgCommand.type == 1 ||
             msgCommand.type == 3 ||

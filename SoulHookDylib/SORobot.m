@@ -114,4 +114,34 @@
     [chatCenter sendCommandsMessage:msg completion:block];
 }
 
++ (void)sendRead:(NSString *)cmdId
+          toUser:(NSString *)userId
+        finished:(nullable void (^)(void))finished {
+    
+    if (!cmdId || !userId) {
+        return;
+    }
+    
+    Class soBuildMessageManager = NSClassFromString(@"SOBuildMessageManager");
+    SEL build = NSSelectorFromString(@"buildSingleReadIMMessageTo:targetId:messageExt:");
+    IMP buildImp = [soBuildMessageManager methodForSelector:build];
+    id (*func1)(id, SEL, NSString *, NSString *, id) = (void *)buildImp;
+    id msg = func1(soBuildMessageManager, build, userId, cmdId, nil);
+    
+    Class nbIMService = NSClassFromString(@"NBIMService");
+    SEL instance = NSSelectorFromString(@"sharedInstance");
+    IMP instanceImp = [nbIMService methodForSelector:instance];
+    id (*func2)(id, SEL) = (void *)instanceImp;
+    id manager = func2(nbIMService, instance);
+               
+    ChatTransCenter *chatCenter = [manager valueForKey:@"chatCenter"];
+               
+    dispatch_block_t block = ^(){
+        NSLog(@"发送成功");
+        !finished ? : finished();
+    };
+               
+    [chatCenter sendCommandsMessage:msg completion:block];
+}
+
 @end

@@ -39,6 +39,10 @@ typedef NS_ENUM(NSUInteger, SONetworkingMethod) {
           toUser:(NSString *)userId
         finished:(nullable void (^)(void))finished;
 
++ (void)sendRead:(NSString *)cmdId
+          toUser:(NSString *)userId
+        finished:(nullable void (^)(void))finished;
+
 @end
 
 NS_ASSUME_NONNULL_END
