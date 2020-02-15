@@ -1042,6 +1042,15 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
             }
         }
         
+        if ([URLString containsString:@"post/detail"]) {
+            responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+                    
+            NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:responseObject[@"data"]];
+                data[@"officialTag"] = [NSNull null];
+        
+            responseObject[@"data"] = data;
+        }
+        
         !success ? : success(task, responseObject);
     };
     
@@ -1174,6 +1183,34 @@ CHOptimizedMethod0(self, void, NewTabBarController, viewDidLoad) {
             
             if (title.length) {
                 obj.title = title;
+            }
+        }];
+        
+        NSArray *subViews = self.tabBar.subviews;
+        
+        [subViews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[UIImageView class]] && obj.bounds.size.height == 46 && obj.bounds.size.width == 46) {
+                UIImageView *imageView = (UIImageView *)obj;
+                
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 46, 46)];
+                label.layer.cornerRadius = 23;
+                label.layer.masksToBounds = YES;
+                label.font = [UIFont systemFontOfSize:12];
+                label.textColor = [UIColor whiteColor];
+                label.numberOfLines = 0;
+                label.textAlignment = NSTextAlignmentCenter;
+                label.backgroundColor = SO_THEME_COLOR;
+                label.text = @"开始\n装逼";
+                
+                UIGraphicsBeginImageContextWithOptions(CGSizeMake(46, 46), NO, 0);
+                CGContextRef context = UIGraphicsGetCurrentContext();
+                [label.layer renderInContext:context];
+                UIImage *imageOut = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+
+                imageView.image = imageOut;
+        
+                *stop = YES;
             }
         }];
     });
