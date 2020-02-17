@@ -1045,10 +1045,12 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
         if ([URLString containsString:@"post/detail"]) {
             responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
                     
-            NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:responseObject[@"data"]];
+            if (responseObject[@"data"] && [responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {
+                NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:responseObject[@"data"]];
                 data[@"officialTag"] = [NSNull null];
-        
-            responseObject[@"data"] = data;
+                 
+                responseObject[@"data"] = data;
+            }
         }
         
         !success ? : success(task, responseObject);
