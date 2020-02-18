@@ -1523,21 +1523,9 @@ CHOptimizedMethod0(self, long long, SOPost, officialTag) {
     return 0;
 }
 
-CHOptimizedMethod0(self, NSString *, SOPost, content) {
-    NSString *contentStr = CHSuper0(SOPost, content);
-    
-    if ([contentStr containsString:@"<officialTag>"]) {
-        contentStr = [[contentStr stringByReplacingOccurrencesOfString:@"<officialTag>" withString:@""] stringByReplacingOccurrencesOfString:@"</officialTag>" withString:@" "];
-        
-        return contentStr;
-    }
-    return contentStr;
-}
-
 CHConstructor {
     CHLoadLateClass(SOPost);
     CHHook0(SOPost, officialTag);
-    CHHook0(SOPost, content);
     
     CHLoadLateClass(SoulChatLimitGiftViewController);
     CHHook1(SoulChatLimitGiftViewController, clickCancelButtonAction);
