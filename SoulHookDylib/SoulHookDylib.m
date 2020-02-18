@@ -1042,6 +1042,7 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
             }
         }
         
+        /* 直接修改SOPost的值 不在此处修改
         if ([URLString containsString:@"post/detail"]) {
             responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
                     
@@ -1052,6 +1053,7 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
                 responseObject[@"data"] = data;
             }
         }
+         */
         
         !success ? : success(task, responseObject);
     };
@@ -1508,10 +1510,35 @@ CHOptimizedMethod2(self, UITableViewCell *, SOPersonalInfoVC, tableView, UITable
 CHDeclareClass(SoulChatLimitGiftViewController)
 
 CHOptimizedMethod1(self, void, SoulChatLimitGiftViewController, clickCancelButtonAction, id, arg1) {
-    [self.view removeFromSuperview];
+     self.cancelBlock = ^{
+           NSLog(@"取消送礼");
+       };
+       
+    CHSuper1(SoulChatLimitGiftViewController, clickCancelButtonAction, arg1);
+}
+
+CHDeclareClass(SOPost)
+ 
+CHOptimizedMethod0(self, long long, SOPost, officialTag) {
+    return 0;
+}
+
+CHOptimizedMethod0(self, NSString *, SOPost, content) {
+    NSString *contentStr = CHSuper0(SOPost, content);
+    
+    if ([contentStr containsString:@"<officialTag>"]) {
+        contentStr = [[contentStr stringByReplacingOccurrencesOfString:@"<officialTag>" withString:@""] stringByReplacingOccurrencesOfString:@"</officialTag>" withString:@" "];
+        
+        return contentStr;
+    }
+    return contentStr;
 }
 
 CHConstructor {
+    CHLoadLateClass(SOPost);
+    CHHook0(SOPost, officialTag);
+    CHHook0(SOPost, content);
+    
     CHLoadLateClass(SoulChatLimitGiftViewController);
     CHHook1(SoulChatLimitGiftViewController, clickCancelButtonAction);
     

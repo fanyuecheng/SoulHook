@@ -526,7 +526,15 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 
 @interface SoulChatLimitGiftViewController : UIViewController
 
+@property(nonatomic, copy) void (^cancelBlock)(void);
 - (void)clickCancelButtonAction:(id)arg1;
+
+@end
+
+@interface SOPost : NSObject
+
+@property (nonatomic, assign) long long officialTag;
+@property (nonatomic, copy)   NSString *content;
 
 @end
 
