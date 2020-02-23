@@ -1510,9 +1510,9 @@ CHOptimizedMethod2(self, UITableViewCell *, SOPersonalInfoVC, tableView, UITable
 CHDeclareClass(SoulChatLimitGiftViewController)
 
 CHOptimizedMethod1(self, void, SoulChatLimitGiftViewController, clickCancelButtonAction, id, arg1) {
-     self.cancelBlock = ^{
-           NSLog(@"取消送礼");
-       };
+    self.cancelBlock = ^{
+        NSLog(@"取消送礼");
+    };
        
     CHSuper1(SoulChatLimitGiftViewController, clickCancelButtonAction, arg1);
 }
@@ -1523,7 +1523,20 @@ CHOptimizedMethod0(self, long long, SOPost, officialTag) {
     return 0;
 }
 
+CHDeclareClass(SOTopicInfoViewController)
+ 
+CHOptimizedMethod0(self, void, SOTopicInfoViewController, viewDidLoad) {
+    CHSuper0(SOTopicInfoViewController, viewDidLoad);
+    
+    self.deletePostBlock = ^{
+        NSLog(@"删除瞬间");
+    };
+}
+
 CHConstructor {
+    CHLoadLateClass(SOTopicInfoViewController);
+    CHHook0(SOTopicInfoViewController, viewDidLoad);
+    
     CHLoadLateClass(SOPost);
     CHHook0(SOPost, officialTag);
     

@@ -538,4 +538,10 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 
 @end
 
+@interface SOTopicInfoViewController : UIViewController
+
+@property(nonatomic, copy) void (^deletePostBlock)(void);
+
+@end
+
 NS_ASSUME_NONNULL_END
