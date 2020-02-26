@@ -311,7 +311,11 @@ CHOptimizedMethod2(self, void, ChatTransCenter, sendCommandsMessage, SoulIMMessa
     
     if (read) {
         if (arg1.type == 321) {
-            return;
+            NSArray *list = [[NSUserDefaults standardUserDefaults] arrayForKey:SOUL_HOOK_WHITE_LIST];
+            
+            if (![list containsObject:arg1.toUid]) {
+                return;
+            }
         }
     }
     
@@ -1099,60 +1103,91 @@ CHOptimizedMethod0(self, void, SOPrivateChatViewController, viewDidLoad) {
         button.titleLabel.font = [UIFont boldSystemFontOfSize:13];
         [button setTitle:@"轰炸" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(boomAction:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.customNavBar addSubview:button];
     }
 }
 
-CHDeclareMethod1(void, SOPrivateChatViewController, boomAction, UIButton *, arg1) {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入文本及消息次数" message:nil preferredStyle:UIAlertControllerStyleAlert];
+CHDeclareMethod1(void, SOPrivateChatViewController, moreAction, UIButton *, arg1) {
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-       }];
-       
-    __weak __typeof(self)weakSelf = self;
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        [alert dismissViewControllerAnimated:YES completion:nil];
-        UITextField *textField1 = alert.textFields[0];
-        UITextField *textField2 = alert.textFields[1];
-        
-        NSInteger count = [textField2.text intValue];
-        
-        if (count && textField1.text.length) {
-            __block NSInteger time = 0;
-            for (NSInteger i = 0; i < count; i++) {
-                CGFloat delay = 0.03 * i;
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [SOIMManager sendText:textField1.text toUser:strongSelf.chatId finished:^{
-                        time ++;
-                        
-                        if (time == count) {
-                            UIAlertController *tip = [UIAlertController alertControllerWithTitle:@"轰炸结束" message:nil preferredStyle:UIAlertControllerStyleAlert];
-                            [strongSelf presentViewController:tip animated:YES completion:nil];
-                            
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                [tip dismissViewControllerAnimated:YES completion:nil];
-                            });
-                        }
-                    }];
-                });
-            }
-        }
-    }];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+ 
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"消息轰炸" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入文本及消息次数" message:nil preferredStyle:UIAlertControllerStyleAlert];
+         
+         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            }];
+            
+         __weak __typeof(self)weakSelf = self;
+         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+             __strong __typeof(weakSelf)strongSelf = weakSelf;
+             [alert dismissViewControllerAnimated:YES completion:nil];
+             UITextField *textField1 = alert.textFields[0];
+             UITextField *textField2 = alert.textFields[1];
+             
+             NSInteger count = [textField2.text intValue];
+             
+             if (count && textField1.text.length) {
+                 __block NSInteger time = 0;
+                 for (NSInteger i = 0; i < count; i++) {
+                     CGFloat delay = 0.03 * i;
+                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                         [SOIMManager sendText:textField1.text toUser:strongSelf.chatId finished:^{
+                             time ++;
+                             
+                             if (time == count) {
+                                 UIAlertController *tip = [UIAlertController alertControllerWithTitle:@"轰炸结束" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                                 [strongSelf presentViewController:tip animated:YES completion:nil];
+                                 
+                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                     [tip dismissViewControllerAnimated:YES completion:nil];
+                                 });
+                             }
+                         }];
+                     });
+                 }
+             }
+         }];
 
-    [alert addAction:cancelAction];
-    [alert addAction:okAction];
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-         textField.placeholder = @"自动回复文本";
+         [alert addAction:cancelAction];
+         [alert addAction:okAction];
+         [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+              textField.placeholder = @"自动回复文本";
+         }];
+         
+         [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+              textField.placeholder = @"轰炸次数";
+         }];
+         
+         [self presentViewController:alert animated:YES completion:nil];
     }];
-    
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-         textField.placeholder = @"轰炸次数";
+        
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"可已读白名单" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        
+        NSMutableArray *list = [userDefaults arrayForKey:SOUL_HOOK_WHITE_LIST].mutableCopy;
+        if (!list) {
+            list = [NSMutableArray array];
+        }
+        
+        if (![list containsObject:self.chatId]) {
+            [list addObject:self.chatId];
+        }
+        
+        [userDefaults setObject:list forKey:SOUL_HOOK_WHITE_LIST];
+        [userDefaults synchronize];
     }];
+  
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [alert addAction:action3];
+      
     [self presentViewController:alert animated:YES completion:nil];
 }
+
 
 CHMethod1(void, SOPrivateChatViewController, _showMenuViewIndexPath, NSIndexPath *, arg1) {
     CHSuper1(SOPrivateChatViewController, _showMenuViewIndexPath, arg1);

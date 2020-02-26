@@ -441,7 +441,7 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 @property (nonatomic, strong) UIMenuController *menuController;
 
 - (void)_showMenuViewIndexPath:(id)arg1;
-- (void)boomAction:(UIButton *)sender;
+- (void)moreAction:(UIButton *)sender;
 
 @end
 

@@ -8,6 +8,7 @@
 
 #import "SOHookSettingController.h"
 #import "SOHookAutoReplyController.h"
+#import "SOHookWhiteListController.h"
 
 @interface SOHookSettingController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -83,7 +84,7 @@
     cell.textLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
     cell.textLabel.text = [dic valueForKey:@"title"];
     view.on = [[dic valueForKey:@"enable"] boolValue];
-    view.hidden = (indexPath.row == 0);
+    view.hidden = (indexPath.row == 0 || indexPath.row == 1);
     
     return cell;
 }
@@ -100,9 +101,12 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row == 0) {
+        SOHookWhiteListController *list = [[SOHookWhiteListController alloc] init];
+        [self.navigationController pushViewController:list animated:YES];
+    } else if (indexPath.row == 1) {
         SOHookAutoReplyController *aotu = [[SOHookAutoReplyController alloc] init];
         [self.navigationController pushViewController:aotu animated:YES];
-    } 
+    }
 }
 
 #pragma mark - Action
@@ -164,6 +168,10 @@
 - (NSArray *)dataSource {
     if (!_dataSource) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSMutableDictionary *item = @{@"title" : @"已读白名单",
+                                      @"enable" : @"0",
+                                      @"type" : @"0"
+                                    }.mutableCopy;
         
         NSMutableDictionary *item0 = @{@"title" : @"自动回复设置",
                                        @"enable" : @"0",
@@ -260,7 +268,7 @@
              @"type" : SOUL_HOOK_AUTO_READ_KEY_SWITCH
              }.mutableCopy;
         
-        _dataSource = @[item0, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16, item17, item18];
+        _dataSource = @[item, item0, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16, item17, item18];
     }
     return _dataSource;
 }

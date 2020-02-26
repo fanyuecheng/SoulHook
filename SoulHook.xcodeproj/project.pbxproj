@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7197D8532406177600FFCECF /* SOHookWhiteListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7197D8512406177600FFCECF /* SOHookWhiteListController.m */; };
+		7197D8542406177600FFCECF /* SOHookWhiteListController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7197D8522406177600FFCECF /* SOHookWhiteListController.h */; };
 		71A99C4823B9DCBE0043D2BF /* MDConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71A99C4723B9DCBE0043D2BF /* MDConfig.plist */; };
 		71A99C5223B9DCBE0043D2BF /* libSoulHookDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 71A99C5123B9DCBE0043D2BF /* libSoulHookDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		71A99C5723B9DCBE0043D2BF /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A99C5623B9DCBE0043D2BF /* JavaScriptCore.framework */; };
@@ -71,6 +73,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7197D8512406177600FFCECF /* SOHookWhiteListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookWhiteListController.m; sourceTree = "<group>"; };
+		7197D8522406177600FFCECF /* SOHookWhiteListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookWhiteListController.h; sourceTree = "<group>"; };
 		71A99C4023B9DCBE0043D2BF /* SoulHook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoulHook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71A99C4323B9DCBE0043D2BF /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		71A99C4523B9DCBE0043D2BF /* quick-resign.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "quick-resign.sh"; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 				71A99CA823B9DE4E0043D2BF /* SOHookAutoReplyController.m */,
 				71A99CA923B9DE4E0043D2BF /* SOHookSettingController.h */,
 				71A99CA623B9DE4E0043D2BF /* SOHookSettingController.m */,
+				7197D8522406177600FFCECF /* SOHookWhiteListController.h */,
+				7197D8512406177600FFCECF /* SOHookWhiteListController.m */,
 				71A99CAC23B9DE4E0043D2BF /* SORobot.h */,
 				71A99CA523B9DE4E0043D2BF /* SORobot.m */,
 				71A99CA423B9DE4E0043D2BF /* SOHeader.h */,
@@ -324,6 +330,7 @@
 				71A99C8223B9DCBE0043D2BF /* OCSelectorTrampolines.h in Headers */,
 				71A99CB523B9DE4E0043D2BF /* SORobot.h in Headers */,
 				71A99CAD23B9DE4E0043D2BF /* SOHeader.h in Headers */,
+				7197D8542406177600FFCECF /* SOHookWhiteListController.h in Headers */,
 				71A99C7E23B9DCBE0043D2BF /* OCMethodTrace.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,6 +504,7 @@
 				71A99C8423B9DCBE0043D2BF /* OCSelectorTrampolines.mm in Sources */,
 				71A99C7423B9DCBE0043D2BF /* a1a2-selectortramps-i386.s in Sources */,
 				71A99CB123B9DE4E0043D2BF /* SOHookAutoReplyController.m in Sources */,
+				7197D8532406177600FFCECF /* SOHookWhiteListController.m in Sources */,
 				71A99C7A23B9DCBE0043D2BF /* a2a3-selectortramps-i386.s in Sources */,
 				71A99C7823B9DCBE0043D2BF /* a2a3-selectortramps-arm.s in Sources */,
 				71A99CAF23B9DE4E0043D2BF /* SOHookSettingController.m in Sources */,
