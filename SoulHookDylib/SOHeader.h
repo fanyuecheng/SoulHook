@@ -544,4 +544,10 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 
 @end
 
+@interface BellNotifyInfoModel : NSObject
+
+@property (nonatomic, copy)   NSString *officialTag;
+
+@end
+
 NS_ASSUME_NONNULL_END

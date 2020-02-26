@@ -1101,7 +1101,7 @@ CHOptimizedMethod0(self, void, SOPrivateChatViewController, viewDidLoad) {
         button.layer.masksToBounds = YES;
         button.backgroundColor = [UIColor redColor];
         button.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-        [button setTitle:@"轰炸" forState:UIControlStateNormal];
+        [button setTitle:@"更多" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.customNavBar addSubview:button];
@@ -1568,7 +1568,16 @@ CHOptimizedMethod0(self, void, SOTopicInfoViewController, viewDidLoad) {
     };
 }
 
+CHDeclareClass(BellNotifyInfoModel)
+ 
+CHOptimizedMethod0(self, NSString *, BellNotifyInfoModel, officialTag) {
+    return nil;
+}
+
 CHConstructor {
+    CHLoadLateClass(BellNotifyInfoModel);
+    CHHook0(BellNotifyInfoModel, officialTag);
+    
     CHLoadLateClass(SOTopicInfoViewController);
     CHHook0(SOTopicInfoViewController, viewDidLoad);
     
