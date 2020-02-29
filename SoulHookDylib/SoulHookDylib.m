@@ -1059,6 +1059,17 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
         }
          */
         
+        if ([URLString containsString:@"officialTag/extInfo"]) {
+            responseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+            if (responseObject[@"data"] && [responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {
+                NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:responseObject[@"data"]];
+                if (![data[@"canPost"] integerValue]) {
+                    data[@"canPost"] = @1;
+                    responseObject[@"data"] = data;
+                }
+            }
+        }
+        
         !success ? : success(task, responseObject);
     };
     
@@ -1574,7 +1585,41 @@ CHOptimizedMethod0(self, NSString *, BellNotifyInfoModel, officialTag) {
     return nil;
 }
 
+CHDeclareClass(SOMainSquareViewController)
+CHOptimizedMethod0(self, void, SOMainSquareViewController, viewDidLoad) {
+    CHSuper0(SOMainSquareViewController, viewDidLoad);
+    
+    UIButton *button = [self.view viewWithTag:1000];
+    
+    if (!button) {
+        button = [[UIButton alloc] initWithFrame:CGRectMake(50, [UIApplication sharedApplication].statusBarFrame.size.height + 6, 30, 30)];
+        button.tag = 1000;
+        button.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:15];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitle:@"匿名" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(noNameController:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+    }
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+
+CHDeclareMethod1(void, SOMainSquareViewController, noNameController, UIButton *, arg1) {
+    UIViewController *noName = [SOHookManager sharedInstance].aSubSquareNoNameViewController;
+    
+    if (!noName) {
+        noName = [NSClassFromString(@"SubSquareNoNameViewController") new];
+        noName.hidesBottomBarWhenPushed = YES;
+        [SOHookManager sharedInstance].aSubSquareNoNameViewController = noName;
+    }
+    [self.navigationController pushViewController:noName animated:YES];
+}
+
 CHConstructor {
+    CHLoadLateClass(SOMainSquareViewController);
+    CHHook0(SOMainSquareViewController, viewDidLoad);
+    
     CHLoadLateClass(BellNotifyInfoModel);
     CHHook0(BellNotifyInfoModel, officialTag);
     

@@ -550,4 +550,10 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 
 @end
 
+@interface SOMainSquareViewController : UIViewController
+
+- (void)noNameController:(UIButton *)sender;
+
+@end
+
 NS_ASSUME_NONNULL_END

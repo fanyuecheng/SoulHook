@@ -15,6 +15,14 @@ typedef NS_ENUM(NSUInteger, SONetworkingMethod) {
     SONetworkingMethodPost
 };
 
+@class UIViewController;
+@interface SOHookManager : NSObject
+
+@property (nonatomic, strong) UIViewController *aSubSquareNoNameViewController;
+
++ (instancetype)sharedInstance;
+
+@end
 
 @interface SONetworking : NSObject
 

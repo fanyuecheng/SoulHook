@@ -13,6 +13,22 @@
 #define SO_TOBOT_API_KEY     @"7ab9524762524779626e9a04ef83bff7"
 #define SO_TOBOT_API_SECRET  @"q02w2fla6dv7"
 
+@implementation SOHookManager
+
++ (instancetype)sharedInstance {
+    static dispatch_once_t onceToken;
+    static SOHookManager *instance = nil;
+    dispatch_once(&onceToken,^{
+        instance = [[super allocWithZone:NULL] init];
+    });
+    return instance;
+}
+
++ (id)allocWithZone:(struct _NSZone *)zone{
+    return [self sharedInstance];
+}
+
+@end
 
 @implementation SONetworking
 
