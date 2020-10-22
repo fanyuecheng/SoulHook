@@ -73,6 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3301D77F25318B5C008187A5 /* SOUL_3.53_0.ipa */ = {isa = PBXFileReference; lastKnownFileType = file; path = SOUL_3.53_0.ipa; sourceTree = "<group>"; };
 		7197D8512406177600FFCECF /* SOHookWhiteListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookWhiteListController.m; sourceTree = "<group>"; };
 		7197D8522406177600FFCECF /* SOHookWhiteListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookWhiteListController.h; sourceTree = "<group>"; };
 		71A99C4023B9DCBE0043D2BF /* SoulHook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoulHook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +115,6 @@
 		71A99C9523B9DCBE0043D2BF /* SoulHookDylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoulHookDylib.h; sourceTree = "<group>"; };
 		71A99C9723B9DCBE0043D2BF /* SoulHookDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoulHookDylib.m; sourceTree = "<group>"; };
 		71A99CA123B9DCE00043D2BF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		71A99CA323B9DD0C0043D2BF /* SOUL-3-13-0.ipa */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOUL-3-13-0.ipa"; sourceTree = "<group>"; };
 		71A99CA423B9DE4E0043D2BF /* SOHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHeader.h; sourceTree = "<group>"; };
 		71A99CA523B9DE4E0043D2BF /* SORobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SORobot.m; sourceTree = "<group>"; };
 		71A99CA623B9DE4E0043D2BF /* SOHookSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOHookSettingController.m; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		71A99C4923B9DCBE0043D2BF /* TargetApp */ = {
 			isa = PBXGroup;
 			children = (
-				71A99CA323B9DD0C0043D2BF /* SOUL-3-13-0.ipa */,
+				3301D77F25318B5C008187A5 /* SOUL_3.53_0.ipa */,
 				71A99C4A23B9DCBE0043D2BF /* put ipa or app here */,
 			);
 			path = TargetApp;
@@ -576,7 +576,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -628,7 +628,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -760,7 +760,17 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z78DQXE2Y3;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LookinServer",
+				);
 				INFOPLIST_FILE = SoulHook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.53.0;
 				MONKEYDEV_ADD_SUBSTRATE = YES;
 				MONKEYDEV_CLASS_DUMP = NO;
 				MONKEYDEV_DEFAULT_BUNDLEID = NO;
@@ -781,7 +791,17 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z78DQXE2Y3;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LookinServer",
+				);
 				INFOPLIST_FILE = SoulHook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.53.0;
 				MONKEYDEV_ADD_SUBSTRATE = YES;
 				MONKEYDEV_CLASS_DUMP = NO;
 				MONKEYDEV_DEFAULT_BUNDLEID = NO;

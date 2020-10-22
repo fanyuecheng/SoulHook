@@ -35,7 +35,10 @@ CHConstructor{
         }
  
 #endif
-        
+         
+        ExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewDidLoad), ^(__kindof UIViewController *selfObject) {
+            NSLog(@"class = %@", selfObject.class);
+        });
     }];
 }
 
@@ -772,33 +775,17 @@ CHDeclareMethod1(void, SOCollectEmoticonView, diceAction, UIButton *, arg1) {
     }
 }
 
-CHDeclareClass(MoveViewController)
+CHDeclareClass(SOSettingsVC)
 
-CHOptimizedMethod0(self, void, MoveViewController, viewDidLoad) {
-    CHSuper0(MoveViewController, viewDidLoad);
-    
-    NSMutableArray <NSArray *>*titleArr = [self valueForKey:@"titleArr"];
-    NSMutableArray <NSArray *>*iconArr =  [self valueForKey:@"iconArr"];
-    
-    NSMutableArray *lastTitleSection = titleArr.lastObject.mutableCopy;
-    [lastTitleSection addObject:@"Hook设置"];
-    NSMutableArray *lastImageSection = iconArr.lastObject.mutableCopy;
-    [lastImageSection addObject:@"more_icon_set"];
-    
-    [titleArr replaceObjectAtIndex:titleArr.count - 1 withObject:lastTitleSection];
-    [iconArr replaceObjectAtIndex:iconArr.count - 1 withObject:lastImageSection];
-    
-    [self.tableView reloadData];
+CHOptimizedMethod0(self, void, SOSettingsVC, viewDidLoad) {
+    CHSuper0(SOSettingsVC, viewDidLoad);
+ 
+    [self so_rightItemWithTitle:@"SO设置"];
 }
 
-
-CHOptimizedMethod2(self, void, MoveViewController, tableView, UITableView *, tableView, didSelectRowAtIndexPath, NSIndexPath *, indexPath) {
-    if (indexPath.section == 3 && indexPath.row == 2) {
-        SOHookSettingController *setting = [[SOHookSettingController alloc] init];
-        [self.navigationController pushViewController:setting animated:YES];
-    } else {
-        CHSuper2(MoveViewController, tableView, tableView, didSelectRowAtIndexPath, indexPath);
-    }
+CHOptimizedMethod1(self, void, SOSettingsVC, rightItemClick, id, arg1) {
+    SOHookSettingController *setting = [[SOHookSettingController alloc] init];
+    [self.navigationController pushViewController:setting animated:YES];
 }
 
 CHDeclareClass(SOBuildMessageManager)
@@ -949,26 +936,41 @@ CHOptimizedMethod3(self, BOOL, ScrollerWebController, webView, UIWebView *, arg1
 }
 
 CHDeclareClass(AFHTTPSessionManager)
-
-CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, NSString *, method, URLString, NSString *, URLString, parameters, id, parameters, uploadProgress, progressBlock, uploadProgress, downloadProgress, progressBlock, downloadProgress, success, successBlock, success, failure, failureBlock, failure) {
+ 
+CHMethod8(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, NSString *, method, URLString, NSString *, URLString, parameters, id, parameters, headers, NSDictionary *, headers, uploadProgress, progressBlock, uploadProgress, downloadProgress, progressBlock, downloadProgress, success, successBlock, success, failure, failureBlock, failure) {
     
+    
+    NSMutableDictionary *header = [NSMutableDictionary dictionaryWithDictionary:headers];
+    header[@"device-id"] = @"";
+    header[@"sdi"] = @"";
+    headers = header;
+    
+    //注册设备限制
+    if ([URLString containsString:@"v6/account/register"]) {
+        NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:parameters];
+        param[@"sMDeviceId"] = @"20200409004134d1156bb82762ccac4528aa3e138abc7501901de5c16ac9a4";
+        parameters = param;
+    }
+    
+ 
     successBlock successB = ^(NSURLSessionDataTask *task, id _Nullable responseObject) {
-        NSLog(@"AFHTTPSessionManager:\nmethod=%@ \nURLString=%@ \nparameters=%@ \nresponseObject=%@", method, URLString, parameters, responseObject);
+        NSLog(@"AFHTTPSessionManager:\nmethod=%@ \nURLString=%@ \nparameters=%@ \nheaders=%@ \nresponseObject=%@", method, URLString, parameters, headers, responseObject);
         
-//         if ([URLString containsString:@"/v2/user/info"]) {
+         if ([URLString containsString:@"/v2/user/info"]) {
 //             Class soulUserManager = NSClassFromString(@"SoulUserManager");
 //             SEL instance = NSSelectorFromString(@"sharedInstance");
 //             IMP instanceImp = [soulUserManager methodForSelector:instance];
 //             id (*func2)(id, SEL) = (void *)instanceImp;
 //             id manager = func2(soulUserManager, instance);
-            
+//
 //             id currentUser = [manager valueForKey:@"currentUser"];
 //             NSString *useridEcpt = [currentUser valueForKey:@"useridEcpt"];
-            
+//
 //             if ([useridEcpt isEqualToString:parameters[@"userIdEcpt"]]) {
 //                 [[NSNotificationCenter defaultCenter] postNotificationName:SOHOOK_NOTIFICATION_USER_DATA object:responseObject[@"data"]];
 //             }
-//         }
+             NSLog(@"个人信息：%@ ", parameters);
+         }
         
         if ([URLString containsString:@"cuteface/getAllItems"]) {
             BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_AVATAR_SWITCH];
@@ -1072,29 +1074,25 @@ CHMethod7(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
         
         !success ? : success(task, responseObject);
     };
-    
-    NSMutableDictionary *header = [[self valueForKey:@"requestSerializer"] valueForKey:@"mutableHTTPRequestHeaders"];
-    
-    [header setObject:@"3240664" forKey:@"X-Auth-UserId"];
+ 
     
 /*
       self->_requestSerializer->_mutableHTTPRequestHeaders:
     {
-        app-id = "10000001",
-        app-version = "3.8.28",
-        device-id = "FBD36813-B04F-4D15-9608-F9FFE4EA77EF",
-        X-Auth-Token = "7303BVibU1KMMgbDZ/ysaNVVf94e7gDX",
-        os = "ios",
-        app-time = "1564050811048",
-        api-sign = "BF63725D27A0E992987180FE2D460A1B1914CAA4",
-        User-Agent = "TlUyYjJJbzdzZldpMU9uVThNL1NQbGxUcENsSVE5c3I1ZXJ0UmIvZ0RVdXFBQ1VJSXhDYUFWNWprNEQ5NjNUZlBLWU1oMmhRWUdITkFCSllPNDhNb1c5Qkx2TkNtdU42RFRKN0UzWWZjOEQzb0tiUklNYjRhUT09",
-        api-sign-version = "v5",
-        request-nonce = "39972665392169031948532831994252",
-        X-Auth-UserId = "3240665",
-        Accept-Language = "zh-Hans-CN;q=1, en-CN;q=0.9, zh-HK;q=0.8"
+ app-id = "10000001",
+ os = "ios",
+ api-sign = "2E6FB3B4F934EEAF06FA2CF75BA5E9A676064193",
+ app-time = "1602321122845",
+ api-sign-version = "v5",
+ device-id = "706A718D-FD39-43A3-81CD-E3A45AF46724",
+ sdi = "62F903ED-99D2-441D-AAEF-F4C3F565F9F7",
+ User-Agent = "TlUyYjJJbzdzZldpMU9uVThNL1NQbzBIR1VEb1N1SVg1ZXJ0UmIvZ0RVdXFBQ1VJSXhDYUFRT2tBbUszMHExeA==",
+ request-nonce = "68254330748351005018073691005927",
+ app-version = "3.53.0",
+ X-Auth-UserId = "-1"
     }
  */
-    NSURLSessionDataTask *task = CHSuper7(AFHTTPSessionManager, dataTaskWithHTTPMethod, method, URLString, URLString, parameters, parameters, uploadProgress, uploadProgress, downloadProgress, downloadProgress, success, successB, failure, failure);
+    NSURLSessionDataTask *task = CHSuper8(AFHTTPSessionManager, dataTaskWithHTTPMethod, method, URLString, URLString, parameters, parameters, headers, headers, uploadProgress, uploadProgress, downloadProgress, downloadProgress, success, successB, failure, failure);
     
     return task;
 }
@@ -1665,7 +1663,7 @@ CHConstructor {
     CHHook1(SOPrivateChatViewController, _showMenuViewIndexPath);
     
     CHLoadLateClass(AFHTTPSessionManager);
-    CHHook7(AFHTTPSessionManager, dataTaskWithHTTPMethod, URLString, parameters, uploadProgress, downloadProgress, success, failure);
+    CHHook8(AFHTTPSessionManager, dataTaskWithHTTPMethod, URLString, parameters, headers,  uploadProgress, downloadProgress, success, failure);
     
     CHLoadLateClass(ScrollerWebController);
     CHHook0(ScrollerWebController, viewDidLoad);
@@ -1727,9 +1725,9 @@ CHConstructor {
     CHHook2(SOCollectEmoticonView, collectionView, didSelectItemAtIndexPath);
     
     //设置页
-    CHLoadLateClass(MoveViewController);
-    CHHook0(MoveViewController, viewDidLoad);
-    CHHook2(MoveViewController, tableView, didSelectRowAtIndexPath);
+    CHLoadLateClass(SOSettingsVC);
+    CHHook0(SOSettingsVC, viewDidLoad);
+    CHHook1(SOSettingsVC, rightItemClick);
     
     //掷骰子&猜拳
     CHLoadLateClass(SOBuildMessageManager);

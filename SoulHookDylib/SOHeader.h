@@ -44,7 +44,95 @@ ExchangeImplementations(Class _class, SEL _originSelector, SEL _newSelector) {
     return ExchangeImplementationsInTwoClasses(_class, _originSelector, _class, _newSelector);
 }
 
+CG_INLINE BOOL
+HasOverrideSuperclassMethod(Class targetClass, SEL targetSelector) {
+    Method method = class_getInstanceMethod(targetClass, targetSelector);
+    if (!method) return NO;
+    
+    Method methodOfSuperclass = class_getInstanceMethod(class_getSuperclass(targetClass), targetSelector);
+    if (!methodOfSuperclass) return YES;
+    
+    return method != methodOfSuperclass;
+}
 
+/**
+ *  用 block 重写某个 class 的指定方法
+ *  @param targetClass 要重写的 class
+ *  @param targetSelector 要重写的 class 里的实例方法，注意如果该方法不存在于 targetClass 里，则什么都不做
+ *  @param implementationBlock 该 block 必须返回一个 block，返回的 block 将被当成 targetSelector 的新实现，所以要在内部自己处理对 super 的调用，以及对当前调用方法的 self 的 class 的保护判断（因为如果 targetClass 的 targetSelector 是继承自父类的，targetClass 内部并没有重写这个方法，则我们这个函数最终重写的其实是父类的 targetSelector，所以会产生预期之外的 class 的影响，例如 targetClass 传进来  UIButton.class，则最终可能会影响到 UIView.class），implementationBlock 的参数里第一个为你要修改的 class，也即等同于 targetClass，第二个参数为你要修改的 selector，也即等同于 targetSelector，第三个参数是一个 block，用于获取 targetSelector 原本的实现，由于 IMP 可以直接当成 C 函数调用，所以可利用它来实现“调用 super”的效果，但由于 targetSelector 的参数个数、参数类型、返回值类型，都会影响 IMP 的调用写法，所以这个调用只能由业务自己写。
+ */
+CG_INLINE BOOL
+OverrideImplementation(Class targetClass, SEL targetSelector, id (^implementationBlock)(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void))) {
+    Method originMethod = class_getInstanceMethod(targetClass, targetSelector);
+    IMP imp = method_getImplementation(originMethod);
+    BOOL hasOverride = HasOverrideSuperclassMethod(targetClass, targetSelector);
+    
+    // 以 block 的方式达到实时获取初始方法的 IMP 的目的，从而避免先 swizzle 了 subclass 的方法，再 swizzle superclass 的方法，会发现前者调用时不会触发后者 swizzle 后的版本的 bug。
+    IMP (^originalIMPProvider)(void) = ^IMP(void) {
+        IMP result = NULL;
+        if (hasOverride) {
+            result = imp;
+        } else {
+            // 如果 superclass 里依然没有实现，则会返回一个 objc_msgForward 从而触发消息转发的流程
+            // https://github.com/Tencent/QMUI_iOS/issues/776
+            Class superclass = class_getSuperclass(targetClass);
+            result = class_getMethodImplementation(superclass, targetSelector);
+        }
+        
+        // 这只是一个保底，这里要返回一个空 block 保证非 nil，才能避免用小括号语法调用 block 时 crash
+        // 空 block 虽然没有参数列表，但在业务那边被转换成 IMP 后就算传多个参数进来也不会 crash
+        if (!result) {
+            result = imp_implementationWithBlock(^(id selfObject){
+//                QMUILogWarn(([NSString stringWithFormat:@"%@", targetClass]), @"%@ 没有初始实现，%@\n%@", NSStringFromSelector(targetSelector), selfObject, [NSThread callStackSymbols]);
+            });
+        }
+        
+        return result;
+    };
+    
+    if (hasOverride) {
+        method_setImplementation(originMethod, imp_implementationWithBlock(implementationBlock(targetClass, targetSelector, originalIMPProvider)));
+    } else {
+        NSMethodSignature *signature = [targetClass instanceMethodSignatureForSelector:targetSelector];
+         
+        NSString *typeString = [signature performSelector:NSSelectorFromString([NSString stringWithFormat:@"_%@String", @"type"])];
+ 
+        const char *typeEncoding = method_getTypeEncoding(originMethod) ?: typeString.UTF8String;
+        class_addMethod(targetClass, targetSelector, imp_implementationWithBlock(implementationBlock(targetClass, targetSelector, originalIMPProvider)), typeEncoding);
+    }
+    
+    return YES;
+}
+
+
+/**
+ *  用 block 重写某个 class 的某个无参数且返回值为 void 的方法，会自动在调用 block 之前先调用该方法原本的实现。
+ *  @param targetClass 要重写的 class
+ *  @param targetSelector 要重写的 class 里的实例方法，注意如果该方法不存在于 targetClass 里，则什么都不做，注意该方法必须无参数，返回值为 void
+ *  @param implementationBlock targetSelector 的自定义实现，直接将你的实现写进去即可，不需要管 super 的调用。参数 selfObject 代表当前正在调用这个方法的对象，也即 self 指针。
+ */
+CG_INLINE BOOL
+ExtendImplementationOfVoidMethodWithoutArguments(Class targetClass, SEL targetSelector, void (^implementationBlock)(__kindof NSObject *selfObject)) {
+    return OverrideImplementation(targetClass, targetSelector, ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+        void (^block)(__unsafe_unretained __kindof NSObject *selfObject) = ^(__unsafe_unretained __kindof NSObject *selfObject) {
+            
+            void (*originSelectorIMP)(id, SEL);
+            originSelectorIMP = (void (*)(id, SEL))originalIMPProvider();
+            originSelectorIMP(selfObject, originCMD);
+            
+            implementationBlock(selfObject);
+        };
+        #if __has_feature(objc_arc)
+        return block;
+        #else
+        return [block copy];
+        #endif
+    });
+}
+
+
+
+ 
 NS_ASSUME_NONNULL_BEGIN
 
 //统计埋点
@@ -262,14 +350,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)collectionView:(UICollectionView *)arg1 didSelectItemAtIndexPath:(NSIndexPath *)arg2;
 
 @end
-
+ 
 //设置页
-@interface MoveViewController : UIViewController
+@interface SOSettingsVC : UIViewController
 
-@property (nonatomic, strong) UITableView *tableView;
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)so_rightItemWithTitle:(id)arg1;
+- (void)rightItemClick:(id)arg1;
 
 @end
 
@@ -425,6 +511,7 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 - (NSURLSessionDataTask *)dataTaskWithHTTPMethod:(NSString *)method
                                        URLString:(NSString *)URLString
                                       parameters:(id)parameters
+                                         headers:(nullable NSDictionary <NSString *, NSString *> *)headers
                                   uploadProgress:(nullable progressBlock) uploadProgress
                                 downloadProgress:(nullable progressBlock) downloadProgress
                                          success:(successBlock)success
@@ -557,3 +644,4 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 @end
 
 NS_ASSUME_NONNULL_END
+//SOSettingsVC
