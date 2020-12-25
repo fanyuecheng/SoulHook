@@ -23,7 +23,7 @@
 2. 把破壳后的Soul.ipa放在工程目录TargetApp文件夹下
 
 > 注: 
-> 1. 编译报错可先删除***.LatestBuild***文件夹和***TargetApp***文件夹下的***Soul.app***，本人不提供Soul.ipa破壳包，自行破壳或找其他途径。
+> 1. 编译报错可先删除 **.LatestBuild** 文件夹和 **TargetApp** 文件夹下的 **Soul.app** ，本人不提供Soul.ipa破壳包，自行破壳或找其他途径。
 
 
 ---
