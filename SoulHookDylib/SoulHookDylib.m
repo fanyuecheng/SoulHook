@@ -940,10 +940,18 @@ CHDeclareClass(AFHTTPSessionManager)
 CHMethod8(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, NSString *, method, URLString, NSString *, URLString, parameters, id, parameters, headers, NSDictionary *, headers, uploadProgress, progressBlock, uploadProgress, downloadProgress, progressBlock, downloadProgress, success, successBlock, success, failure, failureBlock, failure) {
     
     
+    /* device-id 和 sdi 是必须传参数, 不传导致接口失败, 乱改 **可能引起封号**
+     code = 9000006,
+     message = "服务器有些小异常，可以通过意见反馈或关注官博Soul社交反馈哦~",
+     data = <null>,
+     success = 0
+     */
+    /*
     NSMutableDictionary *header = [NSMutableDictionary dictionaryWithDictionary:headers];
     header[@"device-id"] = @"";
     header[@"sdi"] = @"";
     headers = header;
+    */
     
     //注册设备限制
     if ([URLString containsString:@"v6/account/register"]) {
