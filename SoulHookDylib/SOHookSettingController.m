@@ -2,7 +2,7 @@
 //  SOHookSettingController.m
 //  SoulHook
 //
-//  Created by 月成 on 2019/6/25.
+//  Created by miniSeven on 2019/6/25.
 //  Copyright © 2019 fancy. All rights reserved.
 //
 

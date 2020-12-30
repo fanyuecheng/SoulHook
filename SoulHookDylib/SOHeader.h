@@ -2,7 +2,7 @@
 //  SOHeader.h
 //  SoulHook
 //
-//  Created by 月成 on 2019/6/24.
+//  Created by miniSeven on 2019/6/24.
 //  Copyright © 2019 fancy. All rights reserved.
 //
 
@@ -139,6 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TalkingData: NSObject
 //AppId:A52B96856DC**********1B583A45945 channelId:AppStore
 + (void)sessionStarted:(NSString *)appKey withChannelId:(NSString *)channelId;
++ (void)initWithAppID:(NSString *)AppId channelID:(NSString *)channelId;
 
 @end
 
@@ -148,6 +149,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)configureWithParametersDictionary:(NSDictionary *)dic delegate:(id)delegate;
 
 @end
+
+//bugly
+@interface BuglyConfig : NSObject
+@end
+@interface Bugly : NSObject
+
++ (void)startWithAppId:(NSString *)appId;
++ (void)startWithAppId:(NSString *)appId
+                config:(BuglyConfig *)config;
+
+@end
+
 
 @interface AvatarModifyViewController: UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 

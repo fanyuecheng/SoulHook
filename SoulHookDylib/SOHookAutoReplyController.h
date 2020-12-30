@@ -2,7 +2,7 @@
 //  SOHookAutoReplyController.h
 //  SoulHookDylib
 //
-//  Created by 月成 on 2019/7/17.
+//  Created by miniSeven on 2019/7/17.
 //  Copyright © 2019 fancy. All rights reserved.
 //
 

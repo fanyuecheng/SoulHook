@@ -2,7 +2,7 @@
 //  SOHookWhiteListController.m
 //  SoulHookDylib
 //
-//  Created by 月成 on 2020/2/26.
+//  Created by miniSeven on 2020/2/26.
 //  Copyright © 2020 fancy. All rights reserved.
 //
 

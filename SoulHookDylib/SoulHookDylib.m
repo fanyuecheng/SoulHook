@@ -4,7 +4,7 @@
 //  SoulHookDylib.m
 //  SoulHookDylib
 //
-//  Created by 月成 on 2019/12/30.
+//  Created by miniSeven on 2019/12/30.
 //  Copyright (c) 2019 fancy. All rights reserved.
 //
 
@@ -87,10 +87,26 @@ CHOptimizedClassMethod2(self, void, TalkingData, sessionStarted, NSString *, app
     return;
 }
 
+CHOptimizedClassMethod2(self, void, TalkingData, initWithAppID, NSString *, AppId, channelID, NSString *, channelId) {
+    NSLog(@"TalkingData == %@ %@", AppId, channelId);
+    return;
+}
+
 CHDeclareClass(KochavaTracker)
 
 CHOptimizedMethod2(self, void, KochavaTracker, configureWithParametersDictionary, NSDictionary *, dic, delegate, id, delegate) {
     NSLog(@"KochavaTracker == %@ %@", dic, delegate);
+}
+
+CHDeclareClass(Bugly)
+CHOptimizedClassMethod1(self, void, Bugly, startWithAppId, NSString *, appId) {
+    NSLog(@"Bugly == %@", appId);
+    return;
+}
+
+CHOptimizedClassMethod2(self, void, Bugly, startWithAppId, NSString *, appId, config, BuglyConfig *, config) {
+    NSLog(@"Bugly == %@ %@", appId, config);
+    return;
 }
 
 //修改头像
@@ -939,7 +955,6 @@ CHDeclareClass(AFHTTPSessionManager)
  
 CHMethod8(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, NSString *, method, URLString, NSString *, URLString, parameters, id, parameters, headers, NSDictionary *, headers, uploadProgress, progressBlock, uploadProgress, downloadProgress, progressBlock, downloadProgress, success, successBlock, success, failure, failureBlock, failure) {
     
-    
     /* device-id 和 sdi 是必须传参数, 不传导致接口失败, 乱改 **可能引起封号**
      code = 9000006,
      message = "服务器有些小异常，可以通过意见反馈或关注官博Soul社交反馈哦~",
@@ -952,7 +967,6 @@ CHMethod8(NSURLSessionDataTask *, AFHTTPSessionManager, dataTaskWithHTTPMethod, 
     header[@"sdi"] = @"";
     headers = header;
     */
-    
     //注册设备限制
     if ([URLString containsString:@"v6/account/register"]) {
         NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:parameters];
@@ -1683,9 +1697,15 @@ CHConstructor {
     //埋点
     CHLoadLateClass(TalkingData);
     CHClassHook2(TalkingData, sessionStarted, withChannelId);
+    CHClassHook2(TalkingData, initWithAppID, channelID);
     
     CHLoadLateClass(KochavaTracker);
     CHHook2(KochavaTracker, configureWithParametersDictionary, delegate);
+    
+    //bugly
+    CHLoadLateClass(Bugly);
+    CHHook1(Bugly, startWithAppId);
+    CHHook2(Bugly, startWithAppId, config);
     
     //设置头像
     CHLoadLateClass(AvatarModifyViewController);
