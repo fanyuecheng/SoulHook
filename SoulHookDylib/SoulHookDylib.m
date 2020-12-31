@@ -848,13 +848,12 @@ CHOptimizedMethod2(self, void, SOUserInfoViewController, tableView, UITableView 
 }
 
 
+CHDeclareClass(AppShell)
 
-CHDeclareClass(AppDelegate)
-
-CHOptimizedMethod0(self, void, AppDelegate, displayAdvert) {
+CHOptimizedMethod0(self, void, AppShell, displayAdvert) {
     BOOL enable = [[NSUserDefaults standardUserDefaults] boolForKey:SOUL_HOOK_ADVERT_SWITCH];
     if (!enable) {
-        CHSuper0(AppDelegate, displayAdvert);
+        CHSuper0(AppShell, displayAdvert);
     }
 }
 
@@ -1767,8 +1766,8 @@ CHConstructor {
     CHHook2(SOUserInfoViewController, tableView, didSelectRowAtIndexPath);
     
     //启动图
-    CHLoadLateClass(AppDelegate);
-    CHHook0(AppDelegate, displayAdvert);
+    CHLoadLateClass(AppShell);
+    CHHook0(AppShell, displayAdvert);
     
     //更改头像
     CHLoadLateClass(HeaderTwoViewController);

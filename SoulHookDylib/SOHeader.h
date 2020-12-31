@@ -393,11 +393,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface AppShell : UIResponder
 
-@interface AppDelegate : NSObject
-
-- (void)showAdvert;
-- (void)displayAdvert;
+- (void)displayAdvert; // AppDelegate已经没有这个方法了 放在AppShell中了
 
 @end
 
