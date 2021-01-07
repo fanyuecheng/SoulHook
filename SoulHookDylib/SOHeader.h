@@ -161,6 +161,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+//SmAntiFraud 数美
+@interface SmAntiFraud : NSObject
+
+- (void)create:(id)opt;
+- (NSString*)getDeviceId;
+
+@end
 
 @interface AvatarModifyViewController: UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 

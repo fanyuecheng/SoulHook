@@ -109,6 +109,19 @@ CHOptimizedClassMethod2(self, void, Bugly, startWithAppId, NSString *, appId, co
     return;
 }
 
+CHDeclareClass(SmAntiFraud)
+
+CHOptimizedMethod1(self, void, SmAntiFraud, create, id, opt) {
+    NSLog(@"初始化数美: %@", opt);
+    return;
+}
+
+CHOptimizedMethod0(self, NSString *, SmAntiFraud, getDeviceId) {
+    NSString *deviceId = CHSuper0(SmAntiFraud, getDeviceId);
+    NSLog(@"数美device id: %@", deviceId);
+    return @"";
+}
+
 //修改头像
 CHDeclareClass(AvatarModifyViewController)
 
@@ -1706,6 +1719,11 @@ CHConstructor {
     CHHook1(Bugly, startWithAppId);
     CHHook2(Bugly, startWithAppId, config);
     
+    //数美
+    CHLoadLateClass(SmAntiFraud);
+    CHHook1(SmAntiFraud, create);
+    CHHook0(SmAntiFraud, getDeviceId);
+ 
     //设置头像
     CHLoadLateClass(AvatarModifyViewController);
     CHHook5(AvatarModifyViewController, updateUserInfWithAvatarName, originAvatarName, image, originImage, svgInfo);
