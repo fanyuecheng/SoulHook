@@ -47,6 +47,7 @@
 		71A99CB223B9DE4E0043D2BF /* SOHookSettingController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99CA923B9DE4E0043D2BF /* SOHookSettingController.h */; };
 		71A99CB323B9DE4E0043D2BF /* SOHookAutoReplyController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99CAA23B9DE4E0043D2BF /* SOHookAutoReplyController.h */; };
 		71A99CB523B9DE4E0043D2BF /* SORobot.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A99CAC23B9DE4E0043D2BF /* SORobot.h */; };
+		D02923D225A815FA00A27E3B /* icon_download.png in Resources */ = {isa = PBXBuildFile; fileRef = D02923D125A815FA00A27E3B /* icon_download.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		71A99CA923B9DE4E0043D2BF /* SOHookSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookSettingController.h; sourceTree = "<group>"; };
 		71A99CAA23B9DE4E0043D2BF /* SOHookAutoReplyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOHookAutoReplyController.h; sourceTree = "<group>"; };
 		71A99CAC23B9DE4E0043D2BF /* SORobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SORobot.h; sourceTree = "<group>"; };
+		D02923D125A815FA00A27E3B /* icon_download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_download.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 			children = (
 				71A99C4323B9DCBE0043D2BF /* icon.png */,
 				71A99C4B23B9DCBE0043D2BF /* Info.plist */,
+				D02923D025A815FA00A27E3B /* Resources */,
 				71A99C4423B9DCBE0043D2BF /* Scripts */,
 				71A99C4623B9DCBE0043D2BF /* Config */,
 				71A99C4923B9DCBE0043D2BF /* TargetApp */,
@@ -312,6 +315,14 @@
 			path = fishhook;
 			sourceTree = "<group>";
 		};
+		D02923D025A815FA00A27E3B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D02923D125A815FA00A27E3B /* icon_download.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -418,6 +429,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02923D225A815FA00A27E3B /* icon_download.png in Resources */,
 				71A99C4823B9DCBE0043D2BF /* MDConfig.plist in Resources */,
 				71A99CA223B9DCE00043D2BF /* Default-568h@2x.png in Resources */,
 			);

@@ -661,5 +661,34 @@ typedef void (^failureBlock)(NSURLSessionDataTask * _Nullable task, NSError *err
 
 @end
 
+@interface SOMusicPlayerModel : NSObject
+
+@property (copy, nonatomic) NSString *url;
+
+@end
+
+/// 悬浮播放器
+@interface SOMusicPlayerView : UIView
+
+@property (nonatomic, strong) UIView *musicInfoView;
+@property (nonatomic, strong) SOMusicPlayerModel *musicPlayerModel;
+@property (nonatomic, strong) UIButton *screenBtn;
+@property (nonatomic, strong) UIButton *downloadBtn;
+
+- (void)createMusicMusicInfoView;
+- (void)spreadMusicFloatsView;
+- (void)foldMusicFloatsView;
+
+- (void)clickDownloadBtn;
+
+@end
+
+/// toast
+@interface UIView (Toast)
+
+- (void)makeToast:(NSString *)message;
+
+@end
+
 NS_ASSUME_NONNULL_END
 //SOSettingsVC

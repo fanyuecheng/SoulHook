@@ -117,9 +117,11 @@ CHOptimizedMethod1(self, void, SmAntiFraud, create, id, opt) {
 }
 
 CHOptimizedMethod0(self, NSString *, SmAntiFraud, getDeviceId) {
+    // 空id导致Soul 电子宠物加载失败,所以把id最后两位换成12
     NSString *deviceId = CHSuper0(SmAntiFraud, getDeviceId);
-    NSLog(@"数美device id: %@", deviceId);
-    return @"";
+    NSString *newDeviceId = [deviceId stringByReplacingCharactersInRange:NSMakeRange(deviceId.length - 2, 2) withString:@"12"];
+    NSLog(@"数美device id: %@ \n 假id:%@", deviceId,newDeviceId);
+    return newDeviceId;
 }
 
 //修改头像
@@ -1648,6 +1650,51 @@ CHDeclareMethod1(void, SOMainSquareViewController, noNameController, UIButton *,
     [self.navigationController pushViewController:noName animated:YES];
 }
 
+/// 悬浮播放器
+
+//@property (nonatomic, strong) SOMusicPlayerModel *musicPlayerModel;
+//@property (nonatomic, strong) UIButton *downloadBtn;
+//
+//- (void)clickDownloadBtn;
+//
+//@end
+#pragma mark - SOMusicPlayerView
+
+CHDeclareClass(SOMusicPlayerView)
+CHPropertyRetainNonatomic(SOMusicPlayerView, UIButton *, downloadBtn, setDownloadBtn);
+
+CHDeclareMethod0(void, SOMusicPlayerView, clickDownloadBtn) {
+    NSLog(@"---url %@",self.musicPlayerModel.url);
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    pasteBoard.string = self.musicPlayerModel.url;
+    [self makeToast:@"复制音频链接成功"];
+}
+
+CHOptimizedMethod0(self, void, SOMusicPlayerView, createMusicMusicInfoView) {
+    CHSuper0(SOMusicPlayerView, createMusicMusicInfoView);
+    self.downloadBtn = [[UIButton alloc] init];
+    self.downloadBtn.alpha = 0;
+    self.downloadBtn.frame = CGRectMake(self.screenBtn.frame.origin.x + self.screenBtn.frame.size.width + 12, self.screenBtn.frame.origin.y, 35, 35);
+    self.downloadBtn.imageEdgeInsets = UIEdgeInsetsMake(7, 7, 7, 7);
+    [self.downloadBtn setImage:[UIImage imageNamed:@"icon_download"] forState:UIControlStateNormal];
+    [self.downloadBtn addTarget:self action:@selector(clickDownloadBtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.musicInfoView addSubview:self.downloadBtn];
+}
+
+CHOptimizedMethod0(self, void, SOMusicPlayerView, foldMusicFloatsView) {
+    self.downloadBtn.alpha = 0;
+    CHSuper0(SOMusicPlayerView, foldMusicFloatsView);
+}
+
+CHOptimizedMethod0(self, void, SOMusicPlayerView, spreadMusicFloatsView) {
+    CHSuper0(SOMusicPlayerView, spreadMusicFloatsView);
+    CGRect newFrame = CGRectMake(self.musicInfoView.frame.origin.x, self.musicInfoView.frame.origin.y, self.musicInfoView.frame.size.width + 50, self.musicInfoView.frame.size.height);;
+    self.musicInfoView.frame = newFrame;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.downloadBtn.alpha = 1;
+    }];
+}
+
 CHConstructor {
     CHLoadLateClass(SOMainSquareViewController);
     CHHook0(SOMainSquareViewController, viewDidLoad);
@@ -1796,5 +1843,13 @@ CHConstructor {
 
     CHLoadLateClass(SOReleaseViewController);
     CHHook1(SOReleaseViewController, tagEditContainerViewDidLocationItemClick);
+
+    //播放器
+    CHLoadLateClass(SOMusicPlayerView);
+    CHHook0(SOMusicPlayerView, createMusicMusicInfoView);
+    CHHook0(SOMusicPlayerView, spreadMusicFloatsView);
+    CHHook0(SOMusicPlayerView, foldMusicFloatsView);
+    CHHook0(SOMusicPlayerView, downloadBtn);
+    CHHook1(SOMusicPlayerView, setDownloadBtn);
 }
 
