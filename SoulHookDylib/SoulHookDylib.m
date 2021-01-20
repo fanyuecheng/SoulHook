@@ -1300,9 +1300,9 @@ CHOptimizedMethod0(self, void, NewTabBarController, viewDidLoad) {
     });
 }
 
-CHDeclareClass(SoulUtils)
+CHDeclareClass(SOWatermarkOperation)
 
-CHOptimizedClassMethod2(self, id, SoulUtils, makeWatermarkPhotoImageWithImage, id, arg1, watermark, id, arg2) {
+CHOptimizedMethod2(self, id, SOWatermarkOperation, makeWatermarkPhotoImageWithImage, id, arg1, watermark, id, arg2) {
     
     NSLog(@"水印 11 %@ %@", arg1, arg2);
     
@@ -1311,10 +1311,10 @@ CHOptimizedClassMethod2(self, id, SoulUtils, makeWatermarkPhotoImageWithImage, i
     if (enable) {
         arg2 = nil;
     }
-    return CHSuper2(SoulUtils, makeWatermarkPhotoImageWithImage, arg1, watermark, arg2);
+    return CHSuper2(SOWatermarkOperation, makeWatermarkPhotoImageWithImage, arg1, watermark, arg2);
 }
 
-CHOptimizedClassMethod1(self, id, SoulUtils, makeWatermarkPhotoImageWithImage, id, arg1) {
+CHOptimizedMethod1(self, id, SOWatermarkOperation, makeWatermarkPhotoImageWithImage, id, arg1) {
     
     NSLog(@"水印 22 %@", arg1);
     
@@ -1323,7 +1323,7 @@ CHOptimizedClassMethod1(self, id, SoulUtils, makeWatermarkPhotoImageWithImage, i
     if (enable) {
         return arg1;
     }
-    return CHSuper1(SoulUtils, makeWatermarkPhotoImageWithImage, arg1);
+    return CHSuper1(SOWatermarkOperation, makeWatermarkPhotoImageWithImage, arg1);
 }
 
 CHDeclareClass(StrangerViewController)
@@ -1732,9 +1732,9 @@ CHConstructor {
     CHHook0(StrangerViewController, viewDidLoad);
     CHHook0(StrangerViewController, endRefresh);
  
-    CHLoadLateClass(SoulUtils);
-    CHClassHook2(SoulUtils, makeWatermarkPhotoImageWithImage, watermark);
-    CHClassHook1(SoulUtils, makeWatermarkPhotoImageWithImage);
+    CHLoadLateClass(SOWatermarkOperation);
+    CHClassHook2(SOWatermarkOperation, makeWatermarkPhotoImageWithImage, watermark);
+    CHClassHook1(SOWatermarkOperation, makeWatermarkPhotoImageWithImage);
     
     CHLoadLateClass(NewTabBarController);
     CHHook0(NewTabBarController, viewDidLoad);
