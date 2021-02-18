@@ -85,7 +85,7 @@
     cell.textLabel.text = [dic valueForKey:@"title"];
     view.on = [[dic valueForKey:@"enable"] boolValue];
     view.hidden = (indexPath.row == 0 || indexPath.row == 1);
-    
+    view.enabled = ![[dic valueForKey:@"removed"] boolValue];
     return cell;
 }
 
@@ -193,9 +193,10 @@
                                        @"type" : SOUL_HOOK_MSG_COPY_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item4 = @{@"title" : @"捏脸道具免费",
+        NSMutableDictionary *item4 = @{@"title" : @"捏脸道具免费 (已失效)",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_AVATAR_SWITCH]],
-                                       @"type" : SOUL_HOOK_AVATAR_SWITCH
+                                       @"type" : SOUL_HOOK_AVATAR_SWITCH,
+                                       @"removed" : @(1)
                                        }.mutableCopy;
         
         NSMutableDictionary *item5 = @{@"title" : @"设置头像仅设置背景色",
@@ -203,19 +204,22 @@
                                        @"type" : SOUL_HOOK_AVATAR_BG_SWITCH
                                        }.mutableCopy;
         
-        NSMutableDictionary *item6 = @{@"title" : @"设置自定义头像",
+        NSMutableDictionary *item6 = @{@"title" : @"设置自定义头像 (已失效)",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_AVATAR_CUSTOM_SWITCH]],
-                                       @"type" : SOUL_HOOK_AVATAR_CUSTOM_SWITCH
+                                       @"type" : SOUL_HOOK_AVATAR_CUSTOM_SWITCH,
+                                       @"removed" : @(1)
                                        }.mutableCopy;
         
-        NSMutableDictionary *item7 = @{@"title" : @"掷骰子作弊",
+        NSMutableDictionary *item7 = @{@"title" : @"掷骰子作弊 (已失效)",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_DICE_SWITCH]],
-                                       @"type" : SOUL_HOOK_DICE_SWITCH
+                                       @"type" : SOUL_HOOK_DICE_SWITCH,
+                                       @"removed" : @(1)
                                        }.mutableCopy;
         
-        NSMutableDictionary *item8 = @{@"title" : @"石头剪子布作弊",
+        NSMutableDictionary *item8 = @{@"title" : @"石头剪子布作弊 (已失效)",
                                        @"enable" : [NSNumber numberWithBool:[userDefaults boolForKey:SOUL_HOOK_FINGER_SWITCH]],
-                                       @"type" : SOUL_HOOK_FINGER_SWITCH
+                                       @"type" : SOUL_HOOK_FINGER_SWITCH,
+                                       @"removed" : @(1)
                                        }.mutableCopy;
         
         NSMutableDictionary *item9 = @{@"title" : @"启动图屏蔽",

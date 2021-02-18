@@ -15,10 +15,11 @@ typedef NS_ENUM(NSUInteger, SONetworkingMethod) {
     SONetworkingMethodPost
 };
 
-@class UIViewController;
+@class UIViewController,ChatTransCenter;
 @interface SOHookManager : NSObject
 
 @property (nonatomic, strong) UIViewController *aSubSquareNoNameViewController;
+@property (nonatomic, strong) ChatTransCenter *chatTransCenter;
 
 + (instancetype)sharedInstance;
 
