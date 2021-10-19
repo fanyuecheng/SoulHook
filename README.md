@@ -26,7 +26,7 @@
 
 > 注: 
 > 1. 编译报错可先删除 **.LatestBuild** 文件夹和 **TargetApp** 文件夹下的 **Soul.app** 。
-> 2. Soul破壳包v3.71.1[下载](https://cloud.189.cn/t/BzaInmfmuAne)（访问码：lk64）
+> 2. Soul破壳包v4.3.0[下载](https://pan.baidu.com/s/18GV02ALjfytaHEaEq-UTvQ)（访问码：qtwn）
 
 ---
 
